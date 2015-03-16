@@ -1,0 +1,7 @@
+parameters:
+#    oro_tracker.example.class: Oro\Bundle\TrackerBundle\Example
+
+services:
+#    oro_tracker.example:
+#        class: %oro_tracker.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
