@@ -25,7 +25,6 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
  *      name="oro_tracker_issue",
  * )
  * @Config(
-
  * )
  */
 class Issue extends ExtendIssue
@@ -118,12 +117,14 @@ class Issue extends ExtendIssue
 
 
     /**
-     * @ORM\Column(type="date")
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
      **/
     protected $created;
 
     /**
-     * @ORM\Column(type="date")
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
      **/
     protected $updated;
 
@@ -135,6 +136,53 @@ class Issue extends ExtendIssue
         $this->collaborators = new ArrayCollection();
         $this->children = new ArrayCollection();
 //        $this->comment = new ArrayCollection();
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getSummary()
+    {
+        return $this->summary;
+    }
+
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created = $createdAt;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updated;
+    }
+    public function setUpdatedAt($updated)
+    {
+        $this->updated = $updated;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 }
 

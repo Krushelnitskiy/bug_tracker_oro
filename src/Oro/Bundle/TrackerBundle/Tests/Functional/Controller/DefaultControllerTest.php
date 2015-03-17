@@ -2,17 +2,43 @@
 
 namespace Oro\Bundle\TrackerBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
+    public function setUp()
+    {
+        $this->initClient(array(),  $this->generateBasicAuthHeader());
+    }
+
+    public function testCreate()
+    {
+        $crawler = $this->client->request('GET', $this->getUrl('orotracker_issue_create'));
+
+        $form = $crawler->selectButton('Save and Close')->form();
+        $form['orotracker_issue[summary]'] = 'New Issue';
+        $form['orotracker_issue[description]'] = 'New description';
+
+//        $form['orocrm_task[owner]'] = '1';
+
+        $this->client->followRedirects(true);
+        $crawler = $this->client->submit($form);
+
+        $result = $this->client->getResponse();
+        $this->assertHtmlResponseStatusCodeEquals($result, 200);
+        $this->assertContains("Issue saved", $crawler->html());
+    }
+
+    public function viewIndex()
+    {
+
+    }
+
     public function testIndex()
     {
-//        $client = static::createClient();
-//
-//        $crawler = $client->request('GET', '/hello/Fabien');
-//
-//        $this->assertTrue($crawler->filter('html:contains("Hello Fabien")')->count() > 0);
-        $this->assertEquals('0','0');
+        $this->client->request('GET', $this->getUrl('orotracker_issue_index'));
+        $result = $this->client->getResponse();
+        $this->assertHtmlResponseStatusCodeEquals($result, 200);
+        $this->assertContains('Create Issue', $result->getContent());
     }
 }

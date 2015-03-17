@@ -1,5 +1,13 @@
 {% extends 'OroUIBundle:actions:index.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+{% set gridName = 'issue-grid' %}
+{% set pageTitle = 'oro.tracker.issue.entity_plural_label'|trans %}
 
-{% block content %}
-    Hello {{ name }}!
-{% endblock content %}
+{% block navButtons %}
+    {#{% if resource_granted('orocrm_task_create') %}#}
+        {{ UI.addButton({
+            'path' : path('orotracker_issue_create'),
+            'entity_label': 'oro.tracker.issue.entity_label'|trans
+        }) }}
+    {#{% endif %}#}
+{% endblock %}

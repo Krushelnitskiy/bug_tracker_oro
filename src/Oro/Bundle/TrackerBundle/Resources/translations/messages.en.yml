@@ -1,0 +1,10 @@
+oro:
+  tracker:
+    issue:
+      entity_label: Issue
+      entity_plural_label: Issues
+      summary.label: Summary
+      description.label: Description
+
+      saved_message: Issue saved
+

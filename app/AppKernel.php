@@ -10,7 +10,6 @@ class AppKernel extends OroKernel
     {
         $bundles = array(
         // bundles
-//            $bundles[] = new Oro\Bundle\TrackerBundle\OroTrackerBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev'))) {

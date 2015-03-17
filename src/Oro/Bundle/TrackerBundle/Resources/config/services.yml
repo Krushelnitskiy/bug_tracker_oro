@@ -1,7 +1,22 @@
 parameters:
 #    oro_tracker.example.class: Oro\Bundle\TrackerBundle\Example
+  orotracker_issue.entity.class:                       Oro\Bundle\TrackerBundle\Entity\Issue
+#  orotracker_issue.listener.datagrid.user_tasks.class: OroCRM\Bundle\TaskBundle\EventListener\Datagrid\UserTaskGridListener
+#  orotracker_issue.listener.datagrid.activity.class:   OroCRM\Bundle\TaskBundle\EventListener\Datagrid\ActivityGridListener
 
 services:
-#    oro_tracker.example:
-#        class: %oro_tracker.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+#    orocrm_task.listener.datagrid.user_tasks:
+#        class: %orocrm_task.listener.datagrid.user_tasks.class%
+#        arguments:
+#            - @oro_security.security_facade
+#        tags:
+#            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.user-tasks-grid, method: onBuildBefore }
+#            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.after.user-tasks-grid, method: onBuildAfter }
+#
+#    orocrm_task.listener.datagrid.activity:
+#        class: %orocrm_task.listener.datagrid.activity.class%
+#        arguments:
+#            - @oro_activity.manager
+#            - @oro_entity.routing_helper
+#        tags:
+#            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.after.activity-tasks-grid, method: onBuildAfter }
