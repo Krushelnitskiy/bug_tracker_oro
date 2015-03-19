@@ -43,6 +43,8 @@
         <div class="responsive-block">
             {{ UI.renderProperty('oro.tracker.issue.summary.label'|trans, entity.summary) }}
             {{ UI.renderHtmlProperty('oro.tracker.issue.description.label'|trans, entity.description|nl2br) }}
+            {{ UI.renderHtmlProperty('oro.tracker.issue.reporter.label'|trans, entity.reporter) }}
+            {{ UI.renderHtmlProperty('oro.tracker.issue.assignee.label'|trans, entity.assignee) }}
             {#{{ UI.renderProperty('orocrm.task.due_date.label'|trans, entity.dueDate|oro_format_datetime) }}#}
             {#{{ UI.renderProperty('orocrm.task.task_priority.label'|trans, entity.taskPriority) }}#}
 

@@ -71,17 +71,17 @@ class Issue extends ExtendIssue
 //     **/
 //    protected $resolution;
 //
-//    /**
-//     * @ORM\ManyToOne(targetEntity="\Tracker\UserBundle\Entity\User")
-//     * @ORM\JoinColumn(name="reporter_id", referencedColumnName="id")
-//     **/
-//    protected $reporter;
+    /**
+     * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="reporter_id", referencedColumnName="id")
+     **/
+    protected $reporter;
 
-//    /**
-//     * @ORM\ManyToOne(targetEntity="\Tracker\UserBundle\Entity\User", inversedBy="assignedIssue")
-//     * @ORM\JoinColumn(name="assignee_id", referencedColumnName="id")
-//     **/
-//    protected $assignee;
+    /**
+     * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="assignee_id", referencedColumnName="id")
+     **/
+    protected $assignee;
 
 //    /**
 //     * @ORM\ManyToMany(targetEntity="\Tracker\UserBundle\Entity\User", inversedBy="issue")
@@ -184,7 +184,37 @@ class Issue extends ExtendIssue
     {
         $this->description = $description;
     }
+
+    /**
+     * @return User
+     */
+    public function getReporter()
+    {
+        return $this->reporter;
+    }
+
+    /**
+     * @param User $reporter
+     */
+    public function setReporter(User $reporter)
+    {
+        $this->reporter = $reporter;
+    }
+
+    /**
+     * @return User
+     */
+    public function getAssignee()
+    {
+        return $this->assignee;
+    }
+
+    /**
+     * @param User $reporter
+     */
+    public function setAssignee(User $assignee)
+    {
+        $this->assignee = $assignee;
+    }
+
 }
-
-
-

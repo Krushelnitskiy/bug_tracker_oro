@@ -16,6 +16,8 @@ datagrid:
 #                    - issue.status
 #                    - issue.reporter
 #                    - issue.assignee
+                    - CONCAT(reporter.firstName, CONCAT(' ', reporter.lastName)) as reporter_name
+                    - CONCAT(assignee.firstName, CONCAT(' ', assignee.lastName)) as assignee_name
                     - issue.created
                     - issue.updated
 
@@ -34,9 +36,10 @@ datagrid:
 
                 from:
                     - { table: %orotracker_issue.entity.class%, alias: issue }
-#                join:
-#                    left:
-#                        - { join: task.taskPriority, alias: taskPriority }
+                join:
+                    left:
+                        - { join: issue.reporter, alias: reporter }
+                        - { join: issue.assignee, alias: assignee }
 #                        - { join: task.owner, alias: owner }
 #                        - { join: task.workflowStep, alias: workflowStep }
         columns:
@@ -44,7 +47,10 @@ datagrid:
                             label:         oro.tracker.issue.code.label
             summary:
                 label:         oro.tracker.issue.summary.label
-
+            reporter_name:
+                label:         oro.tracker.issue.reporter.label
+            assignee_name:
+                label:         oro.tracker.issue.assignee.label
 #            dueDate:
 #                label:         orocrm.task.due_date.label
 #                frontend_type: datetime

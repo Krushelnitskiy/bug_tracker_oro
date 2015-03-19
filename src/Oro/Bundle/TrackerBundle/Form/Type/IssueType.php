@@ -31,7 +31,24 @@ class IssueType extends AbstractType
                     'required' => false,
                     'label' => 'oro.tracker.issue.description.label'
                 ]
-            );
+            )
+            ->add(
+                'reporter',
+                'oro_user_select',
+                [
+                    'required' => false,
+                    'label' => 'oro.tracker.issue.reporter.label'
+                ]
+            )
+            ->add(
+                'assignee',
+                'oro_user_select',
+                [
+                    'required' => false,
+                    'label' => 'oro.tracker.issue.assignee.label'
+                ]
+            )
+        ;
     }
 
     /**
