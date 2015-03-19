@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Priority
  * @package Tracker\IssueBundle\Entity
- * @ORM\Table(name="issue_priority")
+ * @ORM\Table(name="oro_tracker_issue_priority")
  * @ORM\Entity
  */
 
@@ -35,9 +35,23 @@ class Priority
     /**
      * @var string
      *
-     * @ORM\Column(name="value", type="string", unique=true)
+     * @ORM\Column(name="name", type="string", length=30, unique=true)
      */
-    protected $value;
+    protected $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="label", type="string", unique=true)
+     */
+    protected $label;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="order", type="integer")
+     */
+    protected $order;
 
     /**
      * Get id
@@ -50,30 +64,50 @@ class Priority
     }
 
     /**
-     * Set value
+     * Set label
      *
-     * @param string $value
-     * @return Priority
+     * @param string $label
+     * @return Type
      */
-    public function setValue($value)
+    public function setLabel($label)
     {
-        $this->value = $value;
+        $this->label = $label;
 
         return $this;
     }
 
     /**
-     * Get value
+     * Get label
      *
      * @return string
      */
-    public function getValue()
+    public function getLabel()
     {
-        return $this->value;
+        return $this->label;
+    }
+
+    public function setOrder($order)
+    {
+        $this->order = $order;
+    }
+
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 
     public function __toString()
     {
-        return $this->value;
+        return $this->label;
     }
 }

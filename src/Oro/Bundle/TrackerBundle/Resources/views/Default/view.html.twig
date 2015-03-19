@@ -11,8 +11,17 @@
             'path' : path('orotracker_issue_update', { id: entity.id }),
             'entity_label': 'oro.tracker.issue.entity_label'|trans
         }) }}
-
     {#{% endif %}#}
+
+    {% if entity.type == constant('Oro\\Bundle\\TrackerBundle\\Entity\\Type::TYPE_STORY') %}
+        {{ UI.button({
+            'path' : path('orotracker_issue_add_child', { 'id': entity.id }),
+            'label': 'oro.tracker.issue.view.add_child_label'|trans
+        })
+        }}
+    {% endif %}
+
+
     {#{% if resource_granted('DELETE', entity) %}#}
 
         {#{{ UI.deleteButton({#}
@@ -47,6 +56,8 @@
             {{ UI.renderHtmlProperty('oro.tracker.issue.description.label'|trans, entity.description|nl2br) }}
             {{ UI.renderHtmlProperty('oro.tracker.issue.reporter.label'|trans, entity.reporter) }}
             {{ UI.renderHtmlProperty('oro.tracker.issue.assignee.label'|trans, entity.assignee) }}
+            {{ UI.renderHtmlProperty('oro.tracker.issue.type.label'|trans, entity.type) }}
+            {{ UI.renderHtmlProperty('oro.tracker.issue.priority.label'|trans, entity.priority) }}
             {#{{ UI.renderProperty('orocrm.task.due_date.label'|trans, entity.dueDate|oro_format_datetime) }}#}
             {#{{ UI.renderProperty('orocrm.task.task_priority.label'|trans, entity.taskPriority) }}#}
 

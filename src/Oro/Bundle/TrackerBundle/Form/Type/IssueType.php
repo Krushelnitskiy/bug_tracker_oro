@@ -48,6 +48,30 @@ class IssueType extends AbstractType
                     'label' => 'oro.tracker.issue.assignee.label'
                 ]
             )
+            ->add(
+                'type',
+                'translatable_entity',
+                [
+                    'label' => 'oro.tracker.issue.type.label',
+                    'class' => 'Oro\Bundle\TrackerBundle\Entity\Type',
+                    'required' => true,
+                    'query_builder' => function (EntityRepository $repository) {
+                        return $repository->createQueryBuilder('type')->orderBy('type.order');
+                    }
+                ]
+            )
+            ->add(
+                'priority',
+                'translatable_entity',
+                [
+                    'label' => 'oro.tracker.issue.priority.label',
+                    'class' => 'Oro\Bundle\TrackerBundle\Entity\Priority',
+                    'required' => true,
+                    'query_builder' => function (EntityRepository $repository) {
+                        return $repository->createQueryBuilder('priority')->orderBy('priority.order');
+                    }
+                ]
+            )
         ;
     }
 

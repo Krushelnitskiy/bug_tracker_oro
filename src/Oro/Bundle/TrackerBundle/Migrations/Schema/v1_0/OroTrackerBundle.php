@@ -47,15 +47,16 @@ class OroTrackerBundle implements Migration
     protected function createOroTrackerIssueTypeTable(Schema $schema)
     {
         $table = $schema->createTable('oro_tracker_issue_type');
+        $table->addColumn('id',    'integer', ['autoincrement'=>true]);
         $table->addColumn('name', 'string', ['length'=>30]);
         $table->addColumn('label', 'string', ['notnull' => true, 'length' => 255]);
         $table->addColumn('order', 'integer', ['notnull' => true, 'default' => 0]);
-        $table->setPrimaryKey(['name']);
+        $table->setPrimaryKey(['id']);
     }
 
     protected  function createOroTrackerIssuePriorityTable(Schema $schema)
     {
-        $table = $schema->createTable('oro_tracker_issue_type');
+        $table = $schema->createTable('oro_tracker_issue_priority');
         $table->addColumn('id',    'integer', ['autoincrement'=>true]);
         $table->addColumn('name',  'string',  ['length'=>255]);
         $table->addColumn('label', 'string',  ['notnull' => true, 'length' => 255]);

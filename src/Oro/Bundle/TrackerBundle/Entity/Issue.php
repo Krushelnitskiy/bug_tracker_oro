@@ -62,19 +62,19 @@ class Issue extends ExtendIssue
     protected $description;
 
 
-//    /**
-//     * @ORM\ManyToOne(targetEntity="Type")
-//     * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
-//     **/
-//    protected $type;
+    /**
+     * @ORM\ManyToOne(targetEntity="Type")
+     * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
+     **/
+    protected $type;
 
-//    /**
-//     * @ORM\ManyToOne(targetEntity="Priority")
-//     * @ORM\JoinColumn(name="priority_id", referencedColumnName="id")
-//     **/
-//    protected $priority;
-//
-//
+    /**
+     * @ORM\ManyToOne(targetEntity="Priority")
+     * @ORM\JoinColumn(name="priority_id", referencedColumnName="id")
+     **/
+    protected $priority;
+
+
 //    /**
 //     * @ORM\ManyToOne(targetEntity="Resolution")
 //     * @ORM\JoinColumn(name="resolution_id", referencedColumnName="id")
@@ -120,6 +120,7 @@ class Issue extends ExtendIssue
     protected $children;
 
     /**
+     * @var Issue
      * @ORM\ManyToOne(targetEntity="Issue", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      **/
@@ -280,4 +281,54 @@ class Issue extends ExtendIssue
     {
         return $this->workflowStep;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param Issue $issue
+     */
+    public function setParent(Issue $issue)
+    {
+        $this->parent = $issue;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * @param $priority
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+    }
+
 }

@@ -109,6 +109,31 @@ class DefaultController extends Controller
         return $this->update($task, $formAction);
     }
 
+    /**
+     * @Route("/{id}/sub-task/create", name="orotracker_issue_add_child")
+     * @Template("OroTrackerBundle:Default:update.html.twig")
+     */
+    public function createSubTaskAction(Issue $issue)
+    {
+//        var_dump($task);exit;
+
+        $issueSubTask = new Issue();
+
+//        $defaultPriority = $this->getRepository('OroCRMTaskBundle:TaskPriority')->find('normal');
+//        if ($defaultPriority) {
+//            $issue->setTaskPriority($defaultPriority);
+//        }
+
+        $issueSubTask->setCreatedAt(new \DateTime());
+        $issueSubTask->setUpdatedAt(new \DateTime());
+        $issueSubTask->setParent($issue);
+
+        $formAction = $this->get('oro_entity.routing_helper')
+            ->generateUrlByRequest('orotracker_issue_create', $this->getRequest());
+
+        return $this->update($issueSubTask, $formAction);
+    }
+
 //    /**
 //     * @return IssueType
 //     */
