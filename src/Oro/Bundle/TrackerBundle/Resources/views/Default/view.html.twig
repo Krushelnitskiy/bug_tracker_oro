@@ -25,6 +25,8 @@
         {#}) }}#}
 
     {#{% endif %}#}
+
+
 {% endblock navButtons %}
 
 {% block pageHeader %}
@@ -62,7 +64,7 @@
             {#{{ UI.renderHtmlProperty('orocrm.task.owner.label'|trans, ownerData) }}#}
         </div>
         <div class="responsive-block">
-            {#{{ entityConfig.renderDynamicFields(entity) }}#}
+            {{ entityConfig.renderDynamicFields(entity) }}
         </div>
     </div>
     {%- endset -%}

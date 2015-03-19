@@ -1,5 +1,5 @@
 workflows:
-    task_flow:
+    issue_flow:
         transitions:
             start_progress:
                 label: 'Start progress'
@@ -22,10 +22,17 @@ workflows:
                 frontend_options:
                     icon: 'icon-ok'
                 transition_definition: closed_definition
+            resolve:
+                label: 'Resolve'
+                step_to: resolved
+                #is_unavailable_hidden: true
+                frontend_options:
+                    icon: 'icon-ok'
+                transition_definition: resolve_definition
             reopen:
                 label: 'Reopen'
-                step_to: open
+                step_to: reopened
                 #is_unavailable_hidden: true
                 frontend_options:
                     icon: 'icon-edit'
-                transition_definition: reopen_definition
+                transition_definition: reopened_definition

@@ -15,6 +15,8 @@ use Oro\Bundle\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
+use Oro\Bundle\WorkflowBundle\Entity\WorkflowItem;
+use Oro\Bundle\WorkflowBundle\Entity\WorkflowStep;
 
 /**
  * Class Issue
@@ -25,6 +27,14 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
  *      name="oro_tracker_issue",
  * )
  * @Config(
+ *      defaultValues={
+ *          "workflow"={
+ *              "active_workflow"="task_flow"
+ *          },
+ *           "workflow"={
+ *              "active_workflow"="issue_flow"
+ *          },
+ *      }
  * )
  */
 class Issue extends ExtendIssue
@@ -129,6 +139,22 @@ class Issue extends ExtendIssue
     protected $updated;
 
 
+    /**
+     * @var WorkflowItem
+     *
+     * @ORM\OneToOne(targetEntity="Oro\Bundle\WorkflowBundle\Entity\WorkflowItem")
+     * @ORM\JoinColumn(name="workflow_item_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $workflowItem;
+
+    /**
+     * @var WorkflowStep
+     *
+     * @ORM\ManyToOne(targetEntity="Oro\Bundle\WorkflowBundle\Entity\WorkflowStep")
+     * @ORM\JoinColumn(name="workflow_step_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $workflowStep;
+
     public function __construct()
     {
         parent::__construct();
@@ -217,4 +243,41 @@ class Issue extends ExtendIssue
         $this->assignee = $assignee;
     }
 
+    /**
+     * @param WorkflowItem $workflowItem
+     * @return Issue
+     */
+    public function setWorkflowItem($workflowItem)
+    {
+        $this->workflowItem = $workflowItem;
+
+        return $this;
+    }
+
+    /**
+     * @return WorkflowItem
+     */
+    public function getWorkflowItem()
+    {
+        return $this->workflowItem;
+    }
+
+    /**
+     * @param WorkflowItem $workflowStep
+     * @return Issue
+     */
+    public function setWorkflowStep($workflowStep)
+    {
+        $this->workflowStep = $workflowStep;
+
+        return $this;
+    }
+
+    /**
+     * @return WorkflowStep
+     */
+    public function getWorkflowStep()
+    {
+        return $this->workflowStep;
+    }
 }

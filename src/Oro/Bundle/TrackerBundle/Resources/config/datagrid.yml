@@ -20,6 +20,7 @@ datagrid:
                     - CONCAT(assignee.firstName, CONCAT(' ', assignee.lastName)) as assignee_name
                     - issue.created
                     - issue.updated
+                    - workflowStep.label as workflowStepLabel
 
 
 #                        status (workflow step, OroWorkflowBundle: Open, In progress, Closed, Resolved, Reopened)
@@ -40,17 +41,18 @@ datagrid:
                     left:
                         - { join: issue.reporter, alias: reporter }
                         - { join: issue.assignee, alias: assignee }
-#                        - { join: task.owner, alias: owner }
-#                        - { join: task.workflowStep, alias: workflowStep }
+                        - { join: issue.workflowStep, alias: workflowStep }
         columns:
             code:
-                            label:         oro.tracker.issue.code.label
+                label:         oro.tracker.issue.code.label
             summary:
                 label:         oro.tracker.issue.summary.label
             reporter_name:
                 label:         oro.tracker.issue.reporter.label
             assignee_name:
                 label:         oro.tracker.issue.assignee.label
+            workflowStepLabel:
+                label:         oro.tracker.issue.workflow_step.label
 #            dueDate:
 #                label:         orocrm.task.due_date.label
 #                frontend_type: datetime
