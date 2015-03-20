@@ -17,3 +17,5 @@ oro:
       saved_message: Issue saved
 
       view.add_child_label: Create sub task
+      type:
+        subTask: "Issue (Sub Task)"

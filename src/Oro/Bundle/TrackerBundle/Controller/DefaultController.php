@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Oro\Bundle\TrackerBundle\Entity\Issue;
+use Oro\Bundle\TrackerBundle\Entity\Type;
 use Oro\Bundle\TrackerBundle\Form\Type\IssueType;
 
 /**
@@ -119,17 +120,15 @@ class DefaultController extends Controller
 
         $issueSubTask = new Issue();
 
-//        $defaultPriority = $this->getRepository('OroCRMTaskBundle:TaskPriority')->find('normal');
-//        if ($defaultPriority) {
-//            $issue->setTaskPriority($defaultPriority);
-//        }
+        $typeSubTask = $this->getDoctrine()->getRepository('OroTrackerBundle:Type')->findOneBy(['name'=>Type::TYPE_SUB_TASK]);
 
         $issueSubTask->setCreatedAt(new \DateTime());
         $issueSubTask->setUpdatedAt(new \DateTime());
         $issueSubTask->setParent($issue);
+        $issueSubTask->setType($typeSubTask);
 
         $formAction = $this->get('oro_entity.routing_helper')
-            ->generateUrlByRequest('orotracker_issue_create', $this->getRequest());
+            ->generateUrlByRequest('orotracker_issue_add_child', $this->getRequest(), ['id'=>$issue->getId()]);
 
         return $this->update($issueSubTask, $formAction);
     }

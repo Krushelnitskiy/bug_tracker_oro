@@ -9,32 +9,11 @@ datagrid:
                     - issue.id
                     - issue.summary
                     - issue.code
-#                    - issue.description
-#                    - issue.type
-#                    - issue.priority
-#                    - issue.resolution
-#                    - issue.status
-#                    - issue.reporter
-#                    - issue.assignee
                     - CONCAT(reporter.firstName, CONCAT(' ', reporter.lastName)) as reporter_name
                     - CONCAT(assignee.firstName, CONCAT(' ', assignee.lastName)) as assignee_name
                     - issue.created
                     - issue.updated
                     - workflowStep.label as workflowStepLabel
-
-
-#                        status (workflow step, OroWorkflowBundle: Open, In progress, Closed, Resolved, Reopened)
-#                        tags (dictionary entity from OroTagBundle)
-#                        reporter (user)
-#                        assignee (user)
-#                        related issues
-#                        collaborators (users)
-#                        parent (applicable for Subtask)
-#                        children (applicable for Story)
-#                        notes
-#                        created
-#                        updated
-
                 from:
                     - { table: %orotracker_issue.entity.class%, alias: issue }
                 join:
@@ -53,18 +32,76 @@ datagrid:
                 label:         oro.tracker.issue.assignee.label
             workflowStepLabel:
                 label:         oro.tracker.issue.workflow_step.label
-#            dueDate:
-#                label:         orocrm.task.due_date.label
-#                frontend_type: datetime
-#            workflowStepLabel:
-#                label:         orocrm.task.workflow_step.label
-#            priorityLabel:
-#                label:         orocrm.task.task_priority.label
-#            ownerName:
-#                type:          twig
-#                label:         orocrm.task.owner.label
-#                frontend_type: html
-#                template:      OroCRMTaskBundle:Task:Datagrid/Property/owner.html.twig
+            created:
+                label:         oro.ui.created_at
+                frontend_type: datetime
+            updated:
+                label:         oro.ui.updated_at
+                frontend_type: datetime
+        sorters:
+          columns:
+            code:
+              data_name: issue.code
+            summary:
+              data_name: issue.summary
+            created:
+              data_name: issue.created
+            updated:
+              data_name: issue.updated
+          default:
+            update: DESC
+        properties:
+            id: ~
+            view_link:
+                type:       url
+                route:      orotracker_issue_view
+                params:     [ id ]
+        actions:
+          view:
+            type:          navigate
+#            acl_resource:  orocrm_task_view
+            label:         oro.grid.action.view
+            icon:          eye-open
+            link:          view_link
+            rowAction:     true
+    sub-issue-grid:
+        extended_entity_name: %orotracker_issue.entity.class%
+        source:
+            type: orm
+#            acl_resource: orocrm_task_view
+            query:
+                select:
+                    - issue.id
+                    - issue.summary
+                    - issue.code
+                    - CONCAT(reporter.firstName, CONCAT(' ', reporter.lastName)) as reporter_name
+                    - CONCAT(assignee.firstName, CONCAT(' ', assignee.lastName)) as assignee_name
+                    - issue.created
+                    - issue.updated
+                    - workflowStep.label as workflowStepLabel
+                from:
+                    - { table: %orotracker_issue.entity.class%, alias: issue }
+                join:
+                    left:
+                        - { join: issue.reporter, alias: reporter }
+                        - { join: issue.assignee, alias: assignee }
+                        - { join: issue.workflowStep, alias: workflowStep }
+                where:
+                    and:
+                        - issue.parent = :parent_id
+            bind_parameters:
+              - parent_id
+        columns:
+            code:
+                label:         oro.tracker.issue.code.label
+            summary:
+                label:         oro.tracker.issue.summary.label
+            reporter_name:
+                label:         oro.tracker.issue.reporter.label
+            assignee_name:
+                label:         oro.tracker.issue.assignee.label
+            workflowStepLabel:
+                label:         oro.tracker.issue.workflow_step.label
             created:
                 label:         oro.ui.created_at
                 frontend_type: datetime

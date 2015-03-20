@@ -35,7 +35,7 @@ class Priority
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=30, unique=true)
+     * @ORM\Column(name="`name`", type="string", length=30, unique=true)
      */
     protected $name;
 
@@ -49,7 +49,7 @@ class Priority
     /**
      * @var integer
      *
-     * @ORM\Column(name="order", type="integer")
+     * @ORM\Column(name="`order`", type="integer")
      */
     protected $order;
 

@@ -63,6 +63,7 @@ class Issue extends ExtendIssue
 
 
     /**
+     * @var $type Type
      * @ORM\ManyToOne(targetEntity="Type")
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      **/
@@ -283,7 +284,7 @@ class Issue extends ExtendIssue
     }
 
     /**
-     * @return mixed
+     * @return Type
      */
     public function getType()
     {
@@ -331,4 +332,8 @@ class Issue extends ExtendIssue
         $this->priority = $priority;
     }
 
+    public function getChildren()
+    {
+        return $this->children;
+    }
 }

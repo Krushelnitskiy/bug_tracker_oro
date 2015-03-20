@@ -6,7 +6,11 @@ use Doctrine\ORM\EntityRepository;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormEvent;
+use Oro\Bundle\TrackerBundle\Entity\Issue;
+use Oro\Bundle\TrackerBundle\Entity\Type;
 
 class IssueType extends AbstractType
 {
@@ -49,18 +53,6 @@ class IssueType extends AbstractType
                 ]
             )
             ->add(
-                'type',
-                'translatable_entity',
-                [
-                    'label' => 'oro.tracker.issue.type.label',
-                    'class' => 'Oro\Bundle\TrackerBundle\Entity\Type',
-                    'required' => true,
-                    'query_builder' => function (EntityRepository $repository) {
-                        return $repository->createQueryBuilder('type')->orderBy('type.order');
-                    }
-                ]
-            )
-            ->add(
                 'priority',
                 'translatable_entity',
                 [
@@ -73,6 +65,40 @@ class IssueType extends AbstractType
                 ]
             )
         ;
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, $this->addTypeField());
+    }
+
+    protected function addTypeField()
+    {
+        return function(FormEvent $event) {
+            $issue = $event->getData();
+            $builder = $event->getForm();
+
+            if ($issue instanceof Issue)
+            {
+                if (!$issue->getType() || $issue->getType()->getName() !== Type::TYPE_SUB_TASK)
+                {
+                    $builder->add(
+                        'type',
+                        'entity',
+                        array(
+                            'class' => 'Oro\Bundle\TrackerBundle\Entity\Type',
+                            'query_builder' =>
+                                function (EntityRepository $entityRepository) {
+                                    return $entityRepository
+                                        ->createQueryBuilder('type')
+                                        ->where('type.name != :type_name')
+                                        ->setParameter('type_name', Type::TYPE_SUB_TASK)
+                                        ->orderBy('type.order', 'DESC');
+                                },
+                            'property' => 'label',
+                            'label' => 'oro.tracker.issue.form.type.label'
+                        )
+                    );
+                }
+            }
+        };
     }
 
     /**
@@ -81,9 +107,7 @@ class IssueType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Oro\Bundle\TrackerBundle\Entity\Issue',
-            'intention' => 'issue',
-            'cascade_validation' => true
+            'data_class' => 'Oro\Bundle\TrackerBundle\Entity\Issue'
         ]);
     }
 
