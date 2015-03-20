@@ -59,6 +59,8 @@
                 {{ UI.renderHtmlProperty('oro.tracker.issue.assignee.label'|trans, entity.assignee) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.type.label'|trans, entity.type) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.priority.label'|trans, entity.priority) }}
+                {{ UI.renderHtmlProperty('oro.tracker.issue.reporter.label'|trans, entity.reporter.username) }}
+                {{ UI.renderHtmlProperty('oro.tracker.issue.assignee.label'|trans, entity.assignee.username) }}
                 {#{{ UI.renderProperty('orocrm.task.due_date.label'|trans, entity.dueDate|oro_format_datetime) }}#}
                 {#{{ UI.renderProperty('orocrm.task.task_priority.label'|trans, entity.taskPriority) }}#}
 

@@ -76,12 +76,12 @@ class Issue extends ExtendIssue
     protected $priority;
 
 
-//    /**
-//     * @ORM\ManyToOne(targetEntity="Resolution")
-//     * @ORM\JoinColumn(name="resolution_id", referencedColumnName="id")
-//     **/
-//    protected $resolution;
-//
+    /**
+     * @ORM\ManyToOne(targetEntity="Resolution")
+     * @ORM\JoinColumn(name="resolution_id", referencedColumnName="id")
+     **/
+    protected $resolution;
+
     /**
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="reporter_id", referencedColumnName="id")
@@ -335,5 +335,15 @@ class Issue extends ExtendIssue
     public function getChildren()
     {
         return $this->children;
+    }
+
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    public function getResolution()
+    {
+        return $this->resolution;
     }
 }
