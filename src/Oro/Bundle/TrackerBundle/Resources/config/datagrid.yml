@@ -134,3 +134,48 @@ datagrid:
             icon:          eye-open
             link:         view_link
             rowAction:     true
+
+
+    issue-grid-collaborators:
+        source:
+            type: orm
+#            acl_resource: orocrm_task_view
+            query:
+                select:
+                    - collaborators.id as id
+                    - CONCAT(collaborators.firstName, CONCAT(' ', collaborators.lastName)) as collaborator
+                from:
+                    - { table: %orotracker_issue.entity.class%, alias: issue }
+                join:
+                    left:
+                        - { join: issue.collaborators, alias: collaborators }
+                where:
+                    and:
+                        - issue.id = :issue_id
+            bind_parameters:
+                - issue_id
+        columns:
+            id:
+                label:         oro.tracker.issue.colloborator.id.label
+            collaborator:
+                label:         oro.tracker.issue.colloborator.username.label
+        sorters:
+            columns:
+                id:
+                  data_name: id
+                collaborator:
+                  data_name: collaborator
+        properties:
+            id: ~
+            view_link:
+                type:       url
+                route:      oro_user_view
+                params:     [ id ]
+        actions:
+            view:
+                type:          navigate
+             #  acl_resource:  orocrm_task_view
+                label:         oro.grid.action.view
+                icon:          eye-open
+                link:          view_link
+                rowAction:     true

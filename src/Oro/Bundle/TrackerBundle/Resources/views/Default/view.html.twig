@@ -122,6 +122,19 @@
         {% set dataBlocks = dataBlocks|merge(subTaskBlock) %}
     {% endif %}
 
+
+    {% if entity.collaborators|length > 0 %}
+        {% set CollaboratorsBlock = [{
+            'title': 'Collaborators'|trans,
+            'class': 'active',
+            'subblocks': [{
+                'data' : [dataGrid.renderGrid('issue-grid-collaborators', {'issue_id': entity.id})]
+            }]
+        }] %}
+        {% set dataBlocks = dataBlocks|merge(CollaboratorsBlock) %}
+    {% endif %}
+
+
     {% set id = 'taskView' %}
     {% set data = { 'dataBlocks': dataBlocks} %}
 
