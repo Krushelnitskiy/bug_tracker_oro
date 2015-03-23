@@ -1,6 +1,6 @@
 definitions:
-  resolve_issue_collaboration:
-    label: 'Mark user involved in issue collaboration as a collaborator'
+  add_issue_collaboration_by_event_issue:
+    label: 'Mark user involved in issue as a collaborator'
     enabled: true
     entity: Oro\Bundle\TrackerBundle\Entity\Issue
     actions_configuration:
@@ -13,10 +13,31 @@ definitions:
           method: addCollaborator
           method_parameters: [$assignee]
 
+  add_issue_collaboration_by_event_note:
+      label: 'Mark issue commenter as a collaborator'
+      enabled: true
+      entity: Oro\Bundle\NoteBundle\Entity\Note
+      actions_configuration:
+          - @call_method:
+                object: $.data
+                attribute: $.isIssue
+                method: supportTarget
+                method_parameters: ['Issue']
+          - @create_datetime:
+                condition:
+                    @true: $.isIssue
+                attribute: $.data.target.updatedAt
+          - @call_method:
+              condition:
+                  @true: $.isIssue
+              object: $.data.target
+              method: addCollaborator
+              method_parameters: [$owner]
+
 
 
 triggers:
-    resolve_issue_collaboration:
+    add_issue_collaboration_by_event_issue:
         -
             event: create
             queued: false
@@ -27,4 +48,9 @@ triggers:
         -
             event: update
             field: owner
+            queued: false
+
+    add_issue_collaboration_by_event_note:
+        -
+            event: create
             queued: false
