@@ -11,10 +11,8 @@ namespace Oro\Bundle\TrackerBundle\Model;
 use Oro\Bundle\ActivityBundle\Model\ActivityInterface;
 use Oro\Bundle\ActivityBundle\Model\ExtendActivity;
 
-class ExtendIssue implements ActivityInterface
+class ExtendIssue
 {
-    use ExtendActivity;
-
     /**
     *   Constructor
     */

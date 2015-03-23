@@ -40,6 +40,7 @@ use Oro\Bundle\WorkflowBundle\Entity\WorkflowStep;
 class Issue extends ExtendIssue
 {
     /**
+     * @var $id integer
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -47,16 +48,20 @@ class Issue extends ExtendIssue
     protected $id;
 
     /**
+     * @var $summary string
      * @ORM\Column(type="text")
      */
     protected $summary;
 
     /**
+     * @var $code string
      * @ORM\Column(type="string", length=50, unique=true)
      */
     protected $code;
 
     /**
+     *
+     * @var $id string
      * @ORM\Column(type="text")
      */
     protected $description;
@@ -70,6 +75,7 @@ class Issue extends ExtendIssue
     protected $type;
 
     /**
+     * @var $priority Priority
      * @ORM\ManyToOne(targetEntity="Priority")
      * @ORM\JoinColumn(name="priority_id", referencedColumnName="id")
      **/
@@ -77,42 +83,41 @@ class Issue extends ExtendIssue
 
 
     /**
+     * @var $resolution Resolution
      * @ORM\ManyToOne(targetEntity="Resolution")
      * @ORM\JoinColumn(name="resolution_id", referencedColumnName="id")
      **/
     protected $resolution;
 
     /**
+     * @var $reporter User
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="reporter_id", referencedColumnName="id")
      **/
     protected $reporter;
 
     /**
+     * @var $assignee User
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="assignee_id", referencedColumnName="id")
      **/
     protected $assignee;
 
-//    /**
-//     * @ORM\ManyToMany(targetEntity="\Tracker\UserBundle\Entity\User", inversedBy="issue")
-//     * @ORM\JoinTable(name="issue_collaborator")
-//     **/
-//
-//    /**
-//     * @var User
-//     *
-//     * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User" inversedBy="issue")
-//     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", onDelete="SET NULL")
-//     * @ConfigField(
-//     *      defaultValues={
-//     *          "dataaudit"={
-//     *              "auditable"=true
-//     *          }
-//     *      }
-//     * )
-//     */
-//    protected $collaborators;
+    /**
+     * @var $collaborators ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Oro\Bundle\UserBundle\Entity\User")
+     * @ORM\JoinTable(
+     *      name="oro_tracker_issue_collaborator",
+     *      joinColumns={
+     *          @ORM\JoinColumn(name="issue_id", referencedColumnName="id")
+     *      },
+     *      inverseJoinColumns={
+     *          @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *      }
+     * )
+     */
+    protected $collaborators;
 
 
     /**
@@ -130,15 +135,15 @@ class Issue extends ExtendIssue
 
     /**
      * @var \DateTime
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(name="created_at", type="datetime")
      **/
-    protected $created;
+    protected $createdAt;
 
     /**
      * @var \DateTime
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime")
      **/
-    protected $updated;
+    protected $updatedAt;
 
 
     /**
@@ -166,125 +171,151 @@ class Issue extends ExtendIssue
 //        $this->comment = new ArrayCollection();
     }
 
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Set summary
+     *
+     * @param string $summary
+     * @return Issue
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
+
+        return $this;
+    }
+
+    /**
+     * Get summary
+     *
+     * @return string 
+     */
     public function getSummary()
     {
         return $this->summary;
     }
 
-    public function setSummary($summary)
+    /**
+     * Set code
+     *
+     * @param string $code
+     * @return Issue
+     */
+    public function setCode($code)
     {
-        $this->summary = $summary;
-    }
+        $this->code = $code;
 
-    public function getCreatedAt()
-    {
-        return $this->created;
+        return $this;
     }
 
     /**
-     * @param \DateTime $createdAt
+     * Get code
+     *
+     * @return string 
      */
-    public function setCreatedAt($createdAt)
+    public function getCode()
     {
-        $this->created = $createdAt;
+        return $this->code;
     }
 
-    public function getUpdatedAt()
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Issue
+     */
+    public function setDescription($description)
     {
-        return $this->updated;
-    }
-    public function setUpdatedAt($updated)
-    {
-        $this->updated = $updated;
+        $this->description = $description;
+
+        return $this;
     }
 
+    /**
+     * Get description
+     *
+     * @return string 
+     */
     public function getDescription()
     {
         return $this->description;
     }
 
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
     /**
-     * @return User
-     */
-    public function getReporter()
-    {
-        return $this->reporter;
-    }
-
-    /**
-     * @param User $reporter
-     */
-    public function setReporter(User $reporter)
-    {
-        $this->reporter = $reporter;
-    }
-
-    /**
-     * @return User
-     */
-    public function getAssignee()
-    {
-        return $this->assignee;
-    }
-
-    /**
-     * @param User $reporter
-     */
-    public function setAssignee(User $assignee)
-    {
-        $this->assignee = $assignee;
-    }
-
-    /**
-     * @param WorkflowItem $workflowItem
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
      * @return Issue
      */
-    public function setWorkflowItem($workflowItem)
+    public function setCreatedAt($createdAt)
     {
-        $this->workflowItem = $workflowItem;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * @return WorkflowItem
+     * Get createdAt
+     *
+     * @return \DateTime 
      */
-    public function getWorkflowItem()
+    public function getCreatedAt()
     {
-        return $this->workflowItem;
+        return $this->createdAt;
     }
 
     /**
-     * @param WorkflowItem $workflowStep
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
      * @return Issue
      */
-    public function setWorkflowStep($workflowStep)
+    public function setUpdatedAt($updatedAt)
     {
-        $this->workflowStep = $workflowStep;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
     /**
-     * @return WorkflowStep
+     * Get updatedAt
+     *
+     * @return \DateTime 
      */
-    public function getWorkflowStep()
+    public function getUpdatedAt()
     {
-        return $this->workflowStep;
+        return $this->updatedAt;
     }
 
     /**
-     * @return Type
+     * Set type
+     *
+     * @param \Oro\Bundle\TrackerBundle\Entity\Type $type
+     * @return Issue
+     */
+    public function setType(\Oro\Bundle\TrackerBundle\Entity\Type $type = null)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \Oro\Bundle\TrackerBundle\Entity\Type 
      */
     public function getType()
     {
@@ -292,32 +323,22 @@ class Issue extends ExtendIssue
     }
 
     /**
-     * @param $type
+     * Set priority
+     *
+     * @param \Oro\Bundle\TrackerBundle\Entity\Priority $priority
+     * @return Issue
      */
-    public function setType($type)
+    public function setPriority(\Oro\Bundle\TrackerBundle\Entity\Priority $priority = null)
     {
-        $this->type = $type;
-    }
+        $this->priority = $priority;
 
-
-    /**
-     * @return mixed
-     */
-    public function getParent()
-    {
-        return $this->parent;
+        return $this;
     }
 
     /**
-     * @param Issue $issue
-     */
-    public function setParent(Issue $issue)
-    {
-        $this->parent = $issue;
-    }
-
-    /**
-     * @return mixed
+     * Get priority
+     *
+     * @return \Oro\Bundle\TrackerBundle\Entity\Priority 
      */
     public function getPriority()
     {
@@ -325,25 +346,209 @@ class Issue extends ExtendIssue
     }
 
     /**
-     * @param $priority
+     * Set resolution
+     *
+     * @param \Oro\Bundle\TrackerBundle\Entity\Resolution $resolution
+     * @return Issue
      */
-    public function setPriority($priority)
+    public function setResolution(\Oro\Bundle\TrackerBundle\Entity\Resolution $resolution = null)
     {
-        $this->priority = $priority;
+        $this->resolution = $resolution;
+
+        return $this;
     }
 
+    /**
+     * Get resolution
+     *
+     * @return \Oro\Bundle\TrackerBundle\Entity\Resolution 
+     */
+    public function getResolution()
+    {
+        return $this->resolution;
+    }
+
+    /**
+     * Set reporter
+     *
+     * @param \Oro\Bundle\UserBundle\Entity\User $reporter
+     * @return Issue
+     */
+    public function setReporter(\Oro\Bundle\UserBundle\Entity\User $reporter = null)
+    {
+        $this->reporter = $reporter;
+
+        return $this;
+    }
+
+    /**
+     * Get reporter
+     *
+     * @return \Oro\Bundle\UserBundle\Entity\User 
+     */
+    public function getReporter()
+    {
+        return $this->reporter;
+    }
+
+    /**
+     * Set assignee
+     *
+     * @param \Oro\Bundle\UserBundle\Entity\User $assignee
+     * @return Issue
+     */
+    public function setAssignee(\Oro\Bundle\UserBundle\Entity\User $assignee = null)
+    {
+        $this->assignee = $assignee;
+
+        return $this;
+    }
+
+    /**
+     * Get assignee
+     *
+     * @return \Oro\Bundle\UserBundle\Entity\User 
+     */
+    public function getAssignee()
+    {
+        return $this->assignee;
+    }
+
+    /**
+     * Add collaborators
+     *
+     * @param \Oro\Bundle\UserBundle\Entity\User $collaborators
+     * @return Issue
+     */
+    public function addCollaborator(\Oro\Bundle\UserBundle\Entity\User $collaborators)
+    {
+        if (!$this->collaborators->contains($collaborators))
+        {
+            $this->collaborators[] = $collaborators;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove collaborators
+     *
+     * @param \Oro\Bundle\UserBundle\Entity\User $collaborators
+     */
+    public function removeCollaborator(\Oro\Bundle\UserBundle\Entity\User $collaborators)
+    {
+        $this->collaborators->removeElement($collaborators);
+    }
+
+    /**
+     * Get collaborators
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCollaborators()
+    {
+        return $this->collaborators;
+    }
+
+    /**
+     * Add children
+     *
+     * @param \Oro\Bundle\TrackerBundle\Entity\Issue $children
+     * @return Issue
+     */
+    public function addChild(\Oro\Bundle\TrackerBundle\Entity\Issue $children)
+    {
+        $this->children[] = $children;
+
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param \Oro\Bundle\TrackerBundle\Entity\Issue $children
+     */
+    public function removeChild(\Oro\Bundle\TrackerBundle\Entity\Issue $children)
+    {
+        $this->children->removeElement($children);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
     public function getChildren()
     {
         return $this->children;
     }
 
-    public function getCode()
+    /**
+     * Set parent
+     *
+     * @param \Oro\Bundle\TrackerBundle\Entity\Issue $parent
+     * @return Issue
+     */
+    public function setParent(\Oro\Bundle\TrackerBundle\Entity\Issue $parent = null)
     {
-        return $this->code;
+        $this->parent = $parent;
+
+        return $this;
     }
 
-    public function getResolution()
+    /**
+     * Get parent
+     *
+     * @return \Oro\Bundle\TrackerBundle\Entity\Issue 
+     */
+    public function getParent()
     {
-        return $this->resolution;
+        return $this->parent;
+    }
+
+    /**
+     * Set workflowItem
+     *
+     * @param \Oro\Bundle\WorkflowBundle\Entity\WorkflowItem $workflowItem
+     * @return Issue
+     */
+    public function setWorkflowItem(\Oro\Bundle\WorkflowBundle\Entity\WorkflowItem $workflowItem = null)
+    {
+        $this->workflowItem = $workflowItem;
+
+        return $this;
+    }
+
+    /**
+     * Get workflowItem
+     *
+     * @return \Oro\Bundle\WorkflowBundle\Entity\WorkflowItem 
+     */
+    public function getWorkflowItem()
+    {
+        return $this->workflowItem;
+    }
+
+    /**
+     * Set workflowStep
+     *
+     * @param \Oro\Bundle\WorkflowBundle\Entity\WorkflowStep $workflowStep
+     * @return Issue
+     */
+    public function setWorkflowStep(\Oro\Bundle\WorkflowBundle\Entity\WorkflowStep $workflowStep = null)
+    {
+        $this->workflowStep = $workflowStep;
+
+        return $this;
+    }
+
+    /**
+     * Get workflowStep
+     *
+     * @return \Oro\Bundle\WorkflowBundle\Entity\WorkflowStep 
+     */
+    public function getWorkflowStep()
+    {
+        return $this->workflowStep;
     }
 }

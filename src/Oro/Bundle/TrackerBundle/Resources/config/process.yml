@@ -1,0 +1,30 @@
+definitions:
+  resolve_issue_collaboration:
+    label: 'Mark user involved in issue collaboration as a collaborator'
+    enabled: true
+    entity: Oro\Bundle\TrackerBundle\Entity\Issue
+    actions_configuration:
+      - @call_method:
+          object: $.data
+          method: addCollaborator
+          method_parameters: [$reporter]
+      - @call_method:
+          object: $.data
+          method: addCollaborator
+          method_parameters: [$assignee]
+
+
+
+triggers:
+    resolve_issue_collaboration:
+        -
+            event: create
+            queued: false
+        -
+            event: update
+            field: reporter
+            queued: false
+        -
+            event: update
+            field: owner
+            queued: false

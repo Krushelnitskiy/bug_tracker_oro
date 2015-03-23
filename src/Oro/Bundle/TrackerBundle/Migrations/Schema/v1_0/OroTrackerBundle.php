@@ -37,8 +37,8 @@ class OroTrackerBundle implements Migration
         $table->addColumn('parent_id', 'integer', ['notnull' => false]);
         $table->addColumn('workflow_item_id', 'integer', ['notnull' => false]);
         $table->addColumn('workflow_step_id', 'integer', ['notnull' => false]);
-        $table->addColumn('created', 'datetime', []);
-        $table->addColumn('updated', 'datetime', []);
+        $table->addColumn('created_at', 'datetime', []);
+        $table->addColumn('updated_at', 'datetime', []);
         $table->setPrimaryKey(['id']);
 //        $table->addUniqueIndex(['workflow_item_id'], 'UNIQ_814DEE3F1023C4EE');
 //        $table->addIndex(['workflow_step_id'], 'IDX_814DEE3F71FE882C', []);

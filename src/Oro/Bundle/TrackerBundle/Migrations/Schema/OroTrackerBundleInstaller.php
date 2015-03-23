@@ -87,6 +87,7 @@ class OroTrackerBundleInstaller implements Installation,
         $this->createOroTrackerIssueTypeTable($schema);
         $this->createOroTrackerIssuePriorityTable($schema);
         $this->createOroTrackerIssueResolutionTable($schema);
+        $this->createOroTrackerIssueCollaboratorsTable($schema);
 
 //      $this->createOrocrmTaskPriorityTable($schema);
 
@@ -119,8 +120,8 @@ class OroTrackerBundleInstaller implements Installation,
         $table->addColumn('parent_id', 'integer', ['notnull' => false]);
         $table->addColumn('workflow_item_id', 'integer', ['notnull' => false]);
         $table->addColumn('workflow_step_id', 'integer', ['notnull' => false]);
-        $table->addColumn('created', 'datetime', []);
-        $table->addColumn('updated', 'datetime', []);
+        $table->addColumn('created_at', 'datetime', []);
+        $table->addColumn('updated_at', 'datetime', []);
         $table->setPrimaryKey(['id']);
     }
 
@@ -154,10 +155,18 @@ class OroTrackerBundleInstaller implements Installation,
         $table->setPrimaryKey(['id']);
     }
 
-
     public static function addNoteAssociations(Schema $schema, NoteExtension $noteExtension)
     {
         $noteExtension->addNoteAssociation($schema, 'oro_tracker_issue');
+    }
+
+    protected function createOroTrackerIssueCollaboratorsTable(Schema $schema)
+    {
+        $table = $schema->createTable('oro_tracker_issue_collaborator');
+        $table->addColumn('issue_id', 'integer', []);
+        $table->addColumn('user_id',  'integer',  []);
+        $table->addUniqueIndex(['user_id'], 'IDX_COLLABORATOR_USER');
+        $table->addUniqueIndex(['issue_id'], 'IDX_COLLABORATOR_ISSUE');
     }
 
     /**
