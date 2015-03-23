@@ -179,3 +179,83 @@ datagrid:
                 icon:          eye-open
                 link:          view_link
                 rowAction:     true
+
+
+    widget-issue-grid:
+        extended_entity_name: %orotracker_issue.entity.class%
+        source:
+            type: orm
+ #            acl_resource: orocrm_task_view
+            query:
+                select:
+                     - issue.id
+                     - issue.summary
+                     - issue.code
+                     - CONCAT(reporter.firstName, CONCAT(' ', reporter.lastName)) as reporter_name
+                     - CONCAT(assignee.firstName, CONCAT(' ', assignee.lastName)) as assignee_name
+                     - issue.createdAt
+                     - issue.updatedAt
+                     - workflowStep.label as workflowStepLabel
+                from:
+                     - { table: %orotracker_issue.entity.class%, alias: issue }
+                join:
+                     left:
+                         - { join: issue.reporter, alias: reporter }
+                         - { join: issue.assignee, alias: assignee }
+                         - { join: issue.workflowStep, alias: workflowStep }
+                where:
+                  and:
+                    - issue.reporter = :user_id
+                  or:
+                    - issue.assignee = :user_id
+            bind_parameters:
+                - user_id
+        columns:
+            code:
+                label:         oro.tracker.issue.code.label
+            summary:
+                label:         oro.tracker.issue.summary.label
+            reporter_name:
+                label:         oro.tracker.issue.reporter.label
+            assignee_name:
+                label:         oro.tracker.issue.assignee.label
+            workflowStepLabel:
+                label:         oro.tracker.issue.workflow_step.label
+            createdAt:
+                label:         oro.ui.created_at
+                frontend_type: datetime
+            updatedAt:
+                label:         oro.ui.updated_at
+                frontend_type: datetime
+        sorters:
+          columns:
+            code:
+              data_name: issue.code
+            summary:
+              data_name: issue.summary
+            createdAt:
+              data_name: issue.createdAt
+            updatedAt:
+              data_name: issue.updatedAt
+          default:
+            update: DESC
+        properties:
+            id: ~
+            view_link:
+                type:       url
+                route:      orotracker_issue_view
+                params:     [ id ]
+        actions:
+          view:
+            type:          navigate
+#            acl_resource:  orocrm_task_view
+            label:         oro.grid.action.view
+            icon:          eye-open
+            link:          view_link
+            rowAction:     true
+        options:
+            toolbarOptions:
+                hide: true
+                pageSize:
+                    items: [10]
+                    default_per_page: 10

@@ -14,11 +14,14 @@ oro:
       reporter.label: Reporter
       assignee.label: Assignee
       workflow.label: Status
+      workflow_step.label: Status
       saved_message: Issue saved
       colloborator:
         id.label: "Id"
-        username.label: "User name"
+        username.label:
 
       view.add_child_label: Create sub task
       type:
         subTask: "Issue (Sub Task)"
+      dashboard:
+        issues_grid.label: "Issues"

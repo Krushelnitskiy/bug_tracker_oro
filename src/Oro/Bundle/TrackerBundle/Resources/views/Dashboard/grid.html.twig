@@ -1,0 +1,19 @@
+{% extends 'OroDashboardBundle:Dashboard:widget.html.twig' %}
+{% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
+
+{% block content %}
+    {{ dataGrid.renderGrid('widget-issue-grid', {user_id : app.user.id}) }}
+    <script type="text/javascript">
+        require(['orocrm/call/info-opener']);
+    </script>
+{% endblock %}
+
+{% block actions %}
+    {% set actions = [{
+        'url': path('orotracker_issue_index'),
+        'type': 'link',
+        'label': 'oro.tracker.issue.entity_label'|trans
+    }] %}
+
+    {{ parent() }}
+{% endblock %}
