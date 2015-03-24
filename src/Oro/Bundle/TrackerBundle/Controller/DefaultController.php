@@ -8,11 +8,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Oro\Bundle\TrackerBundle\Entity\Issue;
 use Oro\Bundle\TrackerBundle\Entity\Type;
 use Oro\Bundle\TrackerBundle\Form\Type\IssueType;
+use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
+use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 
 /**
  * Class DefaultController
  * @package Oro\Bundle\TrackerBundle\Controller
  * @Route("/tracker")
+ * @Config(
+ *      defaultValues = {
+ *      }
+ * )
  */
 class DefaultController extends Controller
 {
@@ -21,6 +27,7 @@ class DefaultController extends Controller
      *      "/",
      *      name="orotracker_issue_index",
      * )
+     * @AclAncestor("orotracker_issue_view")
      * @Template
      */
     public function indexAction()
@@ -32,6 +39,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/view/{id}", name="orotracker_issue_view", requirements={"id"="\d+"})
+     * @AclAncestor("orotracker_issue_view")
      * @Template
      */
     public function viewAction(Issue $issue)
@@ -42,6 +50,7 @@ class DefaultController extends Controller
     /**
      * @Route("/create", name="orotracker_issue_create")
      * @Template("OroTrackerBundle:Default:update.html.twig")
+     * @AclAncestor("orotracker_issue_create")
      */
     public function createAction()
     {
@@ -101,6 +110,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/update/{id}", name="orotracker_issue_update", requirements={"id"="\d+"})
+     * @AclAncestor("orotracker_issue_edit")
      * @Template
      */
     public function updateAction(Issue $task)
@@ -113,6 +123,7 @@ class DefaultController extends Controller
     /**
      * @Route("/{id}/sub-task/create", name="orotracker_issue_add_child")
      * @Template("OroTrackerBundle:Default:update.html.twig")
+     * @AclAncestor("orotracker_issue_edit")
      */
     public function createSubTaskAction(Issue $issue)
     {
@@ -138,7 +149,7 @@ class DefaultController extends Controller
      *      "/by_status/chart/{widget}",
      *      name="orotracker_issue_chart",
      *      requirements={
-    *           "widget"="[\w-]+"
+     *           "widget"="[\w-]+"
      *      }
      * )
      *

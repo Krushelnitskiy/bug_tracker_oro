@@ -3,7 +3,7 @@ datagrid:
         extended_entity_name: %orotracker_issue.entity.class%
         source:
             type: orm
-#            acl_resource: orocrm_task_view
+            acl_resource: orotracker_issue_view
             query:
                 select:
                     - issue.id
@@ -59,7 +59,7 @@ datagrid:
         actions:
           view:
             type:          navigate
-#            acl_resource:  orocrm_task_view
+            acl_resource:  orotracker_issue_view
             label:         oro.grid.action.view
             icon:          eye-open
             link:          view_link
@@ -68,7 +68,7 @@ datagrid:
         extended_entity_name: %orotracker_issue.entity.class%
         source:
             type: orm
-#            acl_resource: orocrm_task_view
+            acl_resource: orotracker_issue_view
             query:
                 select:
                     - issue.id
@@ -129,7 +129,7 @@ datagrid:
         actions:
           view:
             type:          navigate
-#            acl_resource:  orocrm_task_view
+            acl_resource:  orotracker_issue_view
             label:         oro.grid.action.view
             icon:          eye-open
             link:         view_link
@@ -139,7 +139,7 @@ datagrid:
     issue-grid-collaborators:
         source:
             type: orm
-#            acl_resource: orocrm_task_view
+            acl_resource: orotracker_issue_view
             query:
                 select:
                     - collaborators.id as id
@@ -174,7 +174,7 @@ datagrid:
         actions:
             view:
                 type:          navigate
-             #  acl_resource:  orocrm_task_view
+                acl_resource:   orotracker_issue_view
                 label:         oro.grid.action.view
                 icon:          eye-open
                 link:          view_link
@@ -185,7 +185,7 @@ datagrid:
         extended_entity_name: %orotracker_issue.entity.class%
         source:
             type: orm
- #            acl_resource: orocrm_task_view
+            acl_resource: orotracker_issue_view
             query:
                 select:
                      - issue.id
@@ -203,11 +203,11 @@ datagrid:
                          - { join: issue.reporter, alias: reporter }
                          - { join: issue.assignee, alias: assignee }
                          - { join: issue.workflowStep, alias: workflowStep }
+                         - { join: issue.collaborators, alias: collaborators }
                 where:
                   and:
-                    - issue.reporter = :user_id
-                  or:
-                    - issue.assignee = :user_id
+                    - collaborators.id = :user_id
+
             bind_parameters:
                 - user_id
         columns:
@@ -248,7 +248,7 @@ datagrid:
         actions:
           view:
             type:          navigate
-#            acl_resource:  orocrm_task_view
+            acl_resource:  orotracker_issue_view
             label:         oro.grid.action.view
             icon:          eye-open
             link:          view_link

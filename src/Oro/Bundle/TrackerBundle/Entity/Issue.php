@@ -17,6 +17,8 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 use Oro\Bundle\WorkflowBundle\Entity\WorkflowItem;
 use Oro\Bundle\WorkflowBundle\Entity\WorkflowStep;
+use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
+use Oro\Bundle\OrganizationBundle\Entity\Organization;
 
 /**
  * Class Issue
@@ -30,6 +32,16 @@ use Oro\Bundle\WorkflowBundle\Entity\WorkflowStep;
  *      defaultValues={
  *           "workflow"={
  *              "active_workflow"="issue_flow"
+ *          },
+ *          "security"={
+ *              "type"="ACL"
+ *          },
+ *          "ownership"={
+ *              "owner_type"="USER",
+ *              "owner_field_name"="assignee",
+ *              "owner_column_name"="assignee_id",
+ *              "organization_field_name"="organization",
+ *              "organization_column_name"="organization_id"
  *          },
  *      }
  * )
@@ -63,6 +75,13 @@ class Issue extends ExtendIssue
      */
     protected $description;
 
+    /**
+     * @var Organization
+     *
+     * @ORM\ManyToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\Organization")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $organization;
 
     /**
      * @var $type Type
@@ -547,5 +566,32 @@ class Issue extends ExtendIssue
     public function getWorkflowStep()
     {
         return $this->workflowStep;
+    }
+
+    public function getOwner() {
+        return $this->getAssignee();
+    }
+
+    /**
+     * Set organization
+     *
+     * @param Organization $organization
+     * @return Issue
+     */
+    public function setOrganization(Organization $organization = null)
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * Get organization
+     *
+     * @return Organization
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
     }
 }

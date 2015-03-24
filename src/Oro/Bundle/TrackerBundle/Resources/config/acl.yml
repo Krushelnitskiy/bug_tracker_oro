@@ -1,0 +1,19 @@
+orotracker_issue_view:
+    type: entity
+    class: OroTrackerBundle:Issue
+    permission: "VIEW"
+
+orotracker_issue_create:
+    type: entity
+    class: OroTrackerBundle:Issue
+    permission: "CREATE"
+
+orotracker_issue_edit:
+    type: entity
+    class: OroTrackerBundle:Issue
+    permission: "EDIT"
+
+orotracker_issue_delete:
+    type: entity
+    class: OroTrackerBundle:Issue
+    permission: "DELETE"

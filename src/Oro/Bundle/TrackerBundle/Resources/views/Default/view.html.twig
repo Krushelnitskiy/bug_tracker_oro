@@ -6,13 +6,12 @@
 {% oro_title_set({params : {"%entity.summary%": entity.summary|default('N/A') }}) %}
 
 {% block navButtons %}
-    {#{% if resource_granted('EDIT', entity) %}#}
-
+    {% if resource_granted('orotracker_issue_edit') %}
         {{ UI.editButton({
             'path' : path('orotracker_issue_update', { id: entity.id }),
             'entity_label': 'oro.tracker.issue.entity_label'|trans
         }) }}
-    {#{% endif %}#}
+    {% endif %}
 
     {% if entity.type == constant('Oro\\Bundle\\TrackerBundle\\Entity\\Type::TYPE_STORY') %}
         {{ UI.button({
@@ -23,18 +22,16 @@
     {% endif %}
 
 
-    {#{% if resource_granted('DELETE', entity) %}#}
-
-        {#{{ UI.deleteButton({#}
-            {#'dataUrl': path('orotracker_issue_view', {'id': entity.id}),#}
-            {#'dataRedirect': path('orotracker_issue_index'),#}
-            {#'aCss': 'no-hash remove-button',#}
-            {#'id': 'btn-remove-user',#}
-            {#'dataId': entity.id,#}
-            {#'entity_label': 'oro.tracker.issue.entity_label'|trans#}
-        {#}) }}#}
-
-    {#{% endif %}#}
+    {% if resource_granted('orotracker_issue_delete') %}
+        {{ UI.deleteButton({
+            'dataUrl': path('orotracker_issue_view', {'id': entity.id}),
+            'dataRedirect': path('orotracker_issue_index'),
+            'aCss': 'no-hash remove-button',
+            'id': 'btn-remove-user',
+            'dataId': entity.id,
+            'entity_label': 'oro.tracker.issue.entity_label'|trans
+        }) }}
+    {% endif %}
 
 
 {% endblock navButtons %}
@@ -61,8 +58,6 @@
                 {{ UI.renderHtmlProperty('oro.tracker.issue.priority.label'|trans, entity.priority) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.reporter.label'|trans, entity.reporter.username) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.assignee.label'|trans, entity.assignee.username) }}
-                {#{{ UI.renderProperty('orocrm.task.due_date.label'|trans, entity.dueDate|oro_format_datetime) }}#}
-                {#{{ UI.renderProperty('orocrm.task.task_priority.label'|trans, entity.taskPriority) }}#}
 
                 {%- set ownerData -%}
                 {#{%- if entity.owner -%}#}

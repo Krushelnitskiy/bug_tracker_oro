@@ -4,10 +4,10 @@
 {% set pageTitle = 'oro.tracker.issue.entity_plural_label'|trans %}
 
 {% block navButtons %}
-    {#{% if resource_granted('orocrm_task_create') %}#}
+    {% if resource_granted('orotracker_issue_create') %}
         {{ UI.addButton({
             'path' : path('orotracker_issue_create'),
             'entity_label': 'oro.tracker.issue.entity_label'|trans
         }) }}
-    {#{% endif %}#}
+    {% endif %}
 {% endblock %}
