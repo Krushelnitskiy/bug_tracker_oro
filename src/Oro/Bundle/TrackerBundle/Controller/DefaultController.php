@@ -133,6 +133,43 @@ class DefaultController extends Controller
         return $this->update($issueSubTask, $formAction);
     }
 
+    /**
+     * @Route(
+     *      "/by_status/chart/{widget}",
+     *      name="orotracker_issue_chart",
+     *      requirements={
+    *           "widget"="[\w-]+"
+     *      }
+     * )
+     *
+     * @Template("OroTrackerBundle:Dashboard:chart.html.twig")
+     * @return array $widgetAttr
+     */
+    public function chartAction($widget)
+    {
+        $data = $this->getDoctrine()
+            ->getRepository('OroTrackerBundle:Issue')
+            ->findAllGroupedBySteps();
+
+        $widgetAttr = $this->get('oro_dashboard.widget_configs')->getWidgetAttributesForTwig($widget);
+        $widgetAttr['chartView'] = $this->get('oro_chart.view_builder')
+            ->setArrayData($data)
+            ->setOptions(
+                array(
+                    'name' => 'pie_chart',
+                    'data_schema' => array(
+                        'label' => array('field_name' => 'label'),
+                        'value' => array(
+                            'field_name' => 'issue_count'
+                        )
+                    )
+                )
+            )
+            ->getView();
+
+        return $widgetAttr;
+    }
+
 //    /**
 //     * @return IssueType
 //     */

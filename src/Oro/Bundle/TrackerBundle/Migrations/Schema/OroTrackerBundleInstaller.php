@@ -165,8 +165,8 @@ class OroTrackerBundleInstaller implements Installation,
         $table = $schema->createTable('oro_tracker_issue_collaborator');
         $table->addColumn('issue_id', 'integer', []);
         $table->addColumn('user_id',  'integer',  []);
-        $table->addUniqueIndex(['user_id'], 'IDX_COLLABORATOR_USER');
-        $table->addUniqueIndex(['issue_id'], 'IDX_COLLABORATOR_ISSUE');
+//        $table->addUniqueIndex(['user_id'], 'IDX_COLLABORATOR_USER');
+//        $table->addUniqueIndex(['issue_id'], 'IDX_COLLABORATOR_ISSUE');
     }
 
     /**

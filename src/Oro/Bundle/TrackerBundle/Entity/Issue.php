@@ -22,15 +22,12 @@ use Oro\Bundle\WorkflowBundle\Entity\WorkflowStep;
  * Class Issue
  * @package Oro\Bundle\TrackerBundle\Entity
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Oro\Bundle\TrackerBundle\Entity\IssueRepository")
  * @ORM\Table(
  *      name="oro_tracker_issue",
  * )
  * @Config(
  *      defaultValues={
- *          "workflow"={
- *              "active_workflow"="task_flow"
- *          },
  *           "workflow"={
  *              "active_workflow"="issue_flow"
  *          },
@@ -422,9 +419,9 @@ class Issue extends ExtendIssue
      */
     public function addCollaborator(\Oro\Bundle\UserBundle\Entity\User $collaborators)
     {
-        if (!$this->collaborators->contains($collaborators))
+        if (!$this->getCollaborators()->contains($collaborators))
         {
-            $this->collaborators[] = $collaborators;
+            $this->collaborators->add($collaborators);
         }
 
         return $this;
