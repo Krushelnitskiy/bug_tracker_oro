@@ -53,18 +53,38 @@ class Issue extends ExtendIssue
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ConfigField(
+     *  defaultValues={
+     *      "importexport"={
+     *          "order"=0
+     *      }
+     *  }
+     * )
      */
     protected $id;
 
     /**
      * @var $summary string
      * @ORM\Column(type="text")
+     * @ConfigField(
+     *  defaultValues={
+     *      "importexport"={
+     *          "order"=10
+     *      }
+     *  }
+     * )
      */
     protected $summary;
 
     /**
      * @var $code string
      * @ORM\Column(type="string", length=50, unique=true)
+     * @ConfigField(
+     *  defaultValues={
+     *      "importexport"={
+     *          "order"=20
+     *      }
+     *  } )
      */
     protected $code;
 
@@ -72,6 +92,12 @@ class Issue extends ExtendIssue
      *
      * @var $id string
      * @ORM\Column(type="text")
+     * @ConfigField(
+     *  defaultValues={
+     *      "importexport"={
+     *          "order"=30
+     *      }
+     *  } )
      */
     protected $description;
 
@@ -80,6 +106,12 @@ class Issue extends ExtendIssue
      *
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\Organization")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ConfigField(
+     *  defaultValues={
+     *      "importexport"={
+     *          "order"=40
+     *      }
+     *  } )
      */
     protected $organization;
 
@@ -87,6 +119,12 @@ class Issue extends ExtendIssue
      * @var $type Type
      * @ORM\ManyToOne(targetEntity="Type")
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
+     * @ConfigField(
+     *  defaultValues={
+     *      "importexport"={
+     *          "order"=50
+     *      }
+     *  } )
      **/
     protected $type;
 
@@ -94,6 +132,12 @@ class Issue extends ExtendIssue
      * @var $priority Priority
      * @ORM\ManyToOne(targetEntity="Priority")
      * @ORM\JoinColumn(name="priority_id", referencedColumnName="id")
+     * @ConfigField(
+     *  defaultValues={
+     *      "importexport"={
+     *          "order"=60
+     *      }
+     *  } )
      **/
     protected $priority;
 
@@ -102,6 +146,12 @@ class Issue extends ExtendIssue
      * @var $resolution Resolution
      * @ORM\ManyToOne(targetEntity="Resolution")
      * @ORM\JoinColumn(name="resolution_id", referencedColumnName="id")
+     * @ConfigField(
+     *  defaultValues={
+     *      "importexport"={
+     *          "order"=70
+     *      }
+     *  } )
      **/
     protected $resolution;
 
@@ -109,6 +159,12 @@ class Issue extends ExtendIssue
      * @var $reporter User
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="reporter_id", referencedColumnName="id")
+     * @ConfigField(
+     *  defaultValues={
+     *      "importexport"={
+     *          "order"=80
+     *      }
+     *  } )
      **/
     protected $reporter;
 
@@ -116,6 +172,12 @@ class Issue extends ExtendIssue
      * @var $owner User
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
+     * @ConfigField(
+     *  defaultValues={
+     *      "importexport"={
+     *          "order"=90
+     *      }
+     *  } )
      **/
     protected $owner;
 
@@ -152,12 +214,24 @@ class Issue extends ExtendIssue
     /**
      * @var \DateTime
      * @ORM\Column(name="created_at", type="datetime")
+     * @ConfigField(
+     *  defaultValues={
+     *      "importexport"={
+     *          "order"=100
+     *      }
+     *  } )
      **/
     protected $createdAt;
 
     /**
      * @var \DateTime
      * @ORM\Column(name="updated_at", type="datetime")
+     * @ConfigField(
+     *  defaultValues={
+     *      "importexport"={
+     *          "order"=110
+     *      }
+     *  } )
      **/
     protected $updatedAt;
 

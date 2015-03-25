@@ -4,6 +4,15 @@
 {% set pageTitle = 'oro.tracker.issue.entity_plural_label'|trans %}
 
 {% block navButtons %}
+    {% include 'OroImportExportBundle:ImportExport:buttons.html.twig' with {
+        entity_class: entity_class,
+        exportProcessor: 'orotracker_issue',
+        exportTemplateProcessor: 'orocrm_sales_lead',
+        importProcessor: 'orotracker_issue.add_or_replace',
+        importTitle: 'oro.importexport.import.entity'|trans({'%entityName%': 'oro.tracker.issue.entity_plural_label'|trans}),
+        dataGridName: gridName
+    } %}
+
     {% if resource_granted('orotracker_issue_create') %}
         {{ UI.addButton({
             'path' : path('orotracker_issue_create'),

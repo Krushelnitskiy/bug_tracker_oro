@@ -1,0 +1,44 @@
+parameters:
+    orocrm_sales.importexport.template_fixture.lead.class: Oro\Bundle\TrackerBundle\ImportExport\TemplateFixture\IssueFixture
+
+services:
+    orocrm_sales.importexport.template_fixture.lead:
+        class: %orocrm_sales.importexport.template_fixture.lead.class%
+        tags:
+            - { name: oro_importexport.template_fixture }
+
+    # Converter
+    orocrm_sales.importexport.data_converter.lead:
+        parent: oro_importexport.data_converter.configurable
+
+    orocrm_sales.importexport.template_fixture.data_converter.lead:
+        parent: oro_importexport.data_converter.template_fixture.configurable
+
+    # Export processor
+    orocrm_sales.importexport.processor.export.lead:
+        parent: oro_importexport.processor.export_abstract
+        calls:
+            - [setDataConverter, [@orocrm_sales.importexport.data_converter.lead]]
+        tags:
+            - { name: oro_importexport.processor, type: export, entity: %orotracker_issue.entity.class%, alias: orotracker_issue }
+
+    orocrm_sales.importexport.processor.export_template.lead:
+        parent: oro_importexport.processor.export_abstract
+        calls:
+            - [setDataConverter, [@orocrm_sales.importexport.template_fixture.data_converter.lead]]
+        tags:
+            - { name: oro_importexport.processor, type: export_template, entity: %orotracker_issue.entity.class%, alias: orocrm_sales_lead }
+
+    # Strategy
+    orocrm_sales.importexport.strategy.lead.add_or_replace:
+        parent: oro_importexport.strategy.configurable_add_or_replace
+
+    # Import processor
+    orocrm_sales.importexport.processor.import.lead:
+        parent: oro_importexport.processor.import_abstract
+        calls:
+             - [setDataConverter, [@orocrm_sales.importexport.data_converter.lead]]
+             - [setStrategy, [@orocrm_sales.importexport.strategy.lead.add_or_replace]]
+        tags:
+            - { name: oro_importexport.processor, type: import, entity: %orotracker_issue.entity.class%, alias: orotracker_issue.add_or_replace }
+            - { name: oro_importexport.processor, type: import_validation, entity: %orotracker_issue.entity.class%, alias: orotracker_issue.add_or_replace }
