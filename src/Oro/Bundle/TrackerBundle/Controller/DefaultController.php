@@ -181,6 +181,17 @@ class DefaultController extends Controller
         return $widgetAttr;
     }
 
+
+    /**
+     * @Route("/user/{userId}", name="orotracker_issue_user_issue", requirements={"userId"="\d+"})
+     * @AclAncestor("orotracker_issue_view")
+     * @Template
+     */
+    public function userIssueAction($userId)
+    {
+        return ['userId' => $userId];
+    }
+
 //    /**
 //     * @return IssueType
 //     */

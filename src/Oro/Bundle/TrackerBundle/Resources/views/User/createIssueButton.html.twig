@@ -1,0 +1,33 @@
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+{#{{ UI.button({#}
+    {#'path': path('orotracker_issue_index'),#}
+    {#'iCss': 'icon-list-alt',#}
+    {#'title': 'oro.tracker.issue.entity_label'|trans,#}
+    {#'label': 'oro.tracker.issue.entity_label'|trans#}
+{#}) }}#}
+
+
+{{ UI.clientButton({
+    'dataUrl': path('orotracker_issue_create', oro_action_params(entity, 'assign')),
+    'aCss': 'no-hash',
+    'iCss': 'icon-list-alt',
+    'dataId': entity.id,
+    'label': 'oro.ui.create_entity'|trans({'%entityName%': 'oro.tracker.issue.entity_label'|trans}) ,
+    'title': 'oro.ui.create_entity'|trans({'%entityName%': 'oro.tracker.issue.entity_label'|trans}) ,
+    'widget' : {
+        'type' : 'dialog',
+        'multiple' : true,
+        'reload-grid-name' : 'user-issues-grid',
+        'options' : {
+            'alias': 'assign-task-dialog',
+            'dialogOptions' : {
+                'title' : 'oro.ui.create_entity'|trans({'%entityName%': 'oro.tracker.issue.entity_label'|trans}) ,
+                'allowMaximize': true,
+                'allowMinimize': true,
+                'dblclick': 'maximize',
+                'maximizedHeightDecreaseBy': 'minimize-bar',
+                'width': 1000
+            }
+        }
+    }
+}) }}

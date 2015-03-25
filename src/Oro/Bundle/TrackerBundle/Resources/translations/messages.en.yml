@@ -25,3 +25,5 @@ oro:
         subTask: "Issue (Sub Task)"
       dashboard:
         issues_grid.label: "Issues"
+      user_issue: "User issues"
+      create: "Create"

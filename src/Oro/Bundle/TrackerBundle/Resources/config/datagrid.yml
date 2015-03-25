@@ -10,7 +10,7 @@ datagrid:
                     - issue.summary
                     - issue.code
                     - CONCAT(reporter.firstName, CONCAT(' ', reporter.lastName)) as reporter_name
-                    - CONCAT(assignee.firstName, CONCAT(' ', assignee.lastName)) as assignee_name
+                    - CONCAT(owner.firstName, CONCAT(' ', owner.lastName)) as owner_name
                     - issue.createdAt
                     - issue.updatedAt
                     - workflowStep.label as workflowStepLabel
@@ -19,7 +19,7 @@ datagrid:
                 join:
                     left:
                         - { join: issue.reporter, alias: reporter }
-                        - { join: issue.assignee, alias: assignee }
+                        - { join: issue.owner, alias: owner }
                         - { join: issue.workflowStep, alias: workflowStep }
         columns:
             code:
@@ -28,7 +28,7 @@ datagrid:
                 label:         oro.tracker.issue.summary.label
             reporter_name:
                 label:         oro.tracker.issue.reporter.label
-            assignee_name:
+            owner_name:
                 label:         oro.tracker.issue.assignee.label
             workflowStepLabel:
                 label:         oro.tracker.issue.workflow_step.label
@@ -75,7 +75,7 @@ datagrid:
                     - issue.summary
                     - issue.code
                     - CONCAT(reporter.firstName, CONCAT(' ', reporter.lastName)) as reporter_name
-                    - CONCAT(assignee.firstName, CONCAT(' ', assignee.lastName)) as assignee_name
+                    - CONCAT(owner.firstName, CONCAT(' ', owner.lastName)) as owner_name
                     - issue.createdAt
                     - issue.updatedAt
                     - workflowStep.label as workflowStepLabel
@@ -84,7 +84,7 @@ datagrid:
                 join:
                     left:
                         - { join: issue.reporter, alias: reporter }
-                        - { join: issue.assignee, alias: assignee }
+                        - { join: issue.owner, alias: owner }
                         - { join: issue.workflowStep, alias: workflowStep }
                 where:
                     and:
@@ -98,7 +98,7 @@ datagrid:
                 label:         oro.tracker.issue.summary.label
             reporter_name:
                 label:         oro.tracker.issue.reporter.label
-            assignee_name:
+            owner_name:
                 label:         oro.tracker.issue.assignee.label
             workflowStepLabel:
                 label:         oro.tracker.issue.workflow_step.label
@@ -192,7 +192,7 @@ datagrid:
                      - issue.summary
                      - issue.code
                      - CONCAT(reporter.firstName, CONCAT(' ', reporter.lastName)) as reporter_name
-                     - CONCAT(assignee.firstName, CONCAT(' ', assignee.lastName)) as assignee_name
+                     - CONCAT(owner.firstName, CONCAT(' ', owner.lastName)) as owner_name
                      - issue.createdAt
                      - issue.updatedAt
                      - workflowStep.label as workflowStepLabel
@@ -201,7 +201,7 @@ datagrid:
                 join:
                      left:
                          - { join: issue.reporter, alias: reporter }
-                         - { join: issue.assignee, alias: assignee }
+                         - { join: issue.owner, alias: owner }
                          - { join: issue.workflowStep, alias: workflowStep }
                          - { join: issue.collaborators, alias: collaborators }
                 where:
@@ -217,7 +217,7 @@ datagrid:
                 label:         oro.tracker.issue.summary.label
             reporter_name:
                 label:         oro.tracker.issue.reporter.label
-            assignee_name:
+            owner_name:
                 label:         oro.tracker.issue.assignee.label
             workflowStepLabel:
                 label:         oro.tracker.issue.workflow_step.label
@@ -259,3 +259,7 @@ datagrid:
                 pageSize:
                     items: [10]
                     default_per_page: 10
+    user-issues-grid:
+        extends: issue-grid
+        options:
+            entity_pagination: false

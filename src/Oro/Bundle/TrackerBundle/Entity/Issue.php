@@ -38,8 +38,8 @@ use Oro\Bundle\OrganizationBundle\Entity\Organization;
  *          },
  *          "ownership"={
  *              "owner_type"="USER",
- *              "owner_field_name"="assignee",
- *              "owner_column_name"="assignee_id",
+ *              "owner_field_name"="owner",
+ *              "owner_column_name"="owner_id",
  *              "organization_field_name"="organization",
  *              "organization_column_name"="organization_id"
  *          },
@@ -113,11 +113,11 @@ class Issue extends ExtendIssue
     protected $reporter;
 
     /**
-     * @var $assignee User
+     * @var $owner User
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="assignee_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
      **/
-    protected $assignee;
+    protected $owner;
 
     /**
      * @var $collaborators ArrayCollection
@@ -407,30 +407,7 @@ class Issue extends ExtendIssue
         return $this->reporter;
     }
 
-    /**
-     * Set assignee
-     *
-     * @param \Oro\Bundle\UserBundle\Entity\User $assignee
-     * @return Issue
-     */
-    public function setAssignee(\Oro\Bundle\UserBundle\Entity\User $assignee = null)
-    {
-        $this->assignee = $assignee;
-
-        return $this;
-    }
-
-    /**
-     * Get assignee
-     *
-     * @return \Oro\Bundle\UserBundle\Entity\User 
-     */
-    public function getAssignee()
-    {
-        return $this->assignee;
-    }
-
-    /**
+     /**
      * Add collaborators
      *
      * @param \Oro\Bundle\UserBundle\Entity\User $collaborators
@@ -569,8 +546,20 @@ class Issue extends ExtendIssue
     }
 
     public function getOwner() {
-        return $this->getAssignee();
+        return $this->owner;
     }
+
+
+    /**
+     * @param $user User
+     * @return Issue
+     */
+    public function setOwner($user) {
+        $this->owner = $user;
+
+        return $this;
+    }
+
 
     /**
      * Set organization

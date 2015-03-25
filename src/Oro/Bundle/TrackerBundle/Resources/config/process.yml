@@ -11,7 +11,7 @@ definitions:
       - @call_method:
           object: $.data
           method: addCollaborator
-          method_parameters: [$assignee]
+          method_parameters: [$owner]
 
   add_issue_collaboration_by_event_note:
       label: 'Mark issue commenter as a collaborator'

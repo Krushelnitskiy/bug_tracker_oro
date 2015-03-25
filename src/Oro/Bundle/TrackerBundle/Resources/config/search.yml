@@ -83,7 +83,7 @@ Oro\Bundle\TrackerBundle\Entity\Issue:
                     target_type: integer
                     target_fields: [reporter]
         -
-            name:                   assignee
+            name:                   owner
             relation_type: many-to-one
             relation_fields:
                 -
@@ -93,4 +93,4 @@ Oro\Bundle\TrackerBundle\Entity\Issue:
                 -
                     name: id
                     target_type: integer
-                    target_fields: [assignee]
+                    target_fields: [owner]
