@@ -1,9 +1,11 @@
 parameters:
     orotracker_issue.form.type.issue.class:    Oro\Bundle\TrackerBundle\Form\Type\IssueType
-#    orocrm_task.form.type.task_api.class:           OroCRM\Bundle\TaskBundle\Form\Type\TaskApiType
     orotracker_issue.form.handler.issue.class: Oro\Bundle\TrackerBundle\Form\Handler\IssueHandler
-#    orocrm_task.form.handler.task_api.class:        OroCRM\Bundle\TaskBundle\Form\Handler\TaskApiHandler
-#    orocrm_task.manager.api.class:                  Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
+
+    orotracker_issue.form.type.issue_api.class:           Oro\Bundle\TrackerBundle\Form\Type\IssueApiType
+    orotracker_issue.form.handler.issue_api.class:        Oro\Bundle\TrackerBundle\Form\Handler\IssueApiHandler
+
+    orotracker_issue.manager.api.class:                  Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
 
 services:
     orotracker_issue.form.issue.task:
@@ -27,4 +29,28 @@ services:
             - @request
             - @doctrine.orm.entity_manager
             - @oro_activity.manager
+            - @oro_entity.routing_helper
+
+    orotracker_issue.manager.api:
+        class: %orotracker_issue.manager.api.class%
+        parent: oro_soap.manager.entity_manager.abstract
+        arguments:
+            - %orotracker_issue.entity.class%
+            - @doctrine.orm.entity_manager
+
+    orotracker_issue.form.api:
+        class: Symfony\Component\Form\Form
+        factory_method: createNamed
+        factory_service: form.factory
+        arguments:
+            - ~
+            - 'issue'
+
+    orotracker_issue.form.handler.issue_api:
+        class: %orotracker_issue.form.handler.issue_api.class%
+        scope: request
+        arguments:
+            - @orotracker_issue.form.api
+            - @request
+            - @doctrine.orm.entity_manager
             - @oro_entity.routing_helper

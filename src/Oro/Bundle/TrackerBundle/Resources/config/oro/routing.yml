@@ -2,3 +2,12 @@ oro_tracker_bundle:
     resource:     "@OroTrackerBundle/Controller"
     type:         annotation
     prefix:       /
+
+oro_tracker_issue_bundle_api:
+    resource:     "@OroTrackerBundle/Controller/Api/Rest/IssueController.php"
+    type:         rest
+    prefix:       api/rest/{version}
+    requirements:
+        version:  latest|v1
+    defaults:
+        version:  latest
