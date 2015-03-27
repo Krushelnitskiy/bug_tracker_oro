@@ -20,7 +20,7 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
  *      }
  * )
  */
-class DefaultController extends Controller
+class IssueController extends Controller
 {
     /**
      * @Route(
@@ -49,7 +49,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/create", name="orotracker_issue_create")
-     * @Template("OroTrackerBundle:Default:update.html.twig")
+     * @Template("OroTrackerBundle:Issue:update.html.twig")
      * @AclAncestor("orotracker_issue_create")
      */
     public function createAction()
@@ -113,7 +113,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/{id}/sub-task/create", name="orotracker_issue_add_child")
-     * @Template("OroTrackerBundle:Default:update.html.twig")
+     * @Template("OroTrackerBundle:Issue:update.html.twig")
      * @AclAncestor("orotracker_issue_edit")
      */
     public function createSubTaskAction(Issue $issue)
