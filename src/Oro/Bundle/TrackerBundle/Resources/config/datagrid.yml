@@ -11,6 +11,9 @@ datagrid:
                     - issue.code
                     - CONCAT(reporter.firstName, CONCAT(' ', reporter.lastName)) as reporter_name
                     - CONCAT(owner.firstName, CONCAT(' ', owner.lastName)) as owner_name
+                    - type.label as typeLabel
+                    - priority.label as priorityLabel
+                    - resolution.label as resolutionLabel
                     - issue.createdAt
                     - issue.updatedAt
                     - workflowStep.label as workflowStepLabel
@@ -20,16 +23,26 @@ datagrid:
                     left:
                         - { join: issue.reporter, alias: reporter }
                         - { join: issue.owner, alias: owner }
+                        - { join: issue.type, alias: type }
+                        - { join: issue.priority, alias: priority }
+                        - { join: issue.resolution, alias: resolution }
                         - { join: issue.workflowStep, alias: workflowStep }
+# resolution,
         columns:
             code:
                 label:         oro.tracker.issue.code.label
             summary:
                 label:         oro.tracker.issue.summary.label
+            typeLabel:
+                label:         oro.tracker.issue.type.label
+            priorityLabel:
+                label:         oro.tracker.issue.priority.label
+            resolutionLabel:
+                label:         oro.tracker.issue.resolution.label
             reporter_name:
                 label:         oro.tracker.issue.reporter.label
             owner_name:
-                label:         oro.tracker.issue.assignee.label
+                label:         oro.tracker.issue.owner.label
             workflowStepLabel:
                 label:         oro.tracker.issue.workflow_step.label
             createdAt:
@@ -41,13 +54,19 @@ datagrid:
         sorters:
           columns:
             code:
-              data_name: issue.code
+                data_name: issue.code
             summary:
-              data_name: issue.summary
+                data_name: issue.summary
             createdAt:
-              data_name: issue.createdAt
+                data_name: issue.createdAt
             updatedAt:
-              data_name: issue.updatedAt
+                data_name: issue.updatedAt
+            typeLabel:
+                data_name: type.order
+            priorityLabel:
+                data_name: priority.order
+            resolutionLabel:
+                data_name: resolution.order
           default:
             update: DESC
         properties:
@@ -99,7 +118,7 @@ datagrid:
             reporter_name:
                 label:         oro.tracker.issue.reporter.label
             owner_name:
-                label:         oro.tracker.issue.assignee.label
+                label:         oro.tracker.issue.owner.label
             workflowStepLabel:
                 label:         oro.tracker.issue.workflow_step.label
             createdAt:
@@ -156,9 +175,11 @@ datagrid:
                 - issue_id
         columns:
             id:
-                label:         oro.tracker.issue.colloborator.id.label
+                label:         oro.tracker.issue.collaborator.id.label
             collaborator:
-                label:         oro.tracker.issue.colloborator.username.label
+                label:         oro.tracker.issue.collaborator.username.label
+            step:
+                renderable: false
         sorters:
             columns:
                 id:
@@ -218,7 +239,7 @@ datagrid:
             reporter_name:
                 label:         oro.tracker.issue.reporter.label
             owner_name:
-                label:         oro.tracker.issue.assignee.label
+                label:         oro.tracker.issue.owner.label
             workflowStepLabel:
                 label:         oro.tracker.issue.workflow_step.label
             createdAt:

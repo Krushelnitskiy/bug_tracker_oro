@@ -53,11 +53,10 @@
                 {{ UI.renderProperty('oro.tracker.issue.summary.label'|trans, entity.summary) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.description.label'|trans, entity.description|nl2br) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.reporter.label'|trans, entity.reporter) }}
-                {{ UI.renderHtmlProperty('oro.tracker.issue.assignee.label'|trans, entity.owner) }}
+                {{ UI.renderHtmlProperty('oro.tracker.issue.owner.label'|trans, entity.owner) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.type.label'|trans, entity.type) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.priority.label'|trans, entity.priority) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.reporter.label'|trans, entity.reporter.username) }}
-                {{ UI.renderHtmlProperty('oro.tracker.issue.assignee.label'|trans, entity.owner.username) }}
 
                 {%- set ownerData -%}
                 {#{%- if entity.owner -%}#}

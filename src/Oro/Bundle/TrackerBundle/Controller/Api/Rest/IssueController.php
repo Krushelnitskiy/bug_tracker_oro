@@ -72,7 +72,7 @@ class IssueController extends RestController implements ClassResourceInterface
             'createdAt'     => $dateParamFilter,
             'updatedAt'     => $dateParamFilter,
             'ownerId'       => new IdentifierToReferenceFilter($this->getDoctrine(), 'OroUserBundle:User'),
-            'ownerUsername' => new IdentifierToReferenceFilter($this->getDoctrine(), 'OroUserBundle:User', 'username'),
+            'ownerUsername' => new IdentifierToReferenceFilter($this->getDoctrine(), 'OroUserBundle:User', 'username')
         ];
         $map              = array_fill_keys(['ownerId', 'ownerUsername'], 'owner');
 

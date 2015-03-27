@@ -49,7 +49,7 @@ class IssueType extends AbstractType
                 'oro_user_select',
                 [
                     'required' => false,
-                    'label' => 'oro.tracker.issue.assignee.label'
+                    'label' => 'oro.tracker.issue.owner.label'
                 ]
             )
             ->add(
@@ -93,7 +93,7 @@ class IssueType extends AbstractType
                                         ->orderBy('type.order', 'DESC');
                                 },
                             'property' => 'label',
-                            'label' => 'oro.tracker.issue.form.type.label'
+                            'label' => 'oro.tracker.issue.type.label'
                         )
                     );
                 }

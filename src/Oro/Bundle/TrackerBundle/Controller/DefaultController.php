@@ -177,12 +177,4 @@ class DefaultController extends Controller
     {
         return ['userId' => $userId];
     }
-
-//    /**
-//     * @return IssueType
-//     */
-//    protected function getFormType()
-//    {
-//        return $this->get('orotracker_issue.form.handler.issue')->getForm();
-//    }
 }

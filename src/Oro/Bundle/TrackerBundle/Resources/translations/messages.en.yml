@@ -12,13 +12,13 @@ oro:
       status.label: Status
       resolution.label: Resolution
       reporter.label: Reporter
-      assignee.label: Assignee
+      owner.label: Assignee
       workflow.label: Status
       workflow_step.label: Status
       saved_message: Issue saved
-      colloborator:
+      collaborator:
         id.label: "Id"
-        username.label:
+        username.label: "User name"
 
       view.add_child_label: Create sub task
       type:
@@ -27,3 +27,5 @@ oro:
         issues_grid.label: "Issues"
       user_issue: "User issues"
       create: "Create"
+    dashboard:
+      issues_bar.label: "Chart issues by status"
