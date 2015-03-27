@@ -55,15 +55,6 @@ class DefaultController extends Controller
     public function createAction()
     {
         $issue = new Issue();
-
-//        $defaultPriority = $this->getRepository('OroCRMTaskBundle:TaskPriority')->find('normal');
-//        if ($defaultPriority) {
-//            $issue->setTaskPriority($defaultPriority);
-//        }
-
-        $issue->setCreatedAt(new \DateTime());
-        $issue->setUpdatedAt(new \DateTime());
-
         $formAction = $this->get('oro_entity.routing_helper')
             ->generateUrlByRequest('orotracker_issue_create', $this->getRequest());
 
@@ -127,14 +118,9 @@ class DefaultController extends Controller
      */
     public function createSubTaskAction(Issue $issue)
     {
-//        var_dump($task);exit;
-
         $issueSubTask = new Issue();
 
         $typeSubTask = $this->getDoctrine()->getRepository('OroTrackerBundle:Type')->findOneBy(['name'=>Type::TYPE_SUB_TASK]);
-
-        $issueSubTask->setCreatedAt(new \DateTime());
-        $issueSubTask->setUpdatedAt(new \DateTime());
         $issueSubTask->setParent($issue);
         $issueSubTask->setType($typeSubTask);
 

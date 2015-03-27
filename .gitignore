@@ -8,6 +8,7 @@ composer.lock
 /build/logs/*
 /vendor
 /cov
+/coverage
 /web/bundles
 /web/css
 /web/js

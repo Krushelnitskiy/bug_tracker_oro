@@ -107,7 +107,9 @@ class IssueType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Oro\Bundle\TrackerBundle\Entity\Issue'
+            'data_class' => 'Oro\Bundle\TrackerBundle\Entity\Issue',
+             'intention' => 'isuse',
+             'cascade_validation' => true
         ]);
     }
 

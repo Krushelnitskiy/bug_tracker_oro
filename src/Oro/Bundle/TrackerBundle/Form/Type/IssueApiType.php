@@ -26,7 +26,7 @@ class IssueApiType extends IssueType
         $resolver->setDefaults(
             [
                 'data_class' => 'Oro\Bundle\TrackerBundle\Entity\Issue',
-                'intention' => 'task',
+                'intention' => 'issue',
                 'cascade_validation' => true,
                 'csrf_protection' => false
             ]
@@ -38,6 +38,6 @@ class IssueApiType extends IssueType
      */
     public function getName()
     {
-        return 'task';
+        return 'issue';
     }
 }

@@ -12,7 +12,9 @@ namespace Oro\Bundle\TrackerBundle\Entity;
 use Oro\Bundle\TrackerBundle\Model\ExtendIssue;
 use Doctrine\Common\Collections\ArrayCollection;
 use Oro\Bundle\UserBundle\Entity\User;
+
 use Doctrine\ORM\Mapping as ORM;
+
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 use Oro\Bundle\WorkflowBundle\Entity\WorkflowItem;
@@ -25,6 +27,7 @@ use Oro\Bundle\OrganizationBundle\Entity\Organization;
  * @package Oro\Bundle\TrackerBundle\Entity
  *
  * @ORM\Entity(repositoryClass="Oro\Bundle\TrackerBundle\Entity\IssueRepository")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(
  *      name="oro_tracker_issue",
  * )
@@ -78,7 +81,7 @@ class Issue extends ExtendIssue
 
     /**
      * @var $code string
-     * @ORM\Column(type="string", length=50, unique=true)
+     * @ORM\Column(name="`code`", type="string", length=50, unique=true)
      * @ConfigField(
      *  defaultValues={
      *      "importexport"={
@@ -657,4 +660,22 @@ class Issue extends ExtendIssue
     {
         return $this->organization;
     }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function doStuffOnPrePersist()
+    {
+        $this->createdAt = new \DateTime('now', new \DateTimeZone('UTC'));
+        $this->updatedAt = new \DateTime('now', new \DateTimeZone('UTC'));
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        $this->updatedAt = new \DateTime('now', new \DateTimeZone('UTC'));
+    }
+
 }

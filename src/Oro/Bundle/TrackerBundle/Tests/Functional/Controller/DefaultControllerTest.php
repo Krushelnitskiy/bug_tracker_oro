@@ -14,11 +14,12 @@ class DefaultControllerTest extends WebTestCase
     public function testCreate()
     {
         $crawler = $this->client->request('GET', $this->getUrl('orotracker_issue_create'));
+
         $form = $crawler->selectButton('Save and Close')->form();
         $form['orotracker_issue[summary]'] = 'New Issue';
         $form['orotracker_issue[description]'] = 'New description';
-
-//        $form['orocrm_task[owner]'] = '1';
+        $form['orotracker_issue[reporter]'] = '1';
+        $form['orotracker_issue[owner]'] = '1';
 
         $this->client->followRedirects(true);
         $crawler = $this->client->submit($form);
