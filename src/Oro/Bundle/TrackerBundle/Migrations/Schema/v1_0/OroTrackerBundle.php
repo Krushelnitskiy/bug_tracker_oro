@@ -22,7 +22,7 @@ class OroTrackerBundle implements Migration
         $this->createOroTrackerIssueCollaboratorsTable($schema);
     }
 
-    protected function  createOroTrackerIssueTable(Schema $schema)
+    protected function createOroTrackerIssueTable(Schema $schema)
     {
         $table = $schema->createTable('oro_tracker_issue');
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
@@ -40,26 +40,25 @@ class OroTrackerBundle implements Migration
         $table->addColumn('created_at', 'datetime', []);
         $table->addColumn('updated_at', 'datetime', []);
         $table->setPrimaryKey(['id']);
-//        $table->addUniqueIndex(['workflow_item_id'], 'UNIQ_814DEE3F1023C4EE');
-//        $table->addIndex(['workflow_step_id'], 'IDX_814DEE3F71FE882C', []);
+//      $table->addUniqueIndex(['workflow_item_id'], 'UNIQ_814DEE3F1023C4EE');
     }
 
     protected function createOroTrackerIssueTypeTable(Schema $schema)
     {
         $table = $schema->createTable('oro_tracker_issue_type');
-        $table->addColumn('id',    'integer', ['autoincrement'=>true]);
+        $table->addColumn('id', 'integer', ['autoincrement'=>true]);
         $table->addColumn('name', 'string', ['length'=>30]);
         $table->addColumn('label', 'string', ['notnull' => true, 'length' => 255]);
         $table->addColumn('order', 'integer', ['notnull' => true, 'default' => 0]);
         $table->setPrimaryKey(['id']);
     }
 
-    protected  function createOroTrackerIssuePriorityTable(Schema $schema)
+    protected function createOroTrackerIssuePriorityTable(Schema $schema)
     {
         $table = $schema->createTable('oro_tracker_issue_priority');
-        $table->addColumn('id',    'integer', ['autoincrement'=>true]);
-        $table->addColumn('name',  'string',  ['length'=>255]);
-        $table->addColumn('label', 'string',  ['notnull' => true, 'length' => 255]);
+        $table->addColumn('id', 'integer', ['autoincrement'=>true]);
+        $table->addColumn('name', 'string', ['length'=>255]);
+        $table->addColumn('label', 'string', ['notnull' => true, 'length' => 255]);
         $table->addColumn('order', 'integer', ['notnull' => true, 'default' => 0]);
         $table->setPrimaryKey(['id']);
     }
@@ -67,9 +66,9 @@ class OroTrackerBundle implements Migration
     protected function createOroTrackerIssueResolutionTable(Schema $schema)
     {
         $table = $schema->createTable('oro_tracker_issue_resolution');
-        $table->addColumn('id',    'integer', ['autoincrement'=>true]);
-        $table->addColumn('name',  'string',  ['length'=>255]);
-        $table->addColumn('label', 'string',  ['notnull' => true, 'length' => 255]);
+        $table->addColumn('id', 'integer', ['autoincrement'=>true]);
+        $table->addColumn('name', 'string', ['length'=>255]);
+        $table->addColumn('label', 'string', ['notnull' => true, 'length' => 255]);
         $table->addColumn('order', 'integer', ['notnull' => true, 'default' => 0]);
         $table->setPrimaryKey(['id']);
     }
@@ -78,7 +77,7 @@ class OroTrackerBundle implements Migration
     {
         $table = $schema->createTable('oro_tracker_issue_collaborator');
         $table->addColumn('issue_id', 'integer', []);
-        $table->addColumn('user_id',  'integer',  []);
+        $table->addColumn('user_id', 'integer', []);
         $table->addUniqueIndex(['user_id'], 'IDX_COLLABORATOR_USER');
         $table->addUniqueIndex(['issue_id'], 'IDX_COLLABORATOR_ISSUE');
     }

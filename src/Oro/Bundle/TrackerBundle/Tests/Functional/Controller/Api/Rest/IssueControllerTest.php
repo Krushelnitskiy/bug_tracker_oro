@@ -23,11 +23,9 @@ class IssueControllerTest extends WebTestCase
         'owner' => null,
         'reporter' => null,
         'priority' => 2,
-//        'resolution' => 1,
         'summary' => 'New summary',
         'description' => 'New description',
-        'type' => 1,
-//        'code' => '111'
+        'type' => 1
     ];
 
     protected function setUp()
@@ -43,17 +41,11 @@ class IssueControllerTest extends WebTestCase
             ->findOneByName(Type::TYPE_TASK);
         $priority = $this->getContainer()->get('doctrine')->getRepository('OroTrackerBundle:Priority')
             ->findOneByName(Priority::PRIORITY_MINOR);
-        $resolution = $this->getContainer()->get('doctrine')->getRepository('OroTrackerBundle:Resolution')
-            ->findOneByName(Resolution::RESOLUTION_DONE);
 
         $this->issue['owner']  = $owner;
         $this->issue['reporter'] = $owner;
         $this->issue['type'] = $type->getId();
         $this->issue['priority'] = $priority->getId();
-//        $this->issue['resolution'] = $resolution->getId();
-//        $this->issue['organization'] = 1;
-//        $this->issue['created_at'] = new \DateTime();
-//        $this->issue['updated_at'] = new \DateTime();
     }
 
 
@@ -111,12 +103,47 @@ class IssueControllerTest extends WebTestCase
             [
                 'owner' => $this->issue['owner'],
                 'summary' => 'New summary',
-                'description' => 'New description',
+                'description' => 'New description'
             ],
             $issue
         );
     }
 
+    /**
+     * @depends testCreate
+     *
+     * @param integer $id
+     */
+    public function testPut($id)
+    {
+        $updatedIssue = array_merge($this->issue, ['summary' => 'Updated summary']);
+        $this->client->request('PUT', $this->getUrl('orotracker_api_put_issue', ['id' => $id]), $updatedIssue);
+        $result = $this->client->getResponse();
+        $this->assertEmptyResponseStatusCodeEquals($result, 204);
+
+        $this->client->request('GET', $this->getUrl('orotracker_api_get_issue', ['id' => $id]));
+
+        $task = $this->getJsonResponseContent($this->client->getResponse(), 200);
+        $this->assertEquals('Updated summary', $task['summary']);
+        $this->assertEquals($updatedIssue['summary'], $task['summary']);
+    }
+
+
+    /**
+     * @depends testCreate
+     *
+     * @param integer $id
+     */
+    public function testDelete($id)
+    {
+        $this->client->request('DELETE', $this->getUrl('orotracker_api_delete_issue', ['id' => $id]));
+        $result = $this->client->getResponse();
+        $this->assertEmptyResponseStatusCodeEquals($result, 204);
+
+        $this->client->request('GET', $this->getUrl('orotracker_api_get_issue', ['id' => $id]));
+        $result = $this->client->getResponse();
+        $this->assertJsonResponseStatusCodeEquals($result, 404);
+    }
 
 //
 //    /**

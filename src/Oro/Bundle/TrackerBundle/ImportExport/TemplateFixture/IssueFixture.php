@@ -38,12 +38,10 @@ class IssueFixture extends AbstractTemplateRepository implements TemplateFixture
      */
     public function fillEntityData($key, $entity)
     {
-        $priorityRepo      = $this->templateManager->getEntityRepository('Oro\Bundle\TrackerBundle\Entity\Priority');
-        $resolutionRepo      = $this->templateManager->getEntityRepository('Oro\Bundle\TrackerBundle\Entity\Resolution');
-        $typeRepo      = $this->templateManager->getEntityRepository('Oro\Bundle\TrackerBundle\Entity\Type');
         $userRepo         = $this->templateManager->getEntityRepository('Oro\Bundle\UserBundle\Entity\User');
 
-        $organizationRepo = $this->templateManager->getEntityRepository('Oro\Bundle\OrganizationBundle\Entity\Organization');
+        $entityRepository = 'Oro\Bundle\OrganizationBundle\Entity\Organization';
+        $organizationRepo = $this->templateManager->getEntityRepository($entityRepository);
 
         switch ($key) {
             case 'Jerry Coleman':
@@ -55,22 +53,6 @@ class IssueFixture extends AbstractTemplateRepository implements TemplateFixture
                 $entity->setCreatedAt(new \DateTime());
                 $entity->setUpdatedAt(new \DateTime());
                 $entity->setReporter($userRepo->getEntity('John Doo'));
-//                $entity->setPriority($priorityRepo->getEntity(''));
-//
-//                $entity->setContact($contactRepo->getEntity('Jerry Coleman'));
-//                $entity->setAddress($addressRepo->getEntity('Jerry Coleman'));
-//                $entity->setEmail('JerryAColeman@armyspy.com');
-//                $entity->setNamePrefix('Mr.');
-//                $entity->setFirstName('Jerry');
-//                $entity->setLastName('Coleman');
-//                $entity->setNameSuffix('Jr.');
-//                $entity->setStatus(new LeadStatus('New'));
-//                $entity->setJobTitle('Manager');
-//                $entity->setPhoneNumber('585-255-1127');
-//                $entity->setWebsite('http://orocrm.com');
-//                $entity->setNumberOfEmployees(100);
-//                $entity->setIndustry('Internet');
-
                 return;
         }
 

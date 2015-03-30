@@ -75,28 +75,24 @@ class IssueType extends AbstractType
             $issue = $event->getData();
             $builder = $event->getForm();
 
-            if ($issue instanceof Issue)
-            {
-                if (!$issue->getType() || $issue->getType()->getName() !== Type::TYPE_SUB_TASK)
-                {
-                    $builder->add(
-                        'type',
-                        'entity',
-                        array(
-                            'class' => 'Oro\Bundle\TrackerBundle\Entity\Type',
-                            'query_builder' =>
-                                function (EntityRepository $entityRepository) {
-                                    return $entityRepository
-                                        ->createQueryBuilder('type')
-                                        ->where('type.name != :type_name')
-                                        ->setParameter('type_name', Type::TYPE_SUB_TASK)
-                                        ->orderBy('type.order', 'DESC');
-                                },
-                            'property' => 'label',
-                            'label' => 'oro.tracker.issue.type.label'
-                        )
-                    );
-                }
+            if ($issue instanceof Issue && (!$issue->getType() || $issue->getType()->getName() !== Type::TYPE_SUB_TASK)) {
+                $builder->add(
+                    'type',
+                    'entity',
+                    array(
+                        'class' => 'Oro\Bundle\TrackerBundle\Entity\Type',
+                        'query_builder' =>
+                            function (EntityRepository $entityRepository) {
+                                return $entityRepository
+                                    ->createQueryBuilder('type')
+                                    ->where('type.name != :type_name')
+                                    ->setParameter('type_name', Type::TYPE_SUB_TASK)
+                                    ->orderBy('type.order', 'DESC');
+                            },
+                        'property' => 'label',
+                        'label' => 'oro.tracker.issue.type.label'
+                    )
+                );
             }
         };
     }

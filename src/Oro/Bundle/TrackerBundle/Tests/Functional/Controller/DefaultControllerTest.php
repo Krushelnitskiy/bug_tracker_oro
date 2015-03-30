@@ -9,7 +9,7 @@ class DefaultControllerTest extends WebTestCase
 {
     public function setUp()
     {
-        $this->initClient(array(),  $this->generateBasicAuthHeader());
+        $this->initClient(array(), $this->generateBasicAuthHeader());
     }
 
     public function testCreate()
@@ -31,7 +31,7 @@ class DefaultControllerTest extends WebTestCase
 
         $result = $this->client->getResponse();
         $this->assertHtmlResponseStatusCodeEquals($result, 200);
-        $this->assertContains("Issue saved", $crawler->html());
+        $this->assertContains('Issue saved', $crawler->html());
     }
 
 
@@ -59,7 +59,7 @@ class DefaultControllerTest extends WebTestCase
 
         $result = $this->client->getResponse();
         $this->assertHtmlResponseStatusCodeEquals($result, 200);
-        $this->assertContains("Issue saved", $crawler->html());
+        $this->assertContains('Issue saved', $crawler->html());
     }
 
 
@@ -93,9 +93,6 @@ class DefaultControllerTest extends WebTestCase
 
     public function testUserIssue()
     {
-        $owner = $this->getContainer()->get('doctrine')
-            ->getRepository('OroUserBundle:User')->findOneBy(['username' => self::USER_NAME])->getId();
-
         $crawler = $this->client->request('GET', '/user/profile/view');
                 $result = $this->client->getResponse();
         $this->assertHtmlResponseStatusCodeEquals($result, 200);
@@ -106,11 +103,37 @@ class DefaultControllerTest extends WebTestCase
     {
         $response = $this->client->requestGrid(
             'issue-grid',
-            array('issue-grid[_filter][summary][value]' => 'New Issue')
+            array('issue-grid[_filter][type][value]' => 'Story')
         );
 
         $result = $this->getJsonResponseContent($response, 200);
         $result = reset($result['data']);
-//        var_dump()
+
+
+        $crawler = $this->client->request(
+            'GET',
+            $this->getUrl('orotracker_issue_view', array('id' => $result['id']))
+        );
+
+
+        $link = $crawler->filter('a:contains("Create sub task")')->eq(0)->link();
+        $crawler= $this->client->click($link);
+
+
+
+
+
+        $form = $crawler->selectButton('Save and Close')->form();
+        $form['orotracker_issue[summary]'] = 'New Sub Issue';
+        $form['orotracker_issue[description]'] = 'New Sub description';
+        $form['orotracker_issue[reporter]'] = '1';
+        $form['orotracker_issue[owner]'] = '1';
+
+        $this->client->followRedirects(true);
+        $crawler = $this->client->submit($form);
+
+        $links = $crawler->filter('a:contains("'.$result['summary'].'")');
+
+        $this->assertCount(1, $links);
     }
 }

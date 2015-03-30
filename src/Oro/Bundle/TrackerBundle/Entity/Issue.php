@@ -21,6 +21,7 @@ use Oro\Bundle\WorkflowBundle\Entity\WorkflowItem;
 use Oro\Bundle\WorkflowBundle\Entity\WorkflowStep;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Oro\Bundle\OrganizationBundle\Entity\Organization;
+use Oro\Bundle\TrackerBundle\Entity\Type;
 
 /**
  * Class Issue
@@ -398,7 +399,7 @@ class Issue extends ExtendIssue
      * @param \Oro\Bundle\TrackerBundle\Entity\Type $type
      * @return Issue
      */
-    public function setType(\Oro\Bundle\TrackerBundle\Entity\Type $type = null)
+    public function setType(Type $type = null)
     {
         $this->type = $type;
 
@@ -408,7 +409,7 @@ class Issue extends ExtendIssue
     /**
      * Get type
      *
-     * @return \Oro\Bundle\TrackerBundle\Entity\Type 
+     * @return \Oro\Bundle\TrackerBundle\Entity\Type
      */
     public function getType()
     {
@@ -421,7 +422,7 @@ class Issue extends ExtendIssue
      * @param \Oro\Bundle\TrackerBundle\Entity\Priority $priority
      * @return Issue
      */
-    public function setPriority(\Oro\Bundle\TrackerBundle\Entity\Priority $priority = null)
+    public function setPriority(Priority $priority = null)
     {
         $this->priority = $priority;
 
@@ -444,7 +445,7 @@ class Issue extends ExtendIssue
      * @param \Oro\Bundle\TrackerBundle\Entity\Resolution $resolution
      * @return Issue
      */
-    public function setResolution(\Oro\Bundle\TrackerBundle\Entity\Resolution $resolution = null)
+    public function setResolution(Resolution $resolution = null)
     {
         $this->resolution = $resolution;
 
@@ -467,7 +468,7 @@ class Issue extends ExtendIssue
      * @param \Oro\Bundle\UserBundle\Entity\User $reporter
      * @return Issue
      */
-    public function setReporter(\Oro\Bundle\UserBundle\Entity\User $reporter = null)
+    public function setReporter(User $reporter = null)
     {
         $this->reporter = $reporter;
 
@@ -490,7 +491,7 @@ class Issue extends ExtendIssue
      * @param \Oro\Bundle\UserBundle\Entity\User $collaborators
      * @return Issue
      */
-    public function addCollaborator(\Oro\Bundle\UserBundle\Entity\User $collaborators)
+    public function addCollaborator(User $collaborators)
     {
         if (!$this->getCollaborators()->contains($collaborators))
         {
@@ -505,7 +506,7 @@ class Issue extends ExtendIssue
      *
      * @param \Oro\Bundle\UserBundle\Entity\User $collaborators
      */
-    public function removeCollaborator(\Oro\Bundle\UserBundle\Entity\User $collaborators)
+    public function removeCollaborator(User $collaborators)
     {
         $this->collaborators->removeElement($collaborators);
     }
@@ -513,7 +514,7 @@ class Issue extends ExtendIssue
     /**
      * Get collaborators
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCollaborators()
     {
@@ -559,7 +560,7 @@ class Issue extends ExtendIssue
      * @param \Oro\Bundle\TrackerBundle\Entity\Issue $parent
      * @return Issue
      */
-    public function setParent(\Oro\Bundle\TrackerBundle\Entity\Issue $parent = null)
+    public function setParent(Issue $parent = null)
     {
         $this->parent = $parent;
 
@@ -569,7 +570,7 @@ class Issue extends ExtendIssue
     /**
      * Get parent
      *
-     * @return \Oro\Bundle\TrackerBundle\Entity\Issue 
+     * @return \Oro\Bundle\TrackerBundle\Entity\Issue
      */
     public function getParent()
     {
@@ -582,7 +583,7 @@ class Issue extends ExtendIssue
      * @param \Oro\Bundle\WorkflowBundle\Entity\WorkflowItem $workflowItem
      * @return Issue
      */
-    public function setWorkflowItem(\Oro\Bundle\WorkflowBundle\Entity\WorkflowItem $workflowItem = null)
+    public function setWorkflowItem(WorkflowItem $workflowItem = null)
     {
         $this->workflowItem = $workflowItem;
 
@@ -592,7 +593,7 @@ class Issue extends ExtendIssue
     /**
      * Get workflowItem
      *
-     * @return \Oro\Bundle\WorkflowBundle\Entity\WorkflowItem 
+     * @return \Oro\Bundle\WorkflowBundle\Entity\WorkflowItem
      */
     public function getWorkflowItem()
     {
@@ -605,7 +606,7 @@ class Issue extends ExtendIssue
      * @param \Oro\Bundle\WorkflowBundle\Entity\WorkflowStep $workflowStep
      * @return Issue
      */
-    public function setWorkflowStep(\Oro\Bundle\WorkflowBundle\Entity\WorkflowStep $workflowStep = null)
+    public function setWorkflowStep(WorkflowStep $workflowStep = null)
     {
         $this->workflowStep = $workflowStep;
 
@@ -615,7 +616,7 @@ class Issue extends ExtendIssue
     /**
      * Get workflowStep
      *
-     * @return \Oro\Bundle\WorkflowBundle\Entity\WorkflowStep 
+     * @return \Oro\Bundle\WorkflowBundle\Entity\WorkflowStep
      */
     public function getWorkflowStep()
     {

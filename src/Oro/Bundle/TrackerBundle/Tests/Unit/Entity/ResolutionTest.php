@@ -11,7 +11,7 @@ namespace Oro\Bundle\TrackerBundle\Tests\Unit\Entity;
 use Oro\Bundle\TrackerBundle\Entity\Resolution;
 use Doctrine\Common\Collections\ArrayCollection;
 
-class resolutionTest extends \PHPUnit_Framework_TestCase
+class ResolutionTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreate()
     {
