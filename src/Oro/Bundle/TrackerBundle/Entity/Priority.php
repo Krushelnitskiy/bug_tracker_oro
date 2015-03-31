@@ -49,7 +49,7 @@ class Priority
     /**
      * @var integer
      *
-     * @ORM\Column(name="`order`", type="integer")
+     * @ORM\Column(name="`order`", type="integer", nullable=false, options={"default":0})
      */
     protected $order;
 

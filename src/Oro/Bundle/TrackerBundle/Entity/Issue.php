@@ -69,7 +69,7 @@ class Issue extends ExtendIssue
 
     /**
      * @var $summary string
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", nullable=false)
      * @ConfigField(
      *  defaultValues={
      *      "importexport"={
@@ -95,7 +95,7 @@ class Issue extends ExtendIssue
     /**
      *
      * @var $id string
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", nullable=false)
      * @ConfigField(
      *  defaultValues={
      *      "importexport"={
@@ -175,7 +175,7 @@ class Issue extends ExtendIssue
     /**
      * @var $owner User
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", onDelete="SET NULL")
      * @ConfigField(
      *  defaultValues={
      *      "importexport"={

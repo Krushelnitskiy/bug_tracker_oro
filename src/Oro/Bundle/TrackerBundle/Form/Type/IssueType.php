@@ -21,6 +21,14 @@ class IssueType extends AbstractType
     {
         $builder
             ->add(
+                'code',
+                'text',
+                [
+                    'required' => true,
+                    'label' => 'oro.tracker.issue.code.label'
+                ]
+            )
+            ->add(
                 'summary',
                 'text',
                 [
