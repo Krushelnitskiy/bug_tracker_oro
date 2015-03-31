@@ -5,6 +5,13 @@ namespace Oro\Bundle\TrackerBundle\Tests\Controller;
 use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
 use Oro\Bundle\TrackerBundle\Entity\Type;
 
+/**
+ * Class DefaultControllerTest
+ * @package Oro\Bundle\TrackerBundle\Tests\Controller
+ * @outputBuffering enabled
+ * @dbIsolation
+ * @dbReindex
+ */
 class DefaultControllerTest extends WebTestCase
 {
     public function setUp()
@@ -118,9 +125,6 @@ class DefaultControllerTest extends WebTestCase
 
         $link = $crawler->filter('a:contains("Create sub task")')->eq(0)->link();
         $crawler= $this->client->click($link);
-
-
-
 
 
         $form = $crawler->selectButton('Save and Close')->form();

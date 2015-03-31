@@ -146,7 +146,7 @@ class IssueController extends Controller
     {
         $data = $this->getDoctrine()
             ->getRepository('OroTrackerBundle:Issue')
-            ->findAllGroupedBySteps();
+            ->findAllGroupedBySteps()->getQuery()->getResult();
 
         $widgetAttr = $this->get('oro_dashboard.widget_configs')->getWidgetAttributesForTwig($widget);
         $widgetAttr['chartView'] = $this->get('oro_chart.view_builder')

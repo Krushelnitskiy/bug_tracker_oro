@@ -10,7 +10,7 @@ namespace Oro\Bundle\TrackerBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
-class IssueRepository extends  EntityRepository
+class IssueRepository extends EntityRepository
 {
     public function findAllGroupedBySteps()
     {
@@ -20,6 +20,6 @@ class IssueRepository extends  EntityRepository
             ->leftJoin('OroWorkflowBundle:WorkflowStep', 'workflowStep', 'WITH', 'issue.workflowStep = workflowStep')
             ->groupBy('workflowStep.id');
 
-        return $queryBuilder->getQuery()->getResult();
+        return $queryBuilder;
     }
 }
