@@ -7,6 +7,14 @@ use Doctrine\DBAL\Schema\Schema;
 use Oro\Bundle\MigrationBundle\Migration\Migration;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
+use Oro\Bundle\MigrationBundle\Migration\Installation;
+use Oro\Bundle\EntityExtendBundle\Migration\Extension\ExtendExtension;
+use Oro\Bundle\EntityExtendBundle\Migration\Extension\ExtendExtensionAwareInterface;
+use Oro\Bundle\NoteBundle\Migration\Extension\NoteExtension;
+use Oro\Bundle\NoteBundle\Migration\Extension\NoteExtensionAwareInterface;
+use Oro\Bundle\ActivityBundle\Migration\Extension\ActivityExtension;
+use Oro\Bundle\ActivityBundle\Migration\Extension\ActivityExtensionAwareInterface;
+
 class OroTrackerBundle implements Migration
 {
     /**
@@ -24,11 +32,6 @@ class OroTrackerBundle implements Migration
         /** Foreign keys generation **/
         $this->addOroTrackerIssueForeignKeys($schema);
         $this->addOroTrackerIssueCollaboratorForeignKeys($schema);
-
-        /** Add activity association */
-        self::addNoteAssociations($schema, $this->noteExtension);
-
-        $this->activityExtension->addActivityAssociation($schema, 'oro_email', 'oro_tracker_issue');
 
         /** Add comment relation */
     }
@@ -103,10 +106,7 @@ class OroTrackerBundle implements Migration
         $table->addUniqueIndex(['label'], 'UNIQ_6FAF5303EA750E8');
     }
 
-    public static function addNoteAssociations(Schema $schema, NoteExtension $noteExtension)
-    {
-        $noteExtension->addNoteAssociation($schema, 'oro_tracker_issue');
-    }
+
 
     protected function createOroTrackerIssueCollaboratorsTable(Schema $schema)
     {

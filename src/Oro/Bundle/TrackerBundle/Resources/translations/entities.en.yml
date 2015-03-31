@@ -1,0 +1,16 @@
+issue_priority:
+    Trivial: Trivial
+    Minor: Minor
+    Major: Major
+    Critical: Critical
+    Blocker: Blocker
+issue_type:
+    Bug: Bug
+    Subtask: Subtask
+    Task: Task
+    Story: Story
+issue_resolution:
+    Fixed: Fixed
+    Won`t fix: 'Won`t fix'
+    Won`t done: Won`t done
+    Done: Done

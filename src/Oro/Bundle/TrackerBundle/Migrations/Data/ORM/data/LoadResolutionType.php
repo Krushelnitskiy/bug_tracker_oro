@@ -2,13 +2,14 @@
 
 namespace Oro\Bundle\TrackerBundle\Migrations\Data\ORM;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
+use Oro\Bundle\TranslationBundle\DataFixtures\AbstractTranslatableEntityFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 use Oro\Bundle\TrackerBundle\Entity\Resolution;
 
-class LoadResolutionType extends AbstractFixture
+class LoadResolutionType extends AbstractTranslatableEntityFixture
 {
+    const ISSUE_RESOLUTION_PREFIX = 'issue_resolution';
     /**
      * @var array
      */
@@ -36,30 +37,36 @@ class LoadResolutionType extends AbstractFixture
     );
 
     /**
-     * {@inheritdoc}
+     * Load entities to DB
+     *
+     * @param ObjectManager $manager
      */
-    public function load(ObjectManager $manager)
+    protected function loadEntities(ObjectManager $manager)
     {
-        foreach ($this->data as $resolution) {
-            if (!$this->isPriorityExist($manager, $resolution['name'])) {
-                $entity = new Resolution();
-                $entity->setName($resolution['name']);
-                $entity->setLabel($resolution['label']);
-                $entity->setOrder($resolution['order']);
-                $manager->persist($entity);
+        $resolutionRepository = $manager->getRepository('OroTrackerBundle:Resolution');
+
+        $translationLocales = $this->getTranslationLocales();
+
+        foreach ($translationLocales as $locale) {
+            foreach ($this->data as $resolution) {
+                /** @var Resolution $issueType */
+                $issueType = $resolutionRepository->findOneBy(array('name' => $resolution['name']));
+
+                if (!$issueType) {
+                    $issueType = new Resolution();
+                    $issueType->setOrder($resolution['order']);
+                    $issueType->setName($resolution['name']);
+                }
+
+                // set locale and label
+                $priorityLabel = $this->translate($resolution['name'], static::ISSUE_RESOLUTION_PREFIX, $locale);
+                $issueType->setLocale($locale)
+                    ->setLabel($priorityLabel);
+
+                // save
+                $manager->persist($issueType);
             }
         }
-
         $manager->flush();
-    }
-
-    /**
-     * @param ObjectManager $manager
-     * @param string $type
-     * @return bool
-     */
-    private function isPriorityExist(ObjectManager $manager, $resolutionName)
-    {
-        return count($manager->getRepository('OroTrackerBundle:Resolution')->findByName($resolutionName)) > 0;
     }
 }

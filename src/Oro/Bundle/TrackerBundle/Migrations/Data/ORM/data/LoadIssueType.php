@@ -2,13 +2,15 @@
 
 namespace Oro\Bundle\TrackerBundle\Migrations\Data\ORM;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
+use Oro\Bundle\TranslationBundle\DataFixtures\AbstractTranslatableEntityFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 use Oro\Bundle\TrackerBundle\Entity\Type;
 
-class LoadIssueType extends AbstractFixture
+class LoadIssueType extends AbstractTranslatableEntityFixture
 {
+    const ISSUE_TYPE_PREFIX = 'issue_type';
+
     /**
      * @var array
      */
@@ -36,30 +38,36 @@ class LoadIssueType extends AbstractFixture
     );
 
     /**
-     * {@inheritdoc}
+     * Load entities to DB
+     *
+     * @param ObjectManager $manager
      */
-    public function load(ObjectManager $manager)
+    protected function loadEntities(ObjectManager $manager)
     {
-        foreach ($this->data as $type) {
-            if (!$this->isPriorityExist($manager, $type['name'])) {
-                $entity = new Type();
-                $entity->setName($type['name']);
-                $entity->setLabel($type['label']);
-                $entity->setOrder($type['order']);
-                $manager->persist($entity);
+        $typeRepository = $manager->getRepository('OroTrackerBundle:Type');
+
+        $translationLocales = $this->getTranslationLocales();
+
+        foreach ($translationLocales as $locale) {
+            foreach ($this->data as $type) {
+                /** @var Type $issueType */
+                $issueType = $typeRepository->findOneBy(array('name' => $type['name']));
+
+                if (!$issueType) {
+                    $issueType = new Type();
+                    $issueType->setOrder($type['order']);
+                    $issueType->setName($type['name']);
+                }
+
+                // set locale and label
+                $priorityLabel = $this->translate($type['name'], static::ISSUE_TYPE_PREFIX, $locale);
+                $issueType->setLocale($locale)
+                    ->setLabel($priorityLabel);
+
+                // save
+                $manager->persist($issueType);
             }
         }
-
         $manager->flush();
-    }
-
-    /**
-     * @param ObjectManager $manager
-     * @param string $type
-     * @return bool
-     */
-    private function isPriorityExist(ObjectManager $manager, $typeName)
-    {
-        return count($manager->getRepository('OroTrackerBundle:Type')->findByName($typeName)) > 0;
     }
 }

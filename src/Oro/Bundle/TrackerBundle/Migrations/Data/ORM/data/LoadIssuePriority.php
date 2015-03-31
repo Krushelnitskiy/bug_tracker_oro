@@ -2,13 +2,14 @@
 
 namespace Oro\Bundle\TrackerBundle\Migrations\Data\ORM;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
-
+use Oro\Bundle\TranslationBundle\DataFixtures\AbstractTranslatableEntityFixture;
 use Oro\Bundle\TrackerBundle\Entity\Priority;
 
-class LoadIssuePriority extends AbstractFixture
+class LoadIssuePriority extends AbstractTranslatableEntityFixture
 {
+    const ISSUE_PRIORITY_PREFIX = 'issue_priority';
+
     /**
      * @var array
      */
@@ -40,31 +41,38 @@ class LoadIssuePriority extends AbstractFixture
         )
     );
 
+
     /**
-     * {@inheritdoc}
+     * Load entities to DB
+     *
+     * @param ObjectManager $manager
      */
-    public function load(ObjectManager $manager)
+    protected function loadEntities(ObjectManager $manager)
     {
-        foreach ($this->data as $priority) {
-            if (!$this->isPriorityExist($manager, $priority['name'])) {
-                $entity = new Priority();
-                $entity->setName($priority['name']);
-                $entity->setLabel($priority['label']);
-                $entity->setOrder($priority['order']);
-                $manager->persist($entity);
+        $priorityRepository = $manager->getRepository('OroTrackerBundle:Priority');
+
+        $translationLocales = $this->getTranslationLocales();
+
+        foreach ($translationLocales as $locale) {
+            foreach ($this->data as $priority) {
+                /** @var Priority $issuePriority */
+                $issuePriority = $priorityRepository->findOneBy(array('name' => $priority['name']));
+
+                if (!$issuePriority) {
+                    $issuePriority = new Priority();
+                    $issuePriority->setOrder($priority['order']);
+                    $issuePriority->setName($priority['name']);
+                }
+
+                // set locale and label
+                $priorityLabel = $this->translate($priority['name'], static::ISSUE_PRIORITY_PREFIX, $locale);
+                $issuePriority->setLocale($locale)
+                    ->setLabel($priorityLabel);
+
+                // save
+                $manager->persist($issuePriority);
             }
         }
-
         $manager->flush();
-    }
-
-    /**
-     * @param ObjectManager $manager
-     * @param string $priorityType
-     * @return bool
-     */
-    private function isPriorityExist(ObjectManager $manager, $priorityName)
-    {
-        return count($manager->getRepository('OroTrackerBundle:Priority')->findByName($priorityName)) > 0;
     }
 }

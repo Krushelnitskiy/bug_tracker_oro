@@ -10,11 +10,14 @@
 namespace Oro\Bundle\TrackerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 /**
  * Class Type
  * @package Oro\TrackerBundle\Entity
  * @ORM\Table(name="oro_tracker_issue_type")
+ * @Gedmo\TranslationEntity(class="Oro\Bundle\TrackerBundle\Entity\TypeTranslation")
  * @ORM\Entity
  */
 
@@ -44,6 +47,7 @@ class Type
      * @var string
      *
      * @ORM\Column(name="label", type="string", unique=true)
+     * @Gedmo\Translatable
      */
     protected $label;
 
@@ -53,6 +57,11 @@ class Type
      * @ORM\Column(name="`order`", type="integer", nullable=false, options={"default":0}))
      */
     protected $order;
+
+    /**
+     * @Gedmo\Locale
+     */
+    protected $locale;
 
     /**
      * Get id
@@ -87,26 +96,60 @@ class Type
         return $this->label;
     }
 
+    /**
+     * @param $order
+     * @return Type
+     */
     public function setOrder($order)
     {
         $this->order = $order;
+
+        return $this;
     }
 
+    /**
+     * @return int
+     */
     public function getOrder()
     {
         return $this->order;
     }
 
+    /**
+     * @param $name
+     * @return Type
+     */
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * Set locale for translation
+     *
+     * @param string $locale
+     * @return Type
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->label;

@@ -9,11 +9,14 @@
 namespace Oro\Bundle\TrackerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 /**
  * Class Resolution
  * @package Tracker\IssueBundle\Entity
  * @ORM\Table(name="oro_tracker_issue_resolution")
+ * @Gedmo\TranslationEntity(class="Oro\Bundle\TrackerBundle\Entity\ResolutionTranslation")
  * @ORM\Entity
  */
 
@@ -42,6 +45,7 @@ class Resolution
      * @var string
      *
      * @ORM\Column(name="label", type="string", unique=true)
+     * @Gedmo\Translatable
      */
     protected $label;
 
@@ -51,6 +55,11 @@ class Resolution
      * @ORM\Column(name="`order`", type="integer", nullable=false, options={"default":0})
      */
     protected $order;
+
+    /**
+     * @Gedmo\Locale
+     */
+    protected $locale;
 
     /**
      * Get id
@@ -66,7 +75,7 @@ class Resolution
      * Set label
      *
      * @param string $label
-     * @return Type
+     * @return Resolution
      */
     public function setLabel($label)
     {
@@ -85,24 +94,55 @@ class Resolution
         return $this->label;
     }
 
+    /**
+     * @param $order
+     * @return Resolution
+     */
     public function setOrder($order)
     {
         $this->order = $order;
+
+        return $this;
     }
 
+    /**
+     * @return int
+     */
     public function getOrder()
     {
         return $this->order;
     }
 
+    /**
+     * @param $name
+     * @return Resolution
+     */
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set locale for translation
+     *
+     * @param string $locale
+     * @return Resolution
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
     }
 
     public function __toString()
