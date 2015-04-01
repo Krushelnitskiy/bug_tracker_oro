@@ -10,10 +10,11 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 use Oro\Bundle\ActivityBundle\Manager\ActivityManager;
 use Oro\Bundle\EntityBundle\Tools\EntityRoutingHelper;
-
+use Oro\Bundle\TagBundle\Entity\TagManager;
 use Oro\Bundle\TrackerBundle\Entity\Issue;
+use Oro\Bundle\TagBundle\Form\Handler\TagHandlerInterface;
 
-class IssueHandler
+class IssueHandler implements TagHandlerInterface
 {
     /** @var FormInterface */
     protected $form;
@@ -29,6 +30,11 @@ class IssueHandler
 
     /** @var EntityRoutingHelper */
     protected $entityRoutingHelper;
+
+    /**
+     * @var TagManager
+     */
+    protected $tagManager;
 
     /**
      * @param FormInterface       $form
@@ -106,6 +112,10 @@ class IssueHandler
     {
         $this->manager->persist($entity);
         $this->manager->flush();
+
+        if ($this->tagManager) {
+            $this->tagManager->saveTagging($entity);
+        }
     }
 
     /**
@@ -116,5 +126,13 @@ class IssueHandler
     public function getForm()
     {
         return $this->form;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTagManager(TagManager $tagManager)
+    {
+        $this->tagManager = $tagManager;
     }
 }

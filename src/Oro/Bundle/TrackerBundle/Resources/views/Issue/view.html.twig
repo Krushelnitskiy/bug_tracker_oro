@@ -1,5 +1,6 @@
 {% extends 'OroUIBundle:actions:view.html.twig' %}
 {% import 'OroUIBundle::macros.html.twig' as UI %}
+{% import 'OroTagBundle::macros.html.twig' as tag %}
 {% import 'OroEntityConfigBundle::macros.html.twig' as entityConfig %}
 {% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
 
@@ -58,18 +59,9 @@
                 {{ UI.renderHtmlProperty('oro.tracker.issue.priority.label'|trans, entity.priority) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.reporter.label'|trans, entity.reporter.username) }}
 
-                {%- set ownerData -%}
-                {#{%- if entity.owner -%}#}
-                    {#{% if resource_granted('oro_user_user_view') %}#}
-                        {#<a href="{{ path('oro_user_view', {'id': entity.owner.id}) }}">#}
-                            {#{{ entity.owner|oro_format_name|escape }}#}
-                        {#</a>#}
-                    {#{% else %}#}
-                        {#{{ entity.owner|oro_format_name|escape }}#}
-                    {#{% endif %}#}
-                {#{%- endif -%}#}
-                {%- endset -%}
-                {#{{ UI.renderHtmlProperty('orocrm.task.owner.label'|trans, ownerData) }}#}
+                {% if resource_granted('oro_tag_view_tag_cloud') %}
+                    {{ UI.renderHtmlProperty('oro.tag.entity_plural_label'|trans, tag.renderView(entity)) }}
+                {% endif %}
             </div>
             <div class="responsive-block">
                 {{ entityConfig.renderDynamicFields(entity) }}

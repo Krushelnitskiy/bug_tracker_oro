@@ -72,6 +72,14 @@ class IssueType extends AbstractType
                     }
                 ]
             )
+            ->add(
+                'tags',
+                'oro_tag_select',
+                array(
+                    'label' => 'oro.tag.entity_plural_label'
+                )
+            )
+
         ;
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, $this->addTypeField());

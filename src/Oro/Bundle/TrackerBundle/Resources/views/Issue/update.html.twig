@@ -1,5 +1,5 @@
 {% extends 'OroUIBundle:actions:update.html.twig' %}
-
+{% form_theme form with ['OroTagBundle:Form:fields.html.twig'] %}
 {% oro_title_set({params : {"%entity.summary%": entity.summary, "%entityName%": 'oro.tracker.issue.entity_label'|trans }}) %}
 {% set entityId = entity.id %}
 
@@ -48,7 +48,8 @@
                     form_row(form.reporter),
                     form_row(form.owner),
                     (entity.type != null) and (entity.type.name == constant('Oro\\Bundle\\TrackerBundle\\Entity\\Type::TYPE_SUB_TASK')) ? '' : form_row(form.type),
-                    form_row(form.priority)
+                    form_row(form.priority),
+                    form_row(form.tags)
                 ]
             }
         ]

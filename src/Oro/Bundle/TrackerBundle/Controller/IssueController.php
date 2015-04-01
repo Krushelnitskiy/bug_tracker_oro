@@ -3,13 +3,16 @@
 namespace Oro\Bundle\TrackerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
+use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
+use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+
 use Oro\Bundle\TrackerBundle\Entity\Issue;
 use Oro\Bundle\TrackerBundle\Entity\Type;
 use Oro\Bundle\TrackerBundle\Form\Type\IssueType;
-use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
-use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 
 /**
  * Class DefaultController

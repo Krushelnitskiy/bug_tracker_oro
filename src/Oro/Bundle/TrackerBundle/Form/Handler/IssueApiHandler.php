@@ -7,9 +7,12 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+use Oro\Bundle\TagBundle\Form\Handler\TagHandlerInterface;
+use Oro\Bundle\TagBundle\Entity\TagManager;
+
 use Oro\Bundle\TrackerBundle\Entity\Issue;
 
-class IssueApiHandler
+class IssueApiHandler implements TagHandlerInterface
 {
     /**
      * @var FormInterface
@@ -25,6 +28,11 @@ class IssueApiHandler
      * @var ObjectManager
      */
     protected $manager;
+
+    /**
+     * @var TagManager
+     */
+    protected $tagManager;
 
     /**
      *
@@ -71,5 +79,18 @@ class IssueApiHandler
     {
         $this->manager->persist($entity);
         $this->manager->flush();
+
+        if ($this->tagManager) {
+            $this->tagManager->saveTagging($entity);
+        }
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTagManager(TagManager $tagManager)
+    {
+        $this->tagManager = $tagManager;
     }
 }

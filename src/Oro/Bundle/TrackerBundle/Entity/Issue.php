@@ -9,18 +9,24 @@
 
 namespace Oro\Bundle\TrackerBundle\Entity;
 
-use Oro\Bundle\TrackerBundle\Model\ExtendIssue;
 use Doctrine\Common\Collections\ArrayCollection;
-use Oro\Bundle\UserBundle\Entity\User;
-
 use Doctrine\ORM\Mapping as ORM;
+
+use Oro\Bundle\TrackerBundle\Model\ExtendIssue;
+use Oro\Bundle\UserBundle\Entity\User;
 
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
+
 use Oro\Bundle\WorkflowBundle\Entity\WorkflowItem;
 use Oro\Bundle\WorkflowBundle\Entity\WorkflowStep;
+
+use Oro\Bundle\TagBundle\Entity\Taggable;
+
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
+
 use Oro\Bundle\OrganizationBundle\Entity\Organization;
+
 use Oro\Bundle\TrackerBundle\Entity\Type;
 
 /**
@@ -50,7 +56,7 @@ use Oro\Bundle\TrackerBundle\Entity\Type;
  *      }
  * )
  */
-class Issue extends ExtendIssue
+class Issue extends ExtendIssue implements Taggable
 {
     /**
      * @var $id integer
@@ -255,6 +261,21 @@ class Issue extends ExtendIssue
      * @ORM\JoinColumn(name="workflow_step_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $workflowStep;
+
+    /**
+     * @var ArrayCollection $tags
+     * @ConfigField(
+     *      defaultValues={
+     *          "merge"={
+     *              "display"=true
+     *          },
+     *          "importexport"={
+     *              "header"="Tags"
+     *          }
+     *      }
+     * )
+     */
+    protected $tags;
 
     public function __construct()
     {
@@ -679,4 +700,31 @@ class Issue extends ExtendIssue
         $this->updatedAt = new \DateTime('now', new \DateTimeZone('UTC'));
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getTags()
+    {
+        $this->tags = $this->tags ?: new ArrayCollection();
+
+        return $this->tags;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTaggableId()
+    {
+        return $this->getId();
+    }
 }

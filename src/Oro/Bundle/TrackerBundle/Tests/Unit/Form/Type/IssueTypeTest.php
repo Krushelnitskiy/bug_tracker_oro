@@ -27,7 +27,7 @@ class IssueTypeTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $builder->expects($this->exactly(6))
+        $builder->expects($this->exactly(7))
             ->method('add')
             ->will($this->returnSelf());
 
@@ -51,7 +51,8 @@ class IssueTypeTest extends \PHPUnit_Framework_TestCase
                     'description',
                     'reporter',
                     'owner',
-                    'priority'
+                    'priority',
+                    'tags'
                 ]
             ]
         ];

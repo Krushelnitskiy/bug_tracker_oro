@@ -12,6 +12,9 @@ use Doctrine\ORM\EntityRepository;
 
 class IssueRepository extends EntityRepository
 {
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
     public function findAllGroupedBySteps()
     {
         $queryBuilder = $this->getEntityManager()->createQueryBuilder('issue')
