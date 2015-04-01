@@ -75,7 +75,7 @@ class DefaultControllerTest extends WebTestCase
     {
         $response = $this->client->requestGrid(
             'issue-grid',
-            array('issue-grid[_filter][summary][value]' => 'New Issue')
+            array('issue-grid[_filter][summary]' => 'New Issue')
         );
 
         $result = $this->getJsonResponseContent($response, 200);

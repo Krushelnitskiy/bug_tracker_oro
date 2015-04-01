@@ -25,12 +25,12 @@ class ProductRepositoryFunctionalTest extends WebTestCase
     {
         $this->initClient([], $this->generateBasicAuthHeader());
         $this->loadFixtures(['Oro\Bundle\TrackerBundle\Tests\Functional\DataFixtures\LoadIssueData']);
-        $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
     }
 
 
     protected function postFixtureLoad()
     {
+        $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
         /**
          * @var $issue Issue
          */

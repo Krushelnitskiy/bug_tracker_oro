@@ -68,6 +68,26 @@ datagrid:
                 data_name: resolution.order
           default:
             update: DESC
+        filters:
+            columns:
+                summary:
+                    type:      string
+                    data_name: issue.summary
+                priorityLabel:
+                    type:      string
+                    data_name: priorityLabel
+                owner_name:
+                    type:      string
+                    data_name: owner_name
+                reporter_name:
+                    type:      string
+                    data_name: reporter_name
+                createdAt:
+                    type:      datetime
+                    data_name: issue.createdAt
+                updatedAt:
+                    type:      datetime
+                    data_name: issue.updatedAt
         properties:
             id: ~
             view_link:
