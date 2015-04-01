@@ -6,8 +6,8 @@
 {% block navButtons %}
     {% include 'OroImportExportBundle:ImportExport:buttons.html.twig' with {
         entity_class: entity_class,
-        exportProcessor: 'orotracker_issue',
-        exportTemplateProcessor: 'orocrm_sales_lead',
+        exportProcessor: 'oro_tracker_issue_processor',
+        exportTemplateProcessor: 'oro_tracker_issue_processor_template',
         importProcessor: 'orotracker_issue.add_or_replace',
         importTitle: 'oro.importexport.import.entity'|trans({'%entityName%': 'oro.tracker.issue.entity_plural_label'|trans}),
         dataGridName: gridName

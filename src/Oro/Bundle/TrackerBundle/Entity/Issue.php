@@ -145,7 +145,9 @@ class Issue extends ExtendIssue implements Taggable
      * @ConfigField(
      *  defaultValues={
      *      "importexport"={
-     *          "order"=60
+     *          "order"=60,
+     *          "header"="Priority",
+     *          "full"=false
      *      }
      *  } )
      **/
@@ -251,6 +253,14 @@ class Issue extends ExtendIssue implements Taggable
      *
      * @ORM\OneToOne(targetEntity="Oro\Bundle\WorkflowBundle\Entity\WorkflowItem")
      * @ORM\JoinColumn(name="workflow_item_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ConfigField(
+     *  defaultValues={
+     *      "importexport"={
+     *          "header"="Item",
+     *          "excluded"=true
+     *      }
+     *  }
+     * )
      */
     protected $workflowItem;
 
@@ -259,6 +269,14 @@ class Issue extends ExtendIssue implements Taggable
      *
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\WorkflowBundle\Entity\WorkflowStep")
      * @ORM\JoinColumn(name="workflow_step_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ConfigField(
+     *  defaultValues={
+     *      "importexport"={
+     *          "header"="Status",
+     *          "full"=false
+     *      }
+     *  }
+     * )
      */
     protected $workflowStep;
 
@@ -283,16 +301,12 @@ class Issue extends ExtendIssue implements Taggable
 
         $this->collaborators = new ArrayCollection();
         $this->children = new ArrayCollection();
-//        $this->comment = new ArrayCollection();
     }
-
-
-
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -315,7 +329,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get summary
      *
-     * @return string 
+     * @return string
      */
     public function getSummary()
     {
@@ -338,7 +352,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get code
      *
-     * @return string 
+     * @return string
      */
     public function getCode()
     {
@@ -361,7 +375,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -384,7 +398,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -407,7 +421,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -453,7 +467,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get priority
      *
-     * @return \Oro\Bundle\TrackerBundle\Entity\Priority 
+     * @return \Oro\Bundle\TrackerBundle\Entity\Priority
      */
     public function getPriority()
     {
@@ -476,7 +490,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get resolution
      *
-     * @return \Oro\Bundle\TrackerBundle\Entity\Resolution 
+     * @return \Oro\Bundle\TrackerBundle\Entity\Resolution
      */
     public function getResolution()
     {
@@ -499,7 +513,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get reporter
      *
-     * @return \Oro\Bundle\UserBundle\Entity\User 
+     * @return \Oro\Bundle\UserBundle\Entity\User
      */
     public function getReporter()
     {
@@ -568,7 +582,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get children
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getChildren()
     {
@@ -644,7 +658,8 @@ class Issue extends ExtendIssue implements Taggable
         return $this->workflowStep;
     }
 
-    public function getOwner() {
+    public function getOwner()
+    {
         return $this->owner;
     }
 
@@ -653,7 +668,8 @@ class Issue extends ExtendIssue implements Taggable
      * @param $user User
      * @return Issue
      */
-    public function setOwner($user) {
+    public function setOwner($user)
+    {
         $this->owner = $user;
 
         return $this;

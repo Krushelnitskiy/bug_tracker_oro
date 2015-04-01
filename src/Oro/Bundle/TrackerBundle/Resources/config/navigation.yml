@@ -8,15 +8,9 @@ oro_menu_config:
         issue_link:
             label: 'oro.tracker.issue.entity_plural_label'
             route: orotracker_issue_index
-#            extras:
-#                routes: ['/^acme_link/']
-#                description: My description
     tree:
         application_menu:
             children:
               issue_tab:
                 children:
                   issue_link: ~
-
-#oro_titles:
-#    orotracker_issue_index: My link page title

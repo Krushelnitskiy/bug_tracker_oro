@@ -4,7 +4,7 @@ namespace Oro\Bundle\TrackerBundle\ImportExport\TemplateFixture;
 
 use Oro\Bundle\ImportExportBundle\TemplateFixture\AbstractTemplateRepository;
 use Oro\Bundle\ImportExportBundle\TemplateFixture\TemplateFixtureInterface;
-use Proxies\__CG__\Oro\Bundle\TrackerBundle\Entity\Issue;
+use Oro\Bundle\TrackerBundle\Entity\Issue;
 
 class IssueFixture extends AbstractTemplateRepository implements TemplateFixtureInterface
 {
@@ -34,14 +34,17 @@ class IssueFixture extends AbstractTemplateRepository implements TemplateFixture
 
     /**
      * @param string $key
-     * @param Issue   $entity
+     * @param Issue $entity
      */
     public function fillEntityData($key, $entity)
     {
         $userRepo         = $this->templateManager->getEntityRepository('Oro\Bundle\UserBundle\Entity\User');
+        $typeRepo         = $this->templateManager->getEntityRepository('Oro\Bundle\TrackerBundle\Entity\Type');
 
         $entityRepository = 'Oro\Bundle\OrganizationBundle\Entity\Organization';
         $organizationRepo = $this->templateManager->getEntityRepository($entityRepository);
+
+
 
         switch ($key) {
             case 'Jerry Coleman':
@@ -53,6 +56,7 @@ class IssueFixture extends AbstractTemplateRepository implements TemplateFixture
                 $entity->setCreatedAt(new \DateTime());
                 $entity->setUpdatedAt(new \DateTime());
                 $entity->setReporter($userRepo->getEntity('John Doo'));
+
                 return;
         }
 

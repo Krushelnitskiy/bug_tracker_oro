@@ -1,44 +1,44 @@
 parameters:
-    orocrm_sales.importexport.template_fixture.lead.class: Oro\Bundle\TrackerBundle\ImportExport\TemplateFixture\IssueFixture
+    oro_tracker_issue.importexport.template_fixture.issue.class: Oro\Bundle\TrackerBundle\ImportExport\TemplateFixture\IssueFixture
 
 services:
-    orocrm_sales.importexport.template_fixture.lead:
-        class: %orocrm_sales.importexport.template_fixture.lead.class%
+    oro_tracker_issue.importexport.template_fixture.issue:
+        class: %oro_tracker_issue.importexport.template_fixture.issue.class%
         tags:
             - { name: oro_importexport.template_fixture }
 
     # Converter
-    orocrm_sales.importexport.data_converter.lead:
+    oro_tracker_issue.importexport.data_converter.issue:
         parent: oro_importexport.data_converter.configurable
 
-    orocrm_sales.importexport.template_fixture.data_converter.lead:
+    oro_tracker_issue.importexport.template_fixture.data_converter.issue:
         parent: oro_importexport.data_converter.template_fixture.configurable
 
     # Export processor
-    orocrm_sales.importexport.processor.export.lead:
+    oro_tracker_issue.importexport.processor.export.issue:
         parent: oro_importexport.processor.export_abstract
         calls:
-            - [setDataConverter, [@orocrm_sales.importexport.data_converter.lead]]
+            - [setDataConverter, [@oro_tracker_issue.importexport.data_converter.issue]]
         tags:
-            - { name: oro_importexport.processor, type: export, entity: %orotracker_issue.entity.class%, alias: orotracker_issue }
+            - { name: oro_importexport.processor, type: export, entity: %orotracker_issue.entity.class%, alias: oro_tracker_issue_processor }
 
-    orocrm_sales.importexport.processor.export_template.lead:
+    oro_tracker_issue.importexport.processor.export_template.issue:
         parent: oro_importexport.processor.export_abstract
         calls:
-            - [setDataConverter, [@orocrm_sales.importexport.template_fixture.data_converter.lead]]
+            - [setDataConverter, [@oro_tracker_issue.importexport.template_fixture.data_converter.issue]]
         tags:
-            - { name: oro_importexport.processor, type: export_template, entity: %orotracker_issue.entity.class%, alias: orocrm_sales_lead }
+            - { name: oro_importexport.processor, type: export_template, entity: %orotracker_issue.entity.class%, alias: oro_tracker_issue_processor_template }
 
     # Strategy
-    orocrm_sales.importexport.strategy.lead.add_or_replace:
+    oro_tracker_issue.importexport.strategy.issue.add_or_replace:
         parent: oro_importexport.strategy.configurable_add_or_replace
 
     # Import processor
-    orocrm_sales.importexport.processor.import.lead:
+    oro_tracker_issue.importexport.processor.import.issue:
         parent: oro_importexport.processor.import_abstract
         calls:
-             - [setDataConverter, [@orocrm_sales.importexport.data_converter.lead]]
-             - [setStrategy, [@orocrm_sales.importexport.strategy.lead.add_or_replace]]
+             - [setDataConverter, [@oro_tracker_issue.importexport.data_converter.issue]]
+             - [setStrategy, [@oro_tracker_issue.importexport.strategy.issue.add_or_replace]]
         tags:
             - { name: oro_importexport.processor, type: import, entity: %orotracker_issue.entity.class%, alias: orotracker_issue.add_or_replace }
             - { name: oro_importexport.processor, type: import_validation, entity: %orotracker_issue.entity.class%, alias: orotracker_issue.add_or_replace }
