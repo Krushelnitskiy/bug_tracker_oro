@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
+use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 
 /**
@@ -20,6 +21,7 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
  * @ORM\Table(name="oro_tracker_issue_priority")
  * @Gedmo\TranslationEntity(class="Oro\Bundle\TrackerBundle\Entity\PriorityTranslation")
  * @ORM\Entity
+ * @Config()
  */
 
 class Priority
@@ -34,6 +36,13 @@ class Priority
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=30, unique=true)
      * @ConfigField(
      *  defaultValues={
      *      "importexport"={
@@ -41,13 +50,6 @@ class Priority
      *      }
      *  }
      * )
-     */
-    protected $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="`name`", type="string", length=30, unique=true)
      */
     protected $name;
 

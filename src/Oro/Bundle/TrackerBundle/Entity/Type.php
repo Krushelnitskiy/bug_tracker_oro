@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
+use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 
 /**
@@ -21,6 +22,7 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
  * @ORM\Table(name="oro_tracker_issue_type")
  * @Gedmo\TranslationEntity(class="Oro\Bundle\TrackerBundle\Entity\TypeTranslation")
  * @ORM\Entity
+ * @Config()
  */
 
 class Type
@@ -34,13 +36,6 @@ class Type
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ConfigField(
-     *  defaultValues={
-     *      "importexport"={
-     *          "identity"=true
-     *      }
-     *  }
-     * )
      */
     protected $id;
 
@@ -48,6 +43,13 @@ class Type
      * @var string
      *
      * @ORM\Column(name="`name`", type="string", length=30, unique=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "importexport"={
+     *              "identity"=true
+     *          }
+     *      }
+     * )
      */
     protected $name;
 

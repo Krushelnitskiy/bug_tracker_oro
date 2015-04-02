@@ -55,6 +55,9 @@ use Oro\Bundle\TrackerBundle\Entity\Type;
  *          },
  *      }
  * )
+ * @SuppressWarnings(PHPMD.TooManyFields)
+ * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class Issue extends ExtendIssue implements Taggable
 {
@@ -127,13 +130,13 @@ class Issue extends ExtendIssue implements Taggable
 
     /**
      * @var $type Type
-     * @ORM\ManyToOne(targetEntity="Type")
+     * @ORM\ManyToOne(targetEntity="Type", cascade={"persist"})
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      * @ConfigField(
      *  defaultValues={
      *      "importexport"={
-     *          "order"=50,
-     *          "short"=true
+     *          "header"="Type",
+     *          "order"=50
      *      }
      *  }
      * )
@@ -147,11 +150,11 @@ class Issue extends ExtendIssue implements Taggable
      * @ConfigField(
      *  defaultValues={
      *      "importexport"={
-     *          "order"=60,
      *          "header"="Priority",
-     *          "short"=true
+     *          "order"=60
      *      }
-     *  } )
+     *  }
+     * )
      **/
     protected $priority;
 
@@ -161,12 +164,12 @@ class Issue extends ExtendIssue implements Taggable
      * @ORM\ManyToOne(targetEntity="Resolution")
      * @ORM\JoinColumn(name="resolution_id", referencedColumnName="id")
      * @ConfigField(
-     *  defaultValues={
-     *      "importexport"={
-     *          "order"=70,
-     *          "short"=true
+     *      defaultValues={
+     *          "importexport"={
+     *              "order"=70
+     *          }
      *      }
-     *  } )
+     * )
      **/
     protected $resolution;
 
@@ -209,6 +212,16 @@ class Issue extends ExtendIssue implements Taggable
      *      inverseJoinColumns={
      *          @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      *      }
+     * )
+     * @ConfigField(
+     *  defaultValues={
+     *      "dataaudit"={
+     *          "auditable"=true
+     *       },
+     *      "importexport"={
+     *          "excluded"=true
+     *      }
+     *  }
      * )
      */
     protected $collaborators;

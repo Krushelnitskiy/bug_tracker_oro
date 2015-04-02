@@ -5,6 +5,9 @@ namespace Oro\Bundle\TrackerBundle\ImportExport\TemplateFixture;
 use Oro\Bundle\ImportExportBundle\TemplateFixture\AbstractTemplateRepository;
 use Oro\Bundle\ImportExportBundle\TemplateFixture\TemplateFixtureInterface;
 use Oro\Bundle\TrackerBundle\Entity\Issue;
+use Oro\Bundle\TrackerBundle\Entity\Priority;
+use Oro\Bundle\TrackerBundle\Entity\Resolution;
+use Oro\Bundle\TrackerBundle\Entity\Type;
 
 class IssueFixture extends AbstractTemplateRepository implements TemplateFixtureInterface
 {
@@ -21,7 +24,7 @@ class IssueFixture extends AbstractTemplateRepository implements TemplateFixture
      */
     public function getData()
     {
-        return $this->getEntityData('Jerry Coleman');
+        return $this->getEntityData('Issue Export Import');
     }
 
     /**
@@ -39,26 +42,36 @@ class IssueFixture extends AbstractTemplateRepository implements TemplateFixture
     public function fillEntityData($key, $entity)
     {
         $userRepo         = $this->templateManager->getEntityRepository('Oro\Bundle\UserBundle\Entity\User');
-        $typeRepo         = $this->templateManager->getEntityRepository('Oro\Bundle\TrackerBundle\Entity\Type');
-        $priorityRepo         = $this->templateManager->getEntityRepository('Oro\Bundle\TrackerBundle\Entity\Priority');
+        $user = $userRepo->getEntity('John Doo');
 
         $entityRepository = 'Oro\Bundle\OrganizationBundle\Entity\Organization';
         $organizationRepo = $this->templateManager->getEntityRepository($entityRepository);
 
+        $priority = new Priority();
+        $priority->setName(Priority::PRIORITY_BLOCKER);
+        $priority->setLabel(Priority::PRIORITY_BLOCKER);
+        $priority->setOrder(1);
 
+        $type = new Type();
+        $type->setName(Type::TYPE_STORY);
+        $type->setLabel(Type::TYPE_STORY);
+        $type->setOrder();;
+
+        $resolution = new Resolution();
 
         switch ($key) {
-            case 'Jerry Coleman':
-                $entity->setSummary('Oro Inc. Lead Name');
+            case 'Issue Export Import':
+                $entity->setSummary('Issue Export Import');
                 $entity->setCode('1');
-                $entity->setOwner($userRepo->getEntity('John Doo'));
+                $entity->setOwner($user);
                 $entity->setOrganization($organizationRepo->getEntity('default'));
-                $entity->setDescription(('B2b channel|b2b'));
+                $entity->setDescription(('Issue Export Import description'));
                 $entity->setCreatedAt(new \DateTime());
                 $entity->setUpdatedAt(new \DateTime());
-                $entity->setReporter($userRepo->getEntity('John Doo'));
-                $entity->setType($typeRepo->getEntity('story'));
-                $entity->setPriority($priorityRepo->getEntity('blocker'));
+                $entity->setReporter($user);
+                $entity->setResolution($resolution);
+                $entity->setType($type);
+                $entity->setPriority($priority);
 
                 return;
         }

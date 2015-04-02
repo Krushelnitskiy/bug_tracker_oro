@@ -14,24 +14,10 @@ services:
     oro_tracker_issue.importexport.template_fixture.data_converter.issue:
         parent: oro_importexport.data_converter.template_fixture.configurable
 
-    # Export processor
-    oro_tracker_issue.importexport.processor.export.issue:
-        parent: oro_importexport.processor.export_abstract
-        calls:
-            - [setDataConverter, [@oro_tracker_issue.importexport.data_converter.issue]]
-        tags:
-            - { name: oro_importexport.processor, type: export, entity: %orotracker_issue.entity.class%, alias: oro_tracker_issue_processor }
-
-    oro_tracker_issue.importexport.processor.export_template.issue:
-        parent: oro_importexport.processor.export_abstract
-        calls:
-            - [setDataConverter, [@oro_tracker_issue.importexport.template_fixture.data_converter.issue]]
-        tags:
-            - { name: oro_importexport.processor, type: export_template, entity: %orotracker_issue.entity.class%, alias: oro_tracker_issue_processor_template }
-
     # Strategy
     oro_tracker_issue.importexport.strategy.issue.add_or_replace:
         parent: oro_importexport.strategy.configurable_add_or_replace
+
 
     # Import processor
     oro_tracker_issue.importexport.processor.import.issue:
@@ -40,5 +26,21 @@ services:
              - [setDataConverter, [@oro_tracker_issue.importexport.data_converter.issue]]
              - [setStrategy, [@oro_tracker_issue.importexport.strategy.issue.add_or_replace]]
         tags:
-            - { name: oro_importexport.processor, type: import, entity: %orotracker_issue.entity.class%, alias: orotracker_issue.add_or_replace }
-            - { name: oro_importexport.processor, type: import_validation, entity: %orotracker_issue.entity.class%, alias: orotracker_issue.add_or_replace }
+            - { name: oro_importexport.processor, type: import, entity: %orotracker_issue.entity.class%, alias: oro_tracker_issue_processor }
+            - { name: oro_importexport.processor, type: import_validation, entity: %orotracker_issue.entity.class%, alias: oro_tracker_issue_processor }
+
+    # Export processor
+    oro_tracker_issue.importexport.processor.export.issue:
+        parent: oro_importexport.processor.export_abstract
+        calls:
+            - [setDataConverter, [@oro_tracker_issue.importexport.data_converter.issue]]
+        tags:
+            - { name: oro_importexport.processor, type: export, entity: %orotracker_issue.entity.class%, alias: oro_tracker_issue_processor }
+
+    # Export template
+    oro_tracker_issue.importexport.processor.export_template.issue:
+        parent: oro_importexport.processor.export_abstract
+        calls:
+            - [setDataConverter, [@oro_tracker_issue.importexport.template_fixture.data_converter.issue]]
+        tags:
+            - { name: oro_importexport.processor, type: export_template, entity: %orotracker_issue.entity.class%, alias: oro_tracker_issue_processor }
