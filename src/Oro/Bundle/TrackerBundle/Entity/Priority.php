@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
+use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 
 /**
  * Class Priority
@@ -33,6 +34,13 @@ class Priority
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ConfigField(
+     *  defaultValues={
+     *      "importexport"={
+     *          "identity"=true
+     *      }
+     *  }
+     * )
      */
     protected $id;
 

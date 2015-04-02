@@ -132,9 +132,11 @@ class Issue extends ExtendIssue implements Taggable
      * @ConfigField(
      *  defaultValues={
      *      "importexport"={
-     *          "order"=50
+     *          "order"=50,
+     *          "short"=true
      *      }
-     *  } )
+     *  }
+     * )
      **/
     protected $type;
 
@@ -147,7 +149,7 @@ class Issue extends ExtendIssue implements Taggable
      *      "importexport"={
      *          "order"=60,
      *          "header"="Priority",
-     *          "full"=false
+     *          "short"=true
      *      }
      *  } )
      **/
@@ -161,7 +163,8 @@ class Issue extends ExtendIssue implements Taggable
      * @ConfigField(
      *  defaultValues={
      *      "importexport"={
-     *          "order"=70
+     *          "order"=70,
+     *          "short"=true
      *      }
      *  } )
      **/
@@ -189,7 +192,8 @@ class Issue extends ExtendIssue implements Taggable
      *      "importexport"={
      *          "order"=90
      *      }
-     *  } )
+     *  }
+     * )
      **/
     protected $owner;
 

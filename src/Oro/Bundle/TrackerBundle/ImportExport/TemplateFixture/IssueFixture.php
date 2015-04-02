@@ -40,6 +40,7 @@ class IssueFixture extends AbstractTemplateRepository implements TemplateFixture
     {
         $userRepo         = $this->templateManager->getEntityRepository('Oro\Bundle\UserBundle\Entity\User');
         $typeRepo         = $this->templateManager->getEntityRepository('Oro\Bundle\TrackerBundle\Entity\Type');
+        $priorityRepo         = $this->templateManager->getEntityRepository('Oro\Bundle\TrackerBundle\Entity\Priority');
 
         $entityRepository = 'Oro\Bundle\OrganizationBundle\Entity\Organization';
         $organizationRepo = $this->templateManager->getEntityRepository($entityRepository);
@@ -56,6 +57,8 @@ class IssueFixture extends AbstractTemplateRepository implements TemplateFixture
                 $entity->setCreatedAt(new \DateTime());
                 $entity->setUpdatedAt(new \DateTime());
                 $entity->setReporter($userRepo->getEntity('John Doo'));
+                $entity->setType($typeRepo->getEntity('story'));
+                $entity->setPriority($priorityRepo->getEntity('blocker'));
 
                 return;
         }
