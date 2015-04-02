@@ -48,7 +48,7 @@ class IssueType extends AbstractType
                 'reporter',
                 'oro_user_select',
                 [
-                    'required' => false,
+                    'required' => true,
                     'label' => 'oro.tracker.issue.reporter.label'
                 ]
             )
@@ -56,7 +56,7 @@ class IssueType extends AbstractType
                 'owner',
                 'oro_user_select',
                 [
-                    'required' => false,
+                    'required' => true,
                     'label' => 'oro.tracker.issue.owner.label'
                 ]
             )

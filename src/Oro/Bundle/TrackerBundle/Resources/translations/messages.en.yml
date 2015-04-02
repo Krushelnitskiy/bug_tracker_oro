@@ -33,3 +33,6 @@ oro:
       create: "Create"
     dashboard:
       issues_bar.label: "Chart issues by status"
+Type.oro.tracker.type.name.label: "Type"
+Priority.oro.tracker.type.name.label: "Priority"
+Resolution.oro.tracker.type.name.label: "Resolution"

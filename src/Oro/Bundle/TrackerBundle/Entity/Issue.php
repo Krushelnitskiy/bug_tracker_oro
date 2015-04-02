@@ -82,7 +82,8 @@ class Issue extends ExtendIssue implements Taggable
      * @ConfigField(
      *  defaultValues={
      *      "importexport"={
-     *          "order"=10
+     *          "order"=10,
+     *          "header"="Summary"
      *      }
      *  }
      * )
@@ -95,7 +96,8 @@ class Issue extends ExtendIssue implements Taggable
      * @ConfigField(
      *  defaultValues={
      *      "importexport"={
-     *          "order"=20
+     *          "order"=20,
+     *          "header"="Code"
      *      }
      *  } )
      */
@@ -108,7 +110,8 @@ class Issue extends ExtendIssue implements Taggable
      * @ConfigField(
      *  defaultValues={
      *      "importexport"={
-     *          "order"=30
+     *          "order"=30,
+     *          "header"="Description"
      *      }
      *  } )
      */
@@ -122,7 +125,8 @@ class Issue extends ExtendIssue implements Taggable
      * @ConfigField(
      *  defaultValues={
      *      "importexport"={
-     *          "order"=40
+     *          "order"=40,
+     *          "header"="Organization"
      *      }
      *  } )
      */
@@ -130,7 +134,7 @@ class Issue extends ExtendIssue implements Taggable
 
     /**
      * @var $type Type
-     * @ORM\ManyToOne(targetEntity="Type", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Type")
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      * @ConfigField(
      *  defaultValues={

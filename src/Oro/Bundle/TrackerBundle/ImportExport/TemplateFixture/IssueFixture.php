@@ -55,7 +55,7 @@ class IssueFixture extends AbstractTemplateRepository implements TemplateFixture
         $type = new Type();
         $type->setName(Type::TYPE_STORY);
         $type->setLabel(Type::TYPE_STORY);
-        $type->setOrder();;
+        $type->setOrder(2);
 
         $resolution = new Resolution();
 
