@@ -1,4 +1,5 @@
 parameters:
   orotracker_issue.entity.class: Oro\Bundle\TrackerBundle\Entity\Issue
+  orotracker_issue.type.entity.class: Oro\Bundle\TrackerBundle\Entity\Type
 
 services:

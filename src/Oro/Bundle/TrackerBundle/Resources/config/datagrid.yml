@@ -88,6 +88,14 @@ datagrid:
                 updatedAt:
                     type:      datetime
                     data_name: issue.updatedAt
+                typeLabel:
+                    type:      entity
+                    data_name: issue.type
+                    options:
+                        field_type: entity
+                        field_options:
+                            class: %orotracker_issue.type.entity.class%
+                            property: name
         properties:
             id: ~
             view_link:
