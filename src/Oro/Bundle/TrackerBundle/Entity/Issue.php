@@ -17,16 +17,11 @@ use Oro\Bundle\UserBundle\Entity\User;
 
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
-
 use Oro\Bundle\WorkflowBundle\Entity\WorkflowItem;
 use Oro\Bundle\WorkflowBundle\Entity\WorkflowStep;
-
 use Oro\Bundle\TagBundle\Entity\Taggable;
-
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
-
 use Oro\Bundle\OrganizationBundle\Entity\Organization;
-
 use Oro\Bundle\TrackerBundle\Entity\Type;
 
 /**
@@ -99,7 +94,8 @@ class Issue extends ExtendIssue implements Taggable
      *          "order"=20,
      *          "header"="Code"
      *      }
-     *  } )
+     *  }
+     * )
      */
     protected $code;
 
@@ -113,7 +109,8 @@ class Issue extends ExtendIssue implements Taggable
      *          "order"=30,
      *          "header"="Description"
      *      }
-     *  } )
+     *  }
+     * )
      */
     protected $description;
 
@@ -128,7 +125,8 @@ class Issue extends ExtendIssue implements Taggable
      *          "order"=40,
      *          "header"="Organization"
      *      }
-     *  } )
+     *  }
+     * )
      */
     protected $organization;
 
@@ -186,7 +184,8 @@ class Issue extends ExtendIssue implements Taggable
      *      "importexport"={
      *          "order"=80
      *      }
-     *  } )
+     *  }
+     * )
      **/
     protected $reporter;
 
@@ -252,7 +251,8 @@ class Issue extends ExtendIssue implements Taggable
      *      "importexport"={
      *          "order"=100
      *      }
-     *  } )
+     *  }
+     * )
      **/
     protected $createdAt;
 
@@ -264,7 +264,8 @@ class Issue extends ExtendIssue implements Taggable
      *      "importexport"={
      *          "order"=110
      *      }
-     *  } )
+     *  }
+     * )
      **/
     protected $updatedAt;
 
@@ -549,8 +550,7 @@ class Issue extends ExtendIssue implements Taggable
      */
     public function addCollaborator(User $collaborators)
     {
-        if (!$this->getCollaborators()->contains($collaborators))
-        {
+        if (!$this->getCollaborators()->contains($collaborators)) {
             $this->collaborators->add($collaborators);
         }
 

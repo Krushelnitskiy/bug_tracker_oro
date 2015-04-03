@@ -13,6 +13,7 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\TrackerBundle\Entity\Issue;
 use Oro\Bundle\TrackerBundle\Entity\Type;
 use Oro\Bundle\TrackerBundle\Form\Type\IssueType;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * Class DefaultController
@@ -123,7 +124,11 @@ class IssueController extends Controller
     {
         $issueSubTask = new Issue();
 
-        $typeSubTask = $this->getDoctrine()->getRepository('OroTrackerBundle:Type')->findOneBy(['name'=>Type::TYPE_SUB_TASK]);
+        /**
+         * @var $typeRepository EntityRepository
+         */
+        $typeRepository = $this->getDoctrine()->getRepository('OroTrackerBundle:Type');
+        $typeSubTask = $typeRepository->findOneBy(['name'=>Type::TYPE_SUB_TASK]);
         $issueSubTask->setParent($issue);
         $issueSubTask->setType($typeSubTask);
 

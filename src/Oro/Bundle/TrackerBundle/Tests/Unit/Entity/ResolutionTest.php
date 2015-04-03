@@ -18,8 +18,11 @@ class ResolutionTest extends \PHPUnit_Framework_TestCase
         new Resolution();
     }
 
+
     /**
      * @dataProvider settersAndGettersDataProvider
+     * @param $property
+     * @param $value
      */
     public function testSettersAndGetters($property, $value)
     {
@@ -38,10 +41,10 @@ class ResolutionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testToString() {
+    public function testToString()
+    {
         $entity = new Resolution();
         $entity->setLabel('111');
         $this->assertEquals($entity->getLabel(), (string)$entity);
     }
-
 }

@@ -91,7 +91,7 @@ class IssueType extends AbstractType
             $issue = $event->getData();
             $builder = $event->getForm();
 
-            if ($issue instanceof Issue && (!$issue->getType() || $issue->getType()->getName() !== Type::TYPE_SUB_TASK)) {
+            if ($this->canAddFiledType($issue)) {
                 $builder->add(
                     'type',
                     'entity',
@@ -111,6 +111,21 @@ class IssueType extends AbstractType
                 );
             }
         };
+    }
+
+    protected function canAddFiledType($issue)
+    {
+        $isIssue = $issue instanceof Issue;
+
+        if ($isIssue) {
+            /**s
+             * @var $issue Issue
+             */
+            $hasTypeSubTask = (!$issue->getType() || $issue->getType()->getName() !== Type::TYPE_SUB_TASK);
+            return $isIssue && $hasTypeSubTask;
+        }
+
+        return false;
     }
 
     /**

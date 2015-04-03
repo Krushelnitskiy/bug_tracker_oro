@@ -20,6 +20,8 @@ class TypeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider settersAndGettersDataProvider
+     * @param $property
+     * @param $value
      */
     public function testSettersAndGetters($property, $value)
     {
@@ -38,7 +40,8 @@ class TypeTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testToString() {
+    public function testToString()
+    {
         $entity = new Type();
         $entity->setLabel('111');
         $this->assertEquals($entity->getLabel(), (string)$entity);

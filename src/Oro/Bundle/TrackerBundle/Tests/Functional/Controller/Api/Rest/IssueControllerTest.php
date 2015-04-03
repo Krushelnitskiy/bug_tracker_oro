@@ -3,10 +3,8 @@
 namespace Oro\Bundle\TrackerBundle\Tests\Functional\Controller\Api\Rest;
 
 use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
-use Oro\Bundle\TrackerBundle\Entity\Issue;
 use Oro\Bundle\TrackerBundle\Entity\Type;
 use Oro\Bundle\TrackerBundle\Entity\Priority;
-use Oro\Bundle\TrackerBundle\Entity\Resolution;
 
 /**
  * @outputBuffering enabled

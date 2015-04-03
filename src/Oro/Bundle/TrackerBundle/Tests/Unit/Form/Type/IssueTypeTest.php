@@ -7,7 +7,7 @@ use Oro\Bundle\TrackerBundle\Form\Type\IssueType;
 class IssueTypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var TaskType
+     * @var IssueType
      */
     protected $formType;
 

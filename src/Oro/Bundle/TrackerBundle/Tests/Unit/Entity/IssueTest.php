@@ -71,6 +71,9 @@ class IssueTest extends \PHPUnit_Framework_TestCase
         $entity = new Issue();
 
         $this->assertNull($entity->getOwner());
+        /**
+         * @var $user User
+         */
         $user = $this->getMock('Oro\Bundle\UserBundle\Entity\User');
         $expected = 1;
         $user->expects($this->once())->method('getId')->will($this->returnValue($expected));
@@ -81,6 +84,8 @@ class IssueTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider settersAndGettersDataProvider
+     * @param $property
+     * @param $value
      */
     public function testSettersAndGetters($property, $value)
     {
@@ -136,30 +141,25 @@ class IssueTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testCollaborator() {
+    public function testCollaborator()
+    {
         $entity = new Issue();
-
         $testCollaborator = $this->getMock('Oro\Bundle\UserBundle\Entity\User');
-
         $entity->addCollaborator($testCollaborator);
-
-        $this->assertCount(1,$entity->getCollaborators());
-
+        $this->assertCount(1, $entity->getCollaborators());
         $entity->removeCollaborator($testCollaborator);
-
-        $this->assertCount(0,$entity->getCollaborators());
+        $this->assertCount(0, $entity->getCollaborators());
     }
 
-    public function testChildren() {
+    public function testChildren()
+    {
         $entity = new Issue();
         $entityChildren = new Issue();
 
-        $this->assertCount(0,$entity->getChildren());
+        $this->assertCount(0, $entity->getChildren());
         $entity->addChild($entityChildren);
-        $this->assertCount(1,$entity->getChildren());
+        $this->assertCount(1, $entity->getChildren());
         $entity->removeChild($entityChildren);
-        $this->assertCount(0,$entity->getChildren());
+        $this->assertCount(0, $entity->getChildren());
     }
-
-
 }
