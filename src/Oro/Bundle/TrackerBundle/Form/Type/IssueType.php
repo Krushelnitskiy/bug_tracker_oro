@@ -85,9 +85,12 @@ class IssueType extends AbstractType
         $builder->addEventListener(FormEvents::PRE_SET_DATA, $this->addTypeField());
     }
 
+    /**
+     * @return callable
+     */
     protected function addTypeField()
     {
-        return function(FormEvent $event) {
+        return function (FormEvent $event) {
             $issue = $event->getData();
             $builder = $event->getForm();
 

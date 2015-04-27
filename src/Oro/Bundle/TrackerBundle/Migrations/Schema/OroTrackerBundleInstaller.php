@@ -26,7 +26,8 @@ use Oro\Bundle\ActivityBundle\Migration\Extension\ActivityExtensionAwareInterfac
 use Oro\Bundle\TrackerBundle\Migrations\Schema\v1_0\OroTrackerBundle as OroTrackerBundle_1_0;
 use Oro\Bundle\TrackerBundle\Migrations\Schema\v1_1\OroTrackerBundle as OroTrackerBundle_1_1;
 
-class OroTrackerBundleInstaller implements Installation,
+class OroTrackerBundleInstaller implements
+    Installation,
     ExtendExtensionAwareInterface,
     NoteExtensionAwareInterface,
     ActivityExtensionAwareInterface

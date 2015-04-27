@@ -583,7 +583,7 @@ class Issue extends ExtendIssue implements Taggable
      * @param \Oro\Bundle\TrackerBundle\Entity\Issue $children
      * @return Issue
      */
-    public function addChild(\Oro\Bundle\TrackerBundle\Entity\Issue $children)
+    public function addChild(Issue $children)
     {
         $this->children[] = $children;
 
@@ -595,7 +595,7 @@ class Issue extends ExtendIssue implements Taggable
      *
      * @param \Oro\Bundle\TrackerBundle\Entity\Issue $children
      */
-    public function removeChild(\Oro\Bundle\TrackerBundle\Entity\Issue $children)
+    public function removeChild(Issue $children)
     {
         $this->children->removeElement($children);
     }
