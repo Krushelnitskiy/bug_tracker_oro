@@ -42,6 +42,8 @@ class IssueController extends Controller
     }
 
     /**
+     * @param Issue $issue
+     *
      * @Route("/view/{id}", name="orotracker_issue_view", requirements={"id"="\d+"})
      * @AclAncestor("orotracker_issue_view")
      * @Template
@@ -104,6 +106,8 @@ class IssueController extends Controller
     }
 
     /**
+     * @param Issue $task
+     *
      * @Route("/update/{id}", name="orotracker_issue_update", requirements={"id"="\d+"})
      * @AclAncestor("orotracker_issue_edit")
      * @Template
@@ -116,6 +120,8 @@ class IssueController extends Controller
     }
 
     /**
+     * @param Issue $issue
+     *
      * @Route("/{id}/sub-task/create", name="orotracker_issue_add_child")
      * @Template("OroTrackerBundle:Issue:update.html.twig")
      * @AclAncestor("orotracker_issue_edit")
@@ -177,6 +183,8 @@ class IssueController extends Controller
 
 
     /**
+     * @param integer $userId
+     *
      * @Route("/user/{userId}", name="orotracker_issue_user_issue", requirements={"userId"="\d+"})
      * @AclAncestor("orotracker_issue_view")
      * @Template

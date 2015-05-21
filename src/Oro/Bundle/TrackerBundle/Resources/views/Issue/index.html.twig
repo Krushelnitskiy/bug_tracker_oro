@@ -14,9 +14,11 @@
     } %}
 
     {% if resource_granted('orotracker_issue_create') %}
-        {{ UI.addButton({
-            'path' : path('orotracker_issue_create'),
-            'entity_label': 'oro.tracker.issue.entity_label'|trans
-        }) }}
+        <div class="btn-group">
+            {{ UI.addButton({
+                'path' : path('orotracker_issue_create'),
+                'entity_label': 'oro.tracker.issue.entity_label'|trans
+            }) }}
+        </div>
     {% endif %}
 {% endblock %}

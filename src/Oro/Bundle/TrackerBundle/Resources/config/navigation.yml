@@ -11,6 +11,6 @@ oro_menu_config:
     tree:
         application_menu:
             children:
-              issue_tab:
+              activities_tab:
                 children:
                   issue_link: ~

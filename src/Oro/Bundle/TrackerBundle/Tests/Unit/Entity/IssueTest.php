@@ -9,7 +9,6 @@
 namespace Oro\Bundle\TrackerBundle\Tests\Unit\Entity;
 
 use Oro\Bundle\TrackerBundle\Entity\Issue;
-use Doctrine\Common\Collections\ArrayCollection;
 
 class IssueTest extends \PHPUnit_Framework_TestCase
 {
@@ -72,7 +71,7 @@ class IssueTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNull($entity->getOwner());
         /**
-         * @var $user User
+         * @var $user \PHPUnit_Framework_MockObject_MockObject
          */
         $user = $this->getMock('Oro\Bundle\UserBundle\Entity\User');
         $expected = 1;
@@ -104,7 +103,6 @@ class IssueTest extends \PHPUnit_Framework_TestCase
         $testIssuePriority->expects($this->once())->method('getName')->will($this->returnValue('low'));
         $testIssuePriority->expects($this->once())->method('getLabel')->will($this->returnValue('Low label'));
 
-
         $testIssueType = $this->getMockBuilder('Oro\Bundle\TrackerBundle\Entity\Type')
             ->disableOriginalConstructor()
             ->getMock();
@@ -123,9 +121,7 @@ class IssueTest extends \PHPUnit_Framework_TestCase
         $organization = $this->getMock('Oro\Bundle\OrganizationBundle\Entity\Organization');
         $parent = new Issue();
 
-
         return array(
-//            array('id', 42),
             array('summary', 'Test summary'),
             array('description', 'Test Description'),
             array('code', '111111'),

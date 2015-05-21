@@ -30,4 +30,6 @@ workflows:
                 label: 'Reopened'
                 order: 50
                 allowed_transitions:
-                    - starдt_progress
+                    - start_progress
+                    - resolve
+                    - close

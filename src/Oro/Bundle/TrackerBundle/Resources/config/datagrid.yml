@@ -60,6 +60,8 @@ datagrid:
                 data_name: issue.createdAt
             updatedAt:
                 data_name: issue.updatedAt
+            workflowStepLabel:
+                data_name: workflowStepLabel
             typeLabel:
                 data_name: type.order
             priorityLabel:
@@ -67,7 +69,7 @@ datagrid:
             resolutionLabel:
                 data_name: resolution.order
           default:
-            update: DESC
+            updatedAt: DESC
         filters:
             columns:
                 summary:
@@ -148,6 +150,8 @@ datagrid:
                 label:         oro.tracker.issue.owner.label
             workflowStepLabel:
                 label:         oro.tracker.issue.workflow_step.label
+            workflowStepLabel:
+                data_name: workflowStepLabel
             createdAt:
                 label:         oro.ui.created_at
                 frontend_type: datetime
@@ -165,7 +169,7 @@ datagrid:
             updatedAt:
               data_name: issue.updatedAt
           default:
-            update: DESC
+            updatedAt: DESC
         properties:
             id: ~
             view_link:
