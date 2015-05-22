@@ -1,0 +1,16 @@
+Oro\Bundle\TrackerBundle\Entity\Issue:
+    properties:
+        summary:
+            - NotBlank: ~
+            - Length:
+                max: 255
+        code:
+            - NotBlank: ~
+            - Length:
+                max: 50
+        priority:
+            - NotBlank: ~
+        owner:
+            - NotBlank: ~
+        reporter:
+            - NotBlank: ~

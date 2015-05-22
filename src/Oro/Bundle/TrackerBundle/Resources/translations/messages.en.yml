@@ -16,23 +16,27 @@ oro:
       workflow.label: Status
       workflow_step.label: Status
       saved_message: Issue saved
-      organization.label: "Organization"
-      created_at.label: "Created at"
-      updated_at.label: "Updated at"
-      collaborators.label: "Collaborator"
+      organization.label: Organization
+      created_at.label: Created at
+      updated_at.label: Updated at
+      collaborators.label: Collaborator
+      children.label: Children
+      parent.label: Parent
+      workflow_item.label: Workflow Item
+      code.unique: Issue with same code already has been saved in database
       collaborator:
-        id.label: "Id"
-        username.label: "User name"
+        id.label: Id
+        username.label: User name
 
       view.add_child_label: Create sub task
       type:
-        subTask: "Issue (Sub Task)"
+        subTask: Issue (Sub Task)
       dashboard:
-        issues_grid.label: "Issues"
-      user_issue: "User issues"
-      create: "Create"
+        issues_grid.label: Issues
+      user_issue: User issues
+      create: Create
     dashboard:
-      issues_bar.label: "Chart issues by status"
+      issues_bar.label: Chart issues by status
     type.name.label: ""
     priority.name.label: ""
     resolution.name.label: ""

@@ -44,7 +44,7 @@ class OroTrackerBundle implements Migration
         $table = $schema->createTable('oro_tracker_issue');
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
         $table->addColumn('summary', 'string', ['length' => 255, 'notnull' => true]);
-        $table->addColumn('description', 'string', ['length' => 255, 'notnull' => true]);
+        $table->addColumn('description', 'string', ['length' => 255, 'notnull' => false]);
         $table->addColumn('`code`', 'string', ['notnull' => true, 'length'=>50]);
         $table->addColumn('type_id', 'integer', ['notnull' => false]);
         $table->addColumn('priority_id', 'integer', ['notnull' => false]);

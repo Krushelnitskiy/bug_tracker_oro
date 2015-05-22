@@ -22,7 +22,6 @@
         }}
     {% endif %}
 
-
     {% if resource_granted('orotracker_issue_delete') %}
         {{ UI.deleteButton({
             'dataUrl': path('orotracker_api_delete_issue', {'id': entity.id}),

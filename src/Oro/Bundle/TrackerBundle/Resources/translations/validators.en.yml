@@ -1,0 +1,4 @@
+oro:
+  tracker:
+    issue:
+      code.unique: Issue with same code already has been saved in database

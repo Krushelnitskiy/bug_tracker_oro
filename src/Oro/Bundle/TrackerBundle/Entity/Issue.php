@@ -1,20 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: root
- * Date: 16.03.15
- * Time: 14:02
- */
-
 
 namespace Oro\Bundle\TrackerBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 use Oro\Bundle\TrackerBundle\Model\ExtendIssue;
 use Oro\Bundle\UserBundle\Entity\User;
-
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 use Oro\Bundle\WorkflowBundle\Entity\WorkflowItem;
@@ -53,6 +47,10 @@ use Oro\Bundle\TrackerBundle\Entity\Type;
  * @SuppressWarnings(PHPMD.TooManyFields)
  * @SuppressWarnings(PHPMD.TooManyMethods)
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @UniqueEntity(
+ *      fields={"code"},
+ *      message="oro.tracker.issue.code.unique"
+ * )
  */
 class Issue extends ExtendIssue implements Taggable
 {
@@ -100,9 +98,8 @@ class Issue extends ExtendIssue implements Taggable
     protected $code;
 
     /**
-     *
      * @var $id string
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", nullable=true)
      * @ConfigField(
      *  defaultValues={
      *      "importexport"={
@@ -763,5 +760,10 @@ class Issue extends ExtendIssue implements Taggable
     public function getTaggableId()
     {
         return $this->getId();
+    }
+
+    public function getEmail()
+    {
+        return '';
     }
 }
