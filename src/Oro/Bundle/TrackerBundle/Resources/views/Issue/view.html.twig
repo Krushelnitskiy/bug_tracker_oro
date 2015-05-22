@@ -50,14 +50,13 @@
     {%- set taskInformation -%}
         <div class="row-fluid form-horizontal">
             <div class="responsive-block">
+                {{ UI.renderProperty('oro.tracker.issue.code.label'|trans, entity.code) }}
+                {{ UI.renderHtmlProperty('oro.tracker.issue.type.label'|trans, entity.type) }}
                 {{ UI.renderProperty('oro.tracker.issue.summary.label'|trans, entity.summary) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.description.label'|trans, entity.description|nl2br) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.reporter.label'|trans, entity.reporter) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.owner.label'|trans, entity.owner) }}
-                {{ UI.renderHtmlProperty('oro.tracker.issue.type.label'|trans, entity.type) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.priority.label'|trans, entity.priority) }}
-                {{ UI.renderHtmlProperty('oro.tracker.issue.reporter.label'|trans, entity.reporter.username) }}
-
                 {% if resource_granted('oro_tag_view_tag_cloud') %}
                     {{ UI.renderHtmlProperty('oro.tag.entity_plural_label'|trans, tag.renderView(entity)) }}
                 {% endif %}

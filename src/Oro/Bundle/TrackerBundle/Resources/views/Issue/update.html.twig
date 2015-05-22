@@ -42,13 +42,13 @@
             {
                 'title': '',
                 'data': [
-                    form_row(form.summary),
                     form_row(form.code),
+                    (entity.type != null) and (entity.type.name == constant('Oro\\Bundle\\TrackerBundle\\Entity\\Type::TYPE_SUB_TASK')) ? '' : form_row(form.type),
+                    form_row(form.summary),
                     form_row(form.description),
+                    form_row(form.priority),
                     form_row(form.reporter),
                     form_row(form.owner),
-                    (entity.type != null) and (entity.type.name == constant('Oro\\Bundle\\TrackerBundle\\Entity\\Type::TYPE_SUB_TASK')) ? '' : form_row(form.type),
-                    form_row(form.priority),
                     form_row(form.tags)
                 ]
             }
