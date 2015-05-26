@@ -19,9 +19,9 @@ oro:
       organization.label: Organization
       created_at.label: Created at
       updated_at.label: Updated at
-      collaborators.label: Collaborator
-      children.label: Children
-      parent.label: Parent
+      collaborators.label: Collaborators
+      children.label: Children Issue
+      parent.label: Parent Issue
       workflow_item.label: Workflow Item
       code.unique: Issue with same code already has been saved in database
       collaborator:
@@ -29,6 +29,7 @@ oro:
         username.label: User name
 
       view.add_child_label: Create sub task
+      subTask: Sub Task
       type:
         subTask: Issue (Sub Task)
       dashboard:

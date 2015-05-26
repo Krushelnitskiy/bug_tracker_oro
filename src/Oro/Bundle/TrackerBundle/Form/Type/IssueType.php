@@ -12,13 +12,30 @@ use Symfony\Component\Form\FormEvent;
 use Oro\Bundle\TrackerBundle\Entity\Issue;
 use Oro\Bundle\TrackerBundle\Entity\Type;
 
+use Symfony\Component\Security\Core\SecurityContextInterface;
+
 class IssueType extends AbstractType
 {
+    /**
+     * @var SecurityContextInterface
+     */
+    protected $securityContext;
+
+    /**
+     * @param SecurityContextInterface $securityContext
+     */
+    public function __construct(SecurityContextInterface $securityContext)
+    {
+        $this->securityContext = $securityContext;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $user = $this->securityContext->getToken()->getUser();
+
         $builder
             ->add(
                 'code',
@@ -49,7 +66,8 @@ class IssueType extends AbstractType
                 'oro_user_select',
                 [
                     'required' => true,
-                    'label' => 'oro.tracker.issue.reporter.label'
+                    'label' => 'oro.tracker.issue.reporter.label',
+                    'data' => $user
                 ]
             )
             ->add(

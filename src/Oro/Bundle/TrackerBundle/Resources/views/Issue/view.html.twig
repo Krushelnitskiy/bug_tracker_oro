@@ -50,6 +50,17 @@
     {%- set taskInformation -%}
         <div class="row-fluid form-horizontal">
             <div class="responsive-block">
+                {% if entity.parent %}
+                    <div class="control-group">
+                        <label class="control-label">{{ "oro.tracker.issue.parent.label"|trans }}</label>
+                        <div class="controls">
+                            <div class="control-label">
+                                <a href="{{ path('orotracker_issue_view', {id: entity.parent.id}) }}">{{ entity.parent.summary }}</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
                 {{ UI.renderProperty('oro.tracker.issue.code.label'|trans, entity.code) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.type.label'|trans, entity.type) }}
                 {{ UI.renderProperty('oro.tracker.issue.summary.label'|trans, entity.summary) }}
@@ -77,27 +88,9 @@
         }
     ] %}
 
-
-    {% if entity.parent %}
-        {%- set parentInformation -%}
-            <a href="{{ path('orotracker_issue_view', {id: entity.parent.id}) }}">{{ entity.parent.summary }}</a>
-        {%- endset -%}
-
-        {% set dataParent = [{
-                'title': 'Parent issue'|trans,
-                'class': 'active',
-                'subblocks': [{
-                    'data' : [parentInformation]
-                }]
-           }]
-        %}
-
-        {% set dataBlocks = dataBlocks|merge(dataParent) %}
-    {% endif %}
-
     {% if entity.children|length > 0 %}
         {% set subTaskBlock = [{
-            'title': 'Sub task'|trans,
+            'title': 'oro.tracker.issue.subTask'|trans,
             'class': 'active',
             'subblocks': [{
                 'data' : [dataGrid.renderGrid('sub-issue-grid', {'parent_id': entity.id})]
@@ -109,7 +102,7 @@
 
     {% if entity.collaborators|length > 0 %}
         {% set CollaboratorsBlock = [{
-            'title': 'Collaborators'|trans,
+            'title': 'oro.tracker.issue.collaborators.label'|trans,
             'class': 'active',
             'subblocks': [{
                 'data' : [dataGrid.renderGrid('issue-grid-collaborators', {'issue_id': entity.id})]
