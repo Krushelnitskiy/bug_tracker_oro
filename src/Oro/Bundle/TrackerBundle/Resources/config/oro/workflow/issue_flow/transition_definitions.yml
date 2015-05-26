@@ -1,9 +1,27 @@
 workflows:
     issue_flow:
         transition_definitions:
-            start_progress_definition: ~
+            start_progress_definition: []
             stop_progress_definition: ~
-            closed_definition: ~
+            closed_definition:
+                post_actions:
+                    - @call_method:
+                        object: $issue
+                        method: setResolution
+                        method_parameters:
+                            [$issue_resolution]
             reopen_definition: ~
-            resolve_definition: ~
-            reopened_definition: ~
+            resolve_definition:
+                post_actions:
+                    - @call_method:
+                        object: $issue
+                        method: setResolution
+                        method_parameters:
+                            [$issue_resolution]
+            reopened_definition:
+                post_actions:
+                    - @call_method:
+                        object: $issue
+                        method: setResolution
+                        method_parameters:
+                            [$issue_resolution]

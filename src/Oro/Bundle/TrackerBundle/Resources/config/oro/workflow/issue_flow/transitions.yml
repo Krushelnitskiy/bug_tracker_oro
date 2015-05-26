@@ -22,6 +22,14 @@ workflows:
                 frontend_options:
                     icon: 'icon-ok'
                 transition_definition: closed_definition
+                form_options:                               # options which will be passed to form type of transition
+                    attribute_fields:                       # list of attribute fields which will be shown
+                        issue_resolution:                   # attribute name
+                            form_type: entity
+                            options:                        # list of form field options
+                                class: Oro\Bundle\TrackerBundle\Entity\Resolution
+                                property: label
+                                required: true
             resolve:
                 label: 'Resolve'
                 step_to: resolved
@@ -29,6 +37,15 @@ workflows:
                 frontend_options:
                     icon: 'icon-ok'
                 transition_definition: resolve_definition
+                form_options:                               # options which will be passed to form type of transition
+                    attribute_fields:                       # list of attribute fields which will be shown
+                        issue_resolution:                   # attribute name
+                            form_type: entity
+                            options:                        # list of form field options
+                                class: Oro\Bundle\TrackerBundle\Entity\Resolution
+                                property: label
+                                required: true
+
             reopen:
                 label: 'Reopen'
                 step_to: reopened
@@ -36,3 +53,11 @@ workflows:
                 frontend_options:
                     icon: 'icon-edit'
                 transition_definition: reopened_definition
+                form_options:                                 # options which will be passed to form type of transition
+                    attribute_fields:                       # list of attribute fields which will be shown
+                        issue_resolution:                   # attribute name
+                            form_type: entity
+                            options:                        # list of form field options
+                                class: Oro\Bundle\TrackerBundle\Entity\Resolution
+                                property: label
+                                required: true
