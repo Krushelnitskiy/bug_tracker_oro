@@ -777,30 +777,30 @@ class Issue extends ExtendIssue implements Taggable
     }
 
     /**
-     * Add children
+     * Add relatedWithMe
      *
-     * @param \Oro\Bundle\TrackerBundle\Entity\Issue $children
+     * @param Issue $issue
      * @return Issue
      */
-    public function addRelatedWithMe(Issue $relatedWithMe)
+    public function addRelatedWithMe(Issue $issue)
     {
-        $this->relatedWithMe[] = $relatedWithMe;
+        $this->relatedWithMe[] = $issue;
 
         return $this;
     }
 
     /**
-     * Remove children
+     * Remove relatedWithMe
      *
-     * @param \Oro\Bundle\TrackerBundle\Entity\Issue $children
+     * @param Issue $issue
      */
-    public function removeRelatedWithMe(Issue $relatedWithMe)
+    public function removeRelatedWithMe(Issue $issue)
     {
-        $this->relatedWithMe->removeElement($relatedWithMe);
+        $this->relatedWithMe->removeElement($issue);
     }
 
     /**
-     * Get children
+     * Get relatedWithMe
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -811,30 +811,30 @@ class Issue extends ExtendIssue implements Taggable
 
 
     /**
-     * Add children
+     * Add myRelated
      *
-     * @param \Oro\Bundle\TrackerBundle\Entity\Issue $children
+     * @param Issue $issue
      * @return Issue
      */
-    public function addMyRelated(Issue $relatedWithMe)
+    public function addMyRelated(Issue $issue)
     {
-        $this->myRelated[] = $relatedWithMe;
+        $this->myRelated[] = $issue;
 
         return $this;
     }
 
     /**
-     * Remove children
+     * Remove myRelated
      *
-     * @param Issue $children
+     * @param Issue $issue
      */
-    public function removeMyRelated(Issue $relatedWithMe)
+    public function removeMyRelated(Issue $issue)
     {
-        $this->myRelated->removeElement($relatedWithMe);
+        $this->myRelated->removeElement($issue);
     }
 
     /**
-     * Get children
+     * Get myRelated
      *
      * @return ArrayCollection
      */
