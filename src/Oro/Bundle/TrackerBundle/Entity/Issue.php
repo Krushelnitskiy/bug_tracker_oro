@@ -239,6 +239,19 @@ class Issue extends ExtendIssue implements Taggable
      **/
     protected $parent;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Issue", mappedBy="myRelated", cascade="PERSIST")
+     **/
+    protected $relatedWithMe;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Issue", inversedBy="relatedWithMe", cascade="PERSIST")
+     * @ORM\JoinTable(name="oro_tracker_issue_related",
+     *      joinColumns={@ORM\JoinColumn(name="issue_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="related_issue_id", referencedColumnName="id")}
+     *      )
+     **/
+    protected $myRelated;
 
     /**
      * @var \DateTime
@@ -320,6 +333,8 @@ class Issue extends ExtendIssue implements Taggable
 
         $this->collaborators = new ArrayCollection();
         $this->children = new ArrayCollection();
+        $this->relatedWithMe = new ArrayCollection();
+        $this->myRelated = new ArrayCollection();
     }
 
     /**
@@ -693,7 +708,6 @@ class Issue extends ExtendIssue implements Taggable
         return $this;
     }
 
-
     /**
      * Set organization
      *
@@ -762,8 +776,70 @@ class Issue extends ExtendIssue implements Taggable
         return $this->getId();
     }
 
-    public function getEmail()
+    /**
+     * Add children
+     *
+     * @param \Oro\Bundle\TrackerBundle\Entity\Issue $children
+     * @return Issue
+     */
+    public function addRelatedWithMe(Issue $relatedWithMe)
     {
-        return '';
+        $this->relatedWithMe[] = $relatedWithMe;
+
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param \Oro\Bundle\TrackerBundle\Entity\Issue $children
+     */
+    public function removeRelatedWithMe(Issue $relatedWithMe)
+    {
+        $this->relatedWithMe->removeElement($relatedWithMe);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRelatedWithMe()
+    {
+        return $this->relatedWithMe;
+    }
+
+
+    /**
+     * Add children
+     *
+     * @param \Oro\Bundle\TrackerBundle\Entity\Issue $children
+     * @return Issue
+     */
+    public function addMyRelated(Issue $relatedWithMe)
+    {
+        $this->myRelated[] = $relatedWithMe;
+
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param Issue $children
+     */
+    public function removeMyRelated(Issue $relatedWithMe)
+    {
+        $this->myRelated->removeElement($relatedWithMe);
+    }
+
+    /**
+     * Get children
+     *
+     * @return ArrayCollection
+     */
+    public function getMyRelated()
+    {
+        return $this->myRelated;
     }
 }

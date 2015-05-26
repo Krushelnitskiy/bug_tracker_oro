@@ -111,6 +111,16 @@
         {% set dataBlocks = dataBlocks|merge(CollaboratorsBlock) %}
     {% endif %}
 
+    {% if entity.myRelated|length > 0 %}
+        {% set RelatedIssueBlock = [{
+        'title': 'oro.tracker.issue.relatedIssue'|trans,
+        'class': 'active',
+        'subblocks': [{
+            'data' : [dataGrid.renderGrid('issue-grid-related-issue', {'issue_id': entity.id})]
+        }]
+        }] %}
+        {% set dataBlocks = dataBlocks|merge(RelatedIssueBlock) %}
+    {% endif %}
 
     {% set id = 'taskView' %}
     {% set data = { 'dataBlocks': dataBlocks} %}

@@ -101,6 +101,41 @@ class IssueType extends AbstractType
         ;
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, $this->addTypeField());
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, $this->addRelatedIssueField());
+    }
+
+    protected function addRelatedIssueField()
+    {
+        return function (FormEvent $event) {
+            $issue = $event->getData();
+            $builder = $event->getForm();
+
+
+                $builder->add(
+                    'myRelated',
+                    'entity',
+                    array(
+                        'class' => 'Oro\Bundle\TrackerBundle\Entity\Issue',
+                        'multiple' => true,
+                        'required'=> false,
+                        'query_builder' =>
+                            function (EntityRepository $entityRepository) use ($issue) {
+                                $issueId = 0;
+                                if ($issue instanceof Issue) {
+                                    $issueId = $issue->getId() ? $issue->getId() : 0;
+                                }
+
+                                return $entityRepository
+                                    ->createQueryBuilder('issue')
+                                    ->where('issue.id != :issue_id')
+                                    ->setParameter('issue_id', $issueId);
+                            },
+                        'property' => 'code',
+                        'label' => 'oro.tracker.issue.related.label'
+                    )
+                );
+
+        };
     }
 
     /**

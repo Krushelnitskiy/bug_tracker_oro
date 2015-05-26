@@ -28,12 +28,47 @@ class OroTrackerBundle implements Migration
         $this->createOroTrackerIssuePriorityTable($schema);
         $this->createOroTrackerIssueResolutionTable($schema);
         $this->createOroTrackerIssueCollaboratorsTable($schema);
+        $this->createOroTrackerIssueRelatedTable($schema);
 
         /** Foreign keys generation **/
         $this->addOroTrackerIssueForeignKeys($schema);
         $this->addOroTrackerIssueCollaboratorForeignKeys($schema);
-
+        $this->addOroTrackerIssueRelatedForeignKeys($schema);
         /** Add comment relation */
+    }
+
+    /**
+     * @param Schema $schema
+     */
+    protected function createOroTrackerIssueRelatedTable(Schema $schema)
+    {
+        $table = $schema->createTable('oro_tracker_issue_related');
+
+        $table->addColumn('issue_id', 'integer', ['notnull' => false]);
+        $table->addColumn('related_issue_id', 'integer', ['notnull' => false]);
+
+        $table->addIndex(['issue_id'], 'IDX_AE3394125E7AA58C', []);
+        $table->addIndex(['related_issue_id'], 'IDX_AE339412F8F9EB21', []);
+        $table->setPrimaryKey(["issue_id", "related_issue_id"]);
+    }
+
+    protected function addOroTrackerIssueRelatedForeignKeys(Schema $schema)
+    {
+        $table = $schema->getTable('oro_tracker_issue_related');
+
+        $table->addForeignKeyConstraint(
+            $schema->getTable('oro_tracker_issue'),
+            ['issue_id'],
+            ['id'],
+            []
+        );
+
+        $table->addForeignKeyConstraint(
+            $schema->getTable('oro_tracker_issue'),
+            ['related_issue_id'],
+            ['id'],
+            []
+        );
     }
 
     /**
@@ -170,6 +205,20 @@ class OroTrackerBundle implements Migration
             ['organization_id'],
             ['id'],
             ['onDelete' => 'SET NULL', 'onUpdate' => null]
+        );
+
+        $table->addForeignKeyConstraint(
+            $schema->getTable('oro_workflow_item'),
+            ['workflow_item_id'],
+            ['id'],
+            ['onDelete' => 'SET NULL']
+        );
+
+        $table->addForeignKeyConstraint(
+            $schema->getTable('oro_workflow_step'),
+            ['workflow_step_id'],
+            ['id'],
+            ['onDelete' => 'SET NULL']
         );
     }
 
