@@ -27,7 +27,7 @@ class LoadIssueData extends AbstractFixture implements ContainerAwareInterface
             'summary'       => 'Issue #1',
             'description'   => 'Issue #1: Description',
             'reportedAt'    => '2014-01-01 13:00:00',
-            'reporter'      => 'orocrm_case_contact',
+            'assignee'      => 'orocrm_case_contact',
             'owner'         => 'orocrm_case_contact',
             'code' => '1',
             'workflow_step_id' => 1
@@ -36,7 +36,7 @@ class LoadIssueData extends AbstractFixture implements ContainerAwareInterface
             'summary'       => 'Issue #2',
             'description'   => 'Issue #2: Description',
             'reportedAt'    => '2014-01-01 13:00:00',
-            'reporter'      => 'orocrm_case_contact',
+            'assignee'      => 'orocrm_case_contact',
             'owner'         => 'orocrm_case_contact',
             'code' => '2',
             'workflow_step_id' => 2
@@ -58,7 +58,7 @@ class LoadIssueData extends AbstractFixture implements ContainerAwareInterface
                 ->setCode($caseData['summary'])
                 ->setOwner($adminUser)
                 ->setType($typeStory)
-                ->setReporter($adminUser);
+                ->setAssignee($adminUser);
 
             $manager->persist($issue);
         }

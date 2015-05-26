@@ -115,7 +115,7 @@ class IssueTest extends \PHPUnit_Framework_TestCase
         $testIssueResolution->expects($this->once())->method('getName')->will($this->returnValue('Fixed'));
         $testIssueResolution->expects($this->once())->method('getLabel')->will($this->returnValue('Fixed'));
 
-        $testReporter = $this->getMock('Oro\Bundle\UserBundle\Entity\User');
+        $testAssignee = $this->getMock('Oro\Bundle\UserBundle\Entity\User');
         $testOwner = $this->getMock('Oro\Bundle\UserBundle\Entity\User');
 
         $organization = $this->getMock('Oro\Bundle\OrganizationBundle\Entity\Organization');
@@ -127,7 +127,7 @@ class IssueTest extends \PHPUnit_Framework_TestCase
             array('code', '111111'),
             array('priority', $testIssuePriority),
             array('resolution', $testIssueResolution),
-            array('reporter', $testReporter),
+            array('assignee', $testAssignee),
             array('owner', $testOwner),
             array('parent', $parent),
             array('type', $testIssueType),

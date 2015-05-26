@@ -62,11 +62,11 @@ class IssueType extends AbstractType
                 ]
             )
             ->add(
-                'reporter',
+                'assignee',
                 'oro_user_select',
                 [
                     'required' => true,
-                    'label' => 'oro.tracker.issue.reporter.label',
+                    'label' => 'oro.tracker.issue.assignee.label',
                     'data' => $user
                 ]
             )

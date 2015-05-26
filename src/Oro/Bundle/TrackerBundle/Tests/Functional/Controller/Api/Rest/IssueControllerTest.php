@@ -20,7 +20,7 @@ class IssueControllerTest extends WebTestCase
     protected $issue = [
         'owner' => null,
         'code'=> '11',
-        'reporter' => null,
+        'assignee' => null,
         'priority' => 2,
         'summary' => 'New summary',
         'description' => 'New description',
@@ -42,7 +42,7 @@ class IssueControllerTest extends WebTestCase
             ->findOneByName(Priority::PRIORITY_MINOR);
 
         $this->issue['owner']  = $owner;
-        $this->issue['reporter'] = $owner;
+        $this->issue['assignee'] = $owner;
         $this->issue['type'] = $type->getId();
         $this->issue['priority'] = $priority->getId();
     }

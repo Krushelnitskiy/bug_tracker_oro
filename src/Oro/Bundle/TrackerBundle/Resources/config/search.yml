@@ -71,7 +71,7 @@ Oro\Bundle\TrackerBundle\Entity\Issue:
                     target_fields: [resolution]
 
         -
-            name:                   reporter
+            name:                   assignee
             relation_type: many-to-one
             relation_fields:
                 -
@@ -81,7 +81,7 @@ Oro\Bundle\TrackerBundle\Entity\Issue:
                 -
                     name: id
                     target_type: integer
-                    target_fields: [reporter]
+                    target_fields: [assignee]
         -
             name:                   owner
             relation_type: many-to-one

@@ -9,7 +9,7 @@ datagrid:
                     - issue.id
                     - issue.summary
                     - issue.code
-                    - CONCAT(reporter.firstName, CONCAT(' ', reporter.lastName)) as reporter_name
+                    - CONCAT(assignee.firstName, CONCAT(' ', assignee.lastName)) as assignee_name
                     - CONCAT(owner.firstName, CONCAT(' ', owner.lastName)) as owner_name
                     - type.label as typeLabel
                     - priority.label as priorityLabel
@@ -22,7 +22,7 @@ datagrid:
                     - { table: %orotracker_issue.entity.class%, alias: issue }
                 join:
                     left:
-                        - { join: issue.reporter, alias: reporter }
+                        - { join: issue.assignee, alias: assignee }
                         - { join: issue.owner, alias: owner }
                         - { join: issue.type, alias: type }
                         - { join: issue.priority, alias: priority }
@@ -39,8 +39,8 @@ datagrid:
                 label:         oro.tracker.issue.priority.label
             resolutionLabel:
                 label:         oro.tracker.issue.resolution.label
-            reporter_name:
-                label:         oro.tracker.issue.reporter.label
+            assignee_name:
+                label:         oro.tracker.issue.assignee.label
             owner_name:
                 label:         oro.tracker.issue.owner.label
             workflowStepLabel:
@@ -65,8 +65,8 @@ datagrid:
                 data_name: workflowStepLabel
             owner_name:
                 data_name: issue.owner
-            reporter_name:
-                data_name: issue.reporter
+            assignee_name:
+                data_name: issue.assignee
             typeLabel:
                 data_name: type.order
             priorityLabel:
@@ -86,9 +86,9 @@ datagrid:
                 owner_name:
                     type:      string
                     data_name: owner_name
-                reporter_name:
+                assignee_name:
                     type:      string
-                    data_name: reporter_name
+                    data_name: assignee_name
                 createdAt:
                     type:      datetime
                     data_name: issue.createdAt
@@ -127,7 +127,7 @@ datagrid:
                     - issue.id
                     - issue.summary
                     - issue.code
-                    - CONCAT(reporter.firstName, CONCAT(' ', reporter.lastName)) as reporter_name
+                    - CONCAT(assignee.firstName, CONCAT(' ', assignee.lastName)) as assignee_name
                     - CONCAT(owner.firstName, CONCAT(' ', owner.lastName)) as owner_name
                     - priority.label as priorityLabel
                     - resolution.label as resolutionLabel
@@ -138,7 +138,7 @@ datagrid:
                     - { table: %orotracker_issue.entity.class%, alias: issue }
                 join:
                     left:
-                        - { join: issue.reporter, alias: reporter }
+                        - { join: issue.assignee, alias: assignee }
                         - { join: issue.owner, alias: owner }
                         - { join: issue.priority, alias: priority }
                         - { join: issue.resolution, alias: resolution }
@@ -157,8 +157,8 @@ datagrid:
                 label: oro.tracker.issue.priority.label
             resolutionLabel:
                 label: oro.tracker.issue.resolution.label
-            reporter_name:
-                label: oro.tracker.issue.reporter.label
+            assignee_name:
+                label: oro.tracker.issue.assignee.label
             owner_name:
                 label: oro.tracker.issue.owner.label
             workflowStepLabel:
@@ -183,8 +183,8 @@ datagrid:
                 data_name: workflowStepLabel
             owner_name:
                 data_name: issue.owner
-            reporter_name:
-                data_name: issue.reporter
+            assignee_name:
+                data_name: issue.assignee
             priorityLabel:
                 data_name: priority.order
             resolutionLabel:
@@ -263,7 +263,7 @@ datagrid:
                     - issue.id
                     - issue.summary
                     - issue.code
-                    - CONCAT(reporter.firstName, CONCAT(' ', reporter.lastName)) as reporter_name
+                    - CONCAT(assignee.firstName, CONCAT(' ', assignee.lastName)) as assignee_name
                     - CONCAT(owner.firstName, CONCAT(' ', owner.lastName)) as owner_name
                     - type.label as typeLabel
                     - priority.label as priorityLabel
@@ -276,7 +276,7 @@ datagrid:
                     - { table: %orotracker_issue.entity.class%, alias: issue }
                 join:
                     left:
-                        - { join: issue.reporter, alias: reporter }
+                        - { join: issue.assignee, alias: assignee }
                         - { join: issue.owner, alias: owner }
                         - { join: issue.type, alias: type }
                         - { join: issue.priority, alias: priority }
@@ -299,8 +299,8 @@ datagrid:
                 label:         oro.tracker.issue.priority.label
             resolutionLabel:
                 label:         oro.tracker.issue.resolution.label
-            reporter_name:
-                label:         oro.tracker.issue.reporter.label
+            assignee_name:
+                label:         oro.tracker.issue.assignee.label
             owner_name:
                 label:         oro.tracker.issue.owner.label
             workflowStepLabel:
@@ -320,8 +320,8 @@ datagrid:
                 data_name: workflowStepLabel
             owner_name:
                 data_name: issue.owner
-            reporter_name:
-                data_name: issue.reporter
+            assignee_name:
+                data_name: issue.assignee
             typeLabel:
                 data_name: type.order
             priorityLabel:
@@ -360,7 +360,7 @@ datagrid:
                     - issue.id
                     - issue.summary
                     - issue.code
-                    - CONCAT(reporter.firstName, CONCAT(' ', reporter.lastName)) as reporter_name
+                    - CONCAT(assignee.firstName, CONCAT(' ', assignee.lastName)) as assignee_name
                     - CONCAT(owner.firstName, CONCAT(' ', owner.lastName)) as owner_name
                     - type.label as typeLabel
                     - priority.label as priorityLabel
@@ -372,7 +372,7 @@ datagrid:
                     - { table: %orotracker_issue.entity.class%, alias: issue }
                 join:
                     left:
-                        - { join: issue.reporter, alias: reporter }
+                        - { join: issue.assignee, alias: assignee }
                         - { join: issue.owner, alias: owner }
                         - { join: issue.type, alias: type }
                         - { join: issue.priority, alias: priority }
@@ -382,7 +382,7 @@ datagrid:
                   and:
                     - owner.id = :userId
                   or:
-                    - reporter.id = :userId
+                    - assignee.id = :userId
             bind_parameters:
               - userId
         columns:
@@ -396,8 +396,8 @@ datagrid:
                 label:         oro.tracker.issue.priority.label
             resolutionLabel:
                 label:         oro.tracker.issue.resolution.label
-            reporter_name:
-                label:         oro.tracker.issue.reporter.label
+            assignee_name:
+                label:         oro.tracker.issue.assignee.label
             owner_name:
                 label:         oro.tracker.issue.owner.label
             workflowStepLabel:
@@ -422,8 +422,8 @@ datagrid:
                 data_name: workflowStepLabel
             owner_name:
                 data_name: issue.owner
-            reporter_name:
-                data_name: issue.reporter
+            assignee_name:
+                data_name: issue.assignee
             typeLabel:
                 data_name: type.order
             priorityLabel:
@@ -459,7 +459,7 @@ datagrid:
                     - issue.id
                     - issue.summary
                     - issue.code
-                    - CONCAT(reporter.firstName, CONCAT(' ', reporter.lastName)) as reporter_name
+                    - CONCAT(assignee.firstName, CONCAT(' ', assignee.lastName)) as assignee_name
                     - CONCAT(owner.firstName, CONCAT(' ', owner.lastName)) as owner_name
                     - type.label as typeLabel
                     - priority.label as priorityLabel
@@ -472,7 +472,7 @@ datagrid:
                     - { table: %orotracker_issue.entity.class%, alias: issue }
                 join:
                     left:
-                        - { join: issue.reporter, alias: reporter }
+                        - { join: issue.assignee, alias: assignee }
                         - { join: issue.owner, alias: owner }
                         - { join: issue.type, alias: type }
                         - { join: issue.priority, alias: priority }
@@ -495,8 +495,8 @@ datagrid:
                 label:         oro.tracker.issue.priority.label
             resolutionLabel:
                 label:         oro.tracker.issue.resolution.label
-            reporter_name:
-                label:         oro.tracker.issue.reporter.label
+            assignee_name:
+                label:         oro.tracker.issue.assignee.label
             owner_name:
                 label:         oro.tracker.issue.owner.label
             workflowStepLabel:
@@ -521,8 +521,8 @@ datagrid:
                 data_name: workflowStepLabel
             owner_name:
                 data_name: issue.owner
-            reporter_name:
-                data_name: issue.reporter
+            assignee_name:
+                data_name: issue.assignee
             typeLabel:
                 data_name: type.order
             priorityLabel:

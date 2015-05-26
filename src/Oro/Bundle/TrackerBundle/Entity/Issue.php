@@ -173,9 +173,9 @@ class Issue extends ExtendIssue implements Taggable
     protected $resolution;
 
     /**
-     * @var $reporter User
+     * @var $assignee User
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="reporter_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="assignee_id", referencedColumnName="id")
      * @ConfigField(
      *  defaultValues={
      *      "importexport"={
@@ -184,7 +184,7 @@ class Issue extends ExtendIssue implements Taggable
      *  }
      * )
      **/
-    protected $reporter;
+    protected $assignee;
 
     /**
      * @var $owner User
@@ -532,32 +532,32 @@ class Issue extends ExtendIssue implements Taggable
     }
 
     /**
-     * Set reporter
+     * Set assignee
      *
-     * @param \Oro\Bundle\UserBundle\Entity\User $reporter
+     * @param User $assignee
      * @return Issue
      */
-    public function setReporter(User $reporter = null)
+    public function setAssignee(User $assignee = null)
     {
-        $this->reporter = $reporter;
+        $this->assignee = $assignee;
 
         return $this;
     }
 
     /**
-     * Get reporter
+     * Get assignee
      *
-     * @return \Oro\Bundle\UserBundle\Entity\User
+     * @return User
      */
-    public function getReporter()
+    public function getAssignee()
     {
-        return $this->reporter;
+        return $this->assignee;
     }
 
      /**
      * Add collaborators
      *
-     * @param \Oro\Bundle\UserBundle\Entity\User $collaborators
+     * @param User $collaborators
      * @return Issue
      */
     public function addCollaborator(User $collaborators)

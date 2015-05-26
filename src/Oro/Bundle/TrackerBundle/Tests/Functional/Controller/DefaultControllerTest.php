@@ -29,7 +29,7 @@ class DefaultControllerTest extends WebTestCase
         $form = $crawler->selectButton('Save and Close')->form();
         $form['orotracker_issue[summary]'] = 'New Issue';
         $form['orotracker_issue[description]'] = 'New description';
-        $form['orotracker_issue[reporter]'] = '1';
+        $form['orotracker_issue[assignee]'] = '1';
         $form['orotracker_issue[code]'] = '1';
         $form['orotracker_issue[owner]'] = '1';
         $form['orotracker_issue[type]'] = $typeStoryId;
@@ -131,7 +131,7 @@ class DefaultControllerTest extends WebTestCase
         $form = $crawler->selectButton('Save and Close')->form();
         $form['orotracker_issue[summary]'] = 'New Sub Issue';
         $form['orotracker_issue[description]'] = 'New Sub description';
-        $form['orotracker_issue[reporter]'] = '1';
+        $form['orotracker_issue[assignee]'] = '1';
         $form['orotracker_issue[code]'] = '123';
         $form['orotracker_issue[owner]'] = '1';
 

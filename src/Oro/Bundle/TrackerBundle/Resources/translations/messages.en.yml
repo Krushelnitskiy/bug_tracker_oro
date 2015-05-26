@@ -12,7 +12,8 @@ oro:
       status.label: Status
       resolution.label: Resolution
       reporter.label: Reporter
-      owner.label: Assignee
+      owner.label: Reporter
+      assignee.label: Assignee
       workflow.label: Status
       workflow_step.label: Status
       saved_message: Issue saved

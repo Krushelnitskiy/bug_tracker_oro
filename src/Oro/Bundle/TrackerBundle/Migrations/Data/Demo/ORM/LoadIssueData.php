@@ -74,7 +74,7 @@ class LoadIssueData extends AbstractFixture implements ContainerAwareInterface
             $issue->setCode($issueDemo['code']);
             $issue->setSummary($issueDemo['summary']);
             $issue->setDescription($issueDemo['description']);
-            $issue->setReporter($users[rand(0, $usersCount - 1)]);
+            $issue->setAssignee($users[rand(0, $usersCount - 1)]);
             $issue->setOwner($users[rand(0, $usersCount - 1)]);
             $issue->setType($type);
             $issue->setPriority($priorities[rand(0, $priorityCount - 1)]);

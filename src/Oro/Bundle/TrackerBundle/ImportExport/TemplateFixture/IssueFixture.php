@@ -68,7 +68,7 @@ class IssueFixture extends AbstractTemplateRepository implements TemplateFixture
                 $entity->setDescription(('Issue Export Import description'));
                 $entity->setCreatedAt(new \DateTime());
                 $entity->setUpdatedAt(new \DateTime());
-                $entity->setReporter($user);
+                $entity->setAssignee($user);
                 $entity->setResolution($resolution);
                 $entity->setType($type);
                 $entity->setPriority($priority);

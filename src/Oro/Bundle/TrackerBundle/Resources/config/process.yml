@@ -7,7 +7,7 @@ definitions:
       - @call_method:
           object: $.data
           method: addCollaborator
-          method_parameters: [$reporter]
+          method_parameters: [$assignee]
       - @call_method:
           object: $.data
           method: addCollaborator
@@ -43,7 +43,7 @@ triggers:
             queued: false
         -
             event: update
-            field: reporter
+            field: assignee
             queued: false
         -
             event: update

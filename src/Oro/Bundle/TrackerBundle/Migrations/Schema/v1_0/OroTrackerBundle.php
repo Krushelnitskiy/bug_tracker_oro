@@ -84,7 +84,7 @@ class OroTrackerBundle implements Migration
         $table->addColumn('type_id', 'integer', ['notnull' => false]);
         $table->addColumn('priority_id', 'integer', ['notnull' => false]);
         $table->addColumn('resolution_id', 'integer', ['notnull' => false]);
-        $table->addColumn('reporter_id', 'integer', ['notnull' => false]);
+        $table->addColumn('assignee_id', 'integer', ['notnull' => false]);
         $table->addColumn('owner_id', 'integer', ['notnull' => false]);
         $table->addColumn('organization_id', 'integer', ['notnull' => false]);
         $table->addColumn('parent_id', 'integer', ['notnull' => false]);
@@ -97,7 +97,7 @@ class OroTrackerBundle implements Migration
         $table->addIndex(['type_id'], 'IDX_4E4C1B5EC54C8C93', []);
         $table->addIndex(['priority_id'], 'IDX_4E4C1B5E497B19F9', []);
         $table->addIndex(['resolution_id'], 'IDX_4E4C1B5E12A1C43A', []);
-        $table->addIndex(['reporter_id'], 'IDX_4E4C1B5EE1CFE6F5', []);
+        $table->addIndex(['assignee_id'], 'IDX_4E4C1B5EE1CFE6F5', []);
         $table->addIndex(['owner_id'], 'IDX_4E4C1B5E7E3C61F9', []);
         $table->addIndex(['parent_id'], 'IDX_4E4C1B5E727ACA70', []);
         $table->addIndex(['workflow_step_id'], 'IDX_4E4C1B5E71FE882C', []);
@@ -169,7 +169,7 @@ class OroTrackerBundle implements Migration
 
         $table->addForeignKeyConstraint(
             $schema->getTable('oro_user'),
-            ['reporter_id'],
+            ['assignee_id'],
             ['id'],
             []
         );

@@ -14,8 +14,8 @@
 
 {% set entityInfo = [
     {
-        'title': 'oro.tracker.issue.reporter.label'|trans,
-        'value': entity.reporter ? entity.reporter : 'N/A'
+        'title': 'oro.tracker.issue.assignee.label'|trans,
+        'value': entity.assignee ? entity.assignee : 'N/A'
     },
     {
         'title': 'oro.tracker.issue.type.label'|trans,
@@ -37,7 +37,7 @@
         'value': entity.resolution ? entity.resolution : 'N/A'
     },
     {
-        'title': 'oro.tracker.issue.assignee.label'|trans,
+        'title': 'oro.tracker.issue.owner.label'|trans,
         'value': entity.owner ? entity.owner : 'N/A'
     },
     {
