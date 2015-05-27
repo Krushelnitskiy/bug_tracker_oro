@@ -4,7 +4,6 @@ namespace Oro\Bundle\TrackerBundle\Migrations\Data\Demo\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -40,6 +39,8 @@ class LoadIssueData extends AbstractFixture implements ContainerAwareInterface
             'type'=> Type::TYPE_SUB_TASK
         )
     );
+
+    protected $container;
 
     /**
      * {@inheritDoc}

@@ -8,9 +8,6 @@
 
 namespace Oro\Bundle\TrackerBundle\Tests\Unit\Entity;
 
-use Composer\DependencyResolver\Problem;
-use Oro\Bundle\TrackerBundle\Entity\Issue;
-use Doctrine\Common\Collections\ArrayCollection;
 use Oro\Bundle\TrackerBundle\Entity\Priority;
 
 class PriorityTest extends \PHPUnit_Framework_TestCase

@@ -9,10 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
-
 use Oro\Bundle\TrackerBundle\Entity\Issue;
 use Oro\Bundle\TrackerBundle\Entity\Type;
-use Oro\Bundle\TrackerBundle\Form\Type\IssueType;
+
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -152,8 +151,9 @@ class IssueController extends Controller
      *           "widget"="[\w-]+"
      *      }
      * )
-     *
+     * @param $widget
      * @Template("OroTrackerBundle:Dashboard:chart.html.twig")
+     *
      * @return array $widgetAttr
      */
     public function chartAction($widget)
@@ -180,7 +180,6 @@ class IssueController extends Controller
 
         return $widgetAttr;
     }
-
 
     /**
      * @param integer $userId

@@ -9,7 +9,6 @@
 namespace Oro\Bundle\TrackerBundle\Tests\Unit\Entity;
 
 use Oro\Bundle\TrackerBundle\Entity\Type;
-use Doctrine\Common\Collections\ArrayCollection;
 
 class TypeTest extends \PHPUnit_Framework_TestCase
 {
