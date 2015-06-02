@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: root
- * Date: 16.03.15
- * Time: 16:36
- */
 
 namespace Oro\Bundle\TrackerBundle\Tests\Unit\Entity;
 
@@ -16,7 +10,6 @@ class ResolutionTest extends \PHPUnit_Framework_TestCase
     {
         new Resolution();
     }
-
 
     /**
      * @dataProvider settersAndGettersDataProvider

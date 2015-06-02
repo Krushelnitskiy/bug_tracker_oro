@@ -103,7 +103,6 @@ class IssueTypeTest extends \PHPUnit_Framework_TestCase
                 ->will($this->returnValue($token));
         }
 
-
         $this->securityContext = $securityContext;
     }
 }
