@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: root
- * Date: 19.02.15
- * Time: 18:59
- */
 
 namespace Oro\Bundle\TrackerBundle\Entity;
 
@@ -18,13 +12,13 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 
 /**
  * Class Resolution
+ *
  * @package Tracker\IssueBundle\Entity
  * @ORM\Table(name="oro_tracker_issue_resolution")
  * @Gedmo\TranslationEntity(class="Oro\Bundle\TrackerBundle\Entity\ResolutionTranslation")
  * @ORM\Entity
  * @Config()
  */
-
 class Resolution
 {
     const RESOLUTION_FIXED = 'Fixed';
@@ -33,6 +27,8 @@ class Resolution
     const RESOLUTION_WONT_DO = 'Won`t done';
 
     /**
+     * @var integer $id
+     *
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -40,7 +36,7 @@ class Resolution
     protected $id;
 
     /**
-     * @var string
+     * @var string $name
      *
      * @ORM\Column(name="`name`", type="string", length=30, unique=true)
      * @ConfigField(
@@ -50,12 +46,11 @@ class Resolution
      *      }
      *  }
      * )
-
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string $label
      *
      * @ORM\Column(name="label", type="string", unique=true)
      * @Gedmo\Translatable
@@ -63,13 +58,15 @@ class Resolution
     protected $label;
 
     /**
-     * @var integer
+     * @var integer $order
      *
      * @ORM\Column(name="`order`", type="integer", nullable=false, options={"default":0})
      */
     protected $order;
 
     /**
+     * @var string $locale
+     *
      * @Gedmo\Locale
      */
     protected $locale;
@@ -88,6 +85,7 @@ class Resolution
      * Set label
      *
      * @param string $label
+     *
      * @return Resolution
      */
     public function setLabel($label)
@@ -109,6 +107,7 @@ class Resolution
 
     /**
      * @param $order
+     *
      * @return Resolution
      */
     public function setOrder($order)
@@ -128,6 +127,7 @@ class Resolution
 
     /**
      * @param $name
+     *
      * @return Resolution
      */
     public function setName($name)
@@ -149,6 +149,7 @@ class Resolution
      * Set locale for translation
      *
      * @param string $locale
+     *
      * @return Resolution
      */
     public function setLocale($locale)
@@ -158,6 +159,9 @@ class Resolution
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->label;

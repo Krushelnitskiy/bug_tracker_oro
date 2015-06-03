@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: root
- * Date: 16.03.15
- * Time: 14:35
- */
-
 
 namespace Oro\Bundle\TrackerBundle\Entity;
 
@@ -19,13 +12,13 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 
 /**
  * Class Type
+ *
  * @package Oro\TrackerBundle\Entity
  * @ORM\Table(name="oro_tracker_issue_type")
  * @Gedmo\TranslationEntity(class="Oro\Bundle\TrackerBundle\Entity\TypeTranslation")
  * @ORM\Entity
  * @Config()
  */
-
 class Type
 {
     const TYPE_BUG = 'Bug';
@@ -34,6 +27,8 @@ class Type
     const TYPE_STORY = 'Story';
 
     /**
+     * @var integer $id
+     *
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -41,7 +36,7 @@ class Type
     protected $id;
 
     /**
-     * @var string
+     * @var string $name
      *
      * @ORM\Column(name="`name`", type="string", length=30, unique=true)
      * @ConfigField(
@@ -54,9 +49,8 @@ class Type
      */
     protected $name;
 
-
     /**
-     * @var string
+     * @var string $label
      *
      * @ORM\Column(name="label", type="string", unique=true)
      * @Gedmo\Translatable
@@ -64,13 +58,15 @@ class Type
     protected $label;
 
     /**
-     * @var integer
+     * @var integer $order
      *
      * @ORM\Column(name="`order`", type="integer", nullable=false, options={"default":0}))
      */
     protected $order;
 
     /**
+     * @var string $locale
+     *
      * @Gedmo\Locale
      */
     protected $locale;
@@ -89,6 +85,7 @@ class Type
      * Set label
      *
      * @param string $label
+     *
      * @return Type
      */
     public function setLabel($label)
@@ -110,6 +107,7 @@ class Type
 
     /**
      * @param $order
+     *
      * @return Type
      */
     public function setOrder($order)
@@ -129,6 +127,7 @@ class Type
 
     /**
      * @param $name
+     *
      * @return Type
      */
     public function setName($name)
@@ -150,6 +149,7 @@ class Type
      * Set locale for translation
      *
      * @param string $locale
+     *
      * @return Type
      */
     public function setLocale($locale)

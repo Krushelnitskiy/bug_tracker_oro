@@ -1,11 +1,4 @@
 {% import 'OroUIBundle::macros.html.twig' as UI %}
-{#{{ UI.button({#}
-    {#'path': path('orotracker_issue_index'),#}
-    {#'iCss': 'icon-list-alt',#}
-    {#'title': 'oro.tracker.issue.entity_label'|trans,#}
-    {#'label': 'oro.tracker.issue.entity_label'|trans#}
-{#}) }}#}
-
 
 {{ UI.clientButton({
     'dataUrl': path('orotracker_issue_create', oro_action_params(entity, 'assign')),

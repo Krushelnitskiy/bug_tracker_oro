@@ -1,45 +1,45 @@
 oro:
-  tracker:
-    issue:
-      entity_label: Issue
-      entity_plural_label: Issues
-      id.label: "Id"
-      summary.label: Summary
-      description.label: Description
-      code.label: Code
-      type.label: Type
-      priority.label: Priority
-      status.label: Status
-      resolution.label: Resolution
-      reporter.label: Reporter
-      owner.label: Reporter
-      assignee.label: Assignee
-      workflow.label: Status
-      workflow_step.label: Status
-      saved_message: Issue saved
-      organization.label: Organization
-      created_at.label: Created at
-      updated_at.label: Updated at
-      collaborators.label: Collaborators
-      children.label: Children Issue
-      parent.label: Parent Issue
-      workflow_item.label: Workflow Item
-      related.label: Related Issues
-      code.unique: Issue with same code already has been saved in database
-      collaborator:
-        id.label: Id
-        username.label: User name
-      relatedIssue: Related Issues
-      view.add_child_label: Create sub task
-      subTask: Sub Task
-      type:
-        subTask: Issue (Sub Task)
-      dashboard:
-        issues_grid.label: Issues
-      user_issue: User issues
-      create: Create
-    dashboard:
-      issues_bar.label: Chart issues by status
-    type.name.label: ""
-    priority.name.label: ""
-    resolution.name.label: ""
+    tracker:
+        issue:
+            entity_label: Issue
+            entity_plural_label: Issues
+            id.label: "Id"
+            summary.label: Summary
+            description.label: Description
+            code.label: Code
+            type.label: Type
+            priority.label: Priority
+            status.label: Status
+            resolution.label: Resolution
+            reporter.label: Reporter
+            owner.label: Reporter
+            assignee.label: Assignee
+            workflow.label: Status
+            workflow_step.label: Status
+            saved_message: Issue saved
+            organization.label: Organization
+            created_at.label: Created at
+            updated_at.label: Updated at
+            collaborators.label: Collaborators
+            children.label: Children Issue
+            parent.label: Parent Issue
+            workflow_item.label: Workflow Item
+            related.label: Related Issues
+            code.unique: Issue with same code already has been saved in database
+            collaborator:
+                id.label: Id
+                username.label: User name
+            relatedIssue: Related Issues
+            view.add_child_label: Create sub task
+            subTask: Sub Task
+            type:
+                subTask: Issue (Sub Task)
+            dashboard:
+                issues_grid.label: Issues
+            user_issue: User issues
+            create: Create
+        dashboard:
+            issues_bar.label: Chart issues by status
+        type.name.label: ""
+        priority.name.label: ""
+        resolution.name.label: ""

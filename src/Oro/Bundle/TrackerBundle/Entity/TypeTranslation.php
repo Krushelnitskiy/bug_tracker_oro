@@ -1,14 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: root
- * Date: 19.02.15
- * Time: 18:59
- */
 
 namespace Oro\Bundle\TrackerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
 use Gedmo\Translatable\Entity\MappedSuperclass\AbstractTranslation;
 
 /**

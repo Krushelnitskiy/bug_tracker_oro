@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\StoreBundle\Tests\Entity;
+namespace Oro\Bundle\TrackerBundle\Tests\Functional\Repository;
 
 use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
 use Oro\Bundle\TrackerBundle\Entity\Issue;
@@ -27,7 +27,6 @@ class ProductRepositoryFunctionalTest extends WebTestCase
         $this->loadFixtures(['Oro\Bundle\TrackerBundle\Tests\Functional\DataFixtures\LoadIssueData']);
     }
 
-
     protected function postFixtureLoad()
     {
         $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
@@ -43,13 +42,11 @@ class ProductRepositoryFunctionalTest extends WebTestCase
         $this->em->flush();
     }
 
-
     public function testSearchByCategoryName()
     {
         $issues = $this->em
             ->getRepository('OroTrackerBundle:Issue')
             ->findAllGroupedBySteps();
-        ;
 
         $this->assertEquals(
             'SELECT count(issue.id) issue_count, workflowStep.label FROM OroTrackerBundle:Issue issue '.

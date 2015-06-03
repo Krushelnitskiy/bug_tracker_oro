@@ -5,9 +5,7 @@
 
 {% block navButtons %}
     {% set html = UI.saveAndCloseButton() %}
-    {#{% if resource_granted('orocrm_task_update') %}#}
-        {% set html = html ~ UI.saveAndStayButton() %}
-    {#{% endif %}#}
+    {% set html = html ~ UI.saveAndStayButton() %}
     {{ UI.dropdownSaveButton({'html': html}) }}
     {{ UI.cancelButton(path('orotracker_issue_index')) }}
 {% endblock navButtons %}

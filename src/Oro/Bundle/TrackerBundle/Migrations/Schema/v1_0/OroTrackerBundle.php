@@ -12,20 +12,20 @@ class OroTrackerBundle implements Migration
     /**
      * {@inheritdoc}
      */
-    public function up(Schema $schema, QueryBag $queries)
+    public static function up(Schema $schema, QueryBag $queries)
     {
         /** Tables generation **/
-        $this->createOroTrackerIssueTable($schema);
-        $this->createOroTrackerIssueTypeTable($schema);
-        $this->createOroTrackerIssuePriorityTable($schema);
-        $this->createOroTrackerIssueResolutionTable($schema);
-        $this->createOroTrackerIssueCollaboratorsTable($schema);
-        $this->createOroTrackerIssueRelatedTable($schema);
+        self::createOroTrackerIssueTable($schema);
+        self::createOroTrackerIssueTypeTable($schema);
+        self::createOroTrackerIssuePriorityTable($schema);
+        self::createOroTrackerIssueResolutionTable($schema);
+        self::createOroTrackerIssueCollaboratorsTable($schema);
+        self::createOroTrackerIssueRelatedTable($schema);
 
         /** Foreign keys generation **/
-        $this->addOroTrackerIssueForeignKeys($schema);
-        $this->addOroTrackerIssueCollaboratorForeignKeys($schema);
-        $this->addOroTrackerIssueRelatedForeignKeys($schema);
+        self::addOroTrackerIssueForeignKeys($schema);
+        self::addOroTrackerIssueCollaboratorForeignKeys($schema);
+        self::addOroTrackerIssueRelatedForeignKeys($schema);
         /** Add comment relation */
     }
 
@@ -44,6 +44,10 @@ class OroTrackerBundle implements Migration
         $table->setPrimaryKey(["issue_id", "related_issue_id"]);
     }
 
+    /**
+     * @param Schema $schema
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
     protected function addOroTrackerIssueRelatedForeignKeys(Schema $schema)
     {
         $table = $schema->getTable('oro_tracker_issue_related');
@@ -97,6 +101,9 @@ class OroTrackerBundle implements Migration
         $table->addUniqueIndex(['workflow_item_id'], 'UNIQ_4E4C1B5E1023C4EE');
     }
 
+    /**
+     * @param Schema $schema
+     */
     protected function createOroTrackerIssueTypeTable(Schema $schema)
     {
         $table = $schema->createTable('oro_tracker_issue_type');
@@ -109,6 +116,9 @@ class OroTrackerBundle implements Migration
         $table->addUniqueIndex(['label'], 'UNIQ_C6BA9029EA750E8');
     }
 
+    /**
+     * @param Schema $schema
+     */
     protected function createOroTrackerIssuePriorityTable(Schema $schema)
     {
         $table = $schema->createTable('oro_tracker_issue_priority');
@@ -121,6 +131,9 @@ class OroTrackerBundle implements Migration
         $table->addUniqueIndex(['label'], 'UNIQ_61DE5ACFEA750E8');
     }
 
+    /**
+     * @param Schema $schema
+     */
     protected function createOroTrackerIssueResolutionTable(Schema $schema)
     {
         $table = $schema->createTable('oro_tracker_issue_resolution');
@@ -133,8 +146,9 @@ class OroTrackerBundle implements Migration
         $table->addUniqueIndex(['label'], 'UNIQ_6FAF5303EA750E8');
     }
 
-
-
+    /**
+     * @param Schema $schema
+     */
     protected function createOroTrackerIssueCollaboratorsTable(Schema $schema)
     {
         $table = $schema->createTable('oro_tracker_issue_collaborator');

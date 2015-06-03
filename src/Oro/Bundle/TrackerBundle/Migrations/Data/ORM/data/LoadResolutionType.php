@@ -2,9 +2,9 @@
 
 namespace Oro\Bundle\TrackerBundle\Migrations\Data\ORM;
 
-use Oro\Bundle\TranslationBundle\DataFixtures\AbstractTranslatableEntityFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
+use Oro\Bundle\TranslationBundle\DataFixtures\AbstractTranslatableEntityFixture;
 use Oro\Bundle\TrackerBundle\Entity\Resolution;
 
 class LoadResolutionType extends AbstractTranslatableEntityFixture
@@ -44,7 +44,6 @@ class LoadResolutionType extends AbstractTranslatableEntityFixture
     protected function loadEntities(ObjectManager $manager)
     {
         $resolutionRepository = $manager->getRepository('OroTrackerBundle:Resolution');
-
         $translationLocales = $this->getTranslationLocales();
 
         foreach ($translationLocales as $locale) {

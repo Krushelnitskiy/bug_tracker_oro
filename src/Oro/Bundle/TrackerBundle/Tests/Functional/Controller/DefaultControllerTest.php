@@ -42,7 +42,6 @@ class DefaultControllerTest extends WebTestCase
         $this->assertContains('Issue saved', $crawler->html());
     }
 
-
     public function testUpdate()
     {
         $response = $this->client->requestGrid(
@@ -69,7 +68,6 @@ class DefaultControllerTest extends WebTestCase
         $this->assertHtmlResponseStatusCodeEquals($result, 200);
         $this->assertContains('Issue saved', $crawler->html());
     }
-
 
     public function testView()
     {
@@ -117,16 +115,13 @@ class DefaultControllerTest extends WebTestCase
         $result = $this->getJsonResponseContent($response, 200);
         $result = reset($result['data']);
 
-
         $crawler = $this->client->request(
             'GET',
             $this->getUrl('orotracker_issue_view', array('id' => $result['id']))
         );
 
-
         $link = $crawler->filter('a:contains("Create sub task")')->eq(0)->link();
         $crawler= $this->client->click($link);
-
 
         $form = $crawler->selectButton('Save and Close')->form();
         $form['orotracker_issue[summary]'] = 'New Sub Issue';

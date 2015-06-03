@@ -14,7 +14,6 @@ use FOS\RestBundle\Routing\ClassResourceInterface;
 
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
-
 use Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager;
 use Oro\Bundle\SoapBundle\Form\Handler\ApiFormHandler;
 use Oro\Bundle\SoapBundle\Controller\Api\Rest\RestController;
@@ -203,11 +202,7 @@ class IssueController extends RestController implements ClassResourceInterface
     protected function fixFormData(array &$data, $entity)
     {
         parent::fixFormData($data, $entity);
-
-        unset($data['id']);
-        unset($data['createdAt']);
-        unset($data['updatedAt']);
-
+        unset($data['id'], $data['createdAt'], $data['updatedAt']);
         return true;
     }
 }

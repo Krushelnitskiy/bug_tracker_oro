@@ -2,7 +2,6 @@
 
 namespace Oro\Bundle\TrackerBundle\Form\Handler;
 
-use Oro\Bundle\FormBundle\Utils\FormUtils;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -10,9 +9,11 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 use Oro\Bundle\ActivityBundle\Manager\ActivityManager;
 use Oro\Bundle\EntityBundle\Tools\EntityRoutingHelper;
+use Oro\Bundle\FormBundle\Utils\FormUtils;
 use Oro\Bundle\TagBundle\Entity\TagManager;
-use Oro\Bundle\TrackerBundle\Entity\Issue;
 use Oro\Bundle\TagBundle\Form\Handler\TagHandlerInterface;
+use Oro\Bundle\TrackerBundle\Entity\Issue;
+use Oro\Bundle\UserBundle\Entity\User;
 
 class IssueHandler implements TagHandlerInterface
 {
@@ -76,9 +77,10 @@ class IssueHandler implements TagHandlerInterface
             && $action === 'assign'
             && is_a($targetEntityClass, 'Oro\Bundle\UserBundle\Entity\User', true)
         ) {
-            $entity->setOwner(
-                $this->entityRoutingHelper->getEntity($targetEntityClass, $targetEntityId)
-            );
+            $user = $this->entityRoutingHelper->getEntity($targetEntityClass, $targetEntityId);
+            if ($user instanceof User) {
+                $entity->setOwner($user);
+            }
             FormUtils::replaceField($this->form, 'owner', ['read_only' => true]);
         }
 

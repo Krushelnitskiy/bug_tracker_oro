@@ -12,11 +12,11 @@ class OroTrackerBundle implements Migration
     /**
      * {@inheritdoc}
      */
-    public function up(Schema $schema, QueryBag $queries)
+    public static function up(Schema $schema, QueryBag $queries)
     {
-        $this->createOroTrackerIssueResolutionTranslationTable($schema);
-        $this->createOroTrackerIssuePriorityTranslationTable($schema);
-        $this->createOroTrackerIssueTypeTranslationTable($schema);
+        self::createOroTrackerIssueResolutionTranslationTable($schema);
+        self::createOroTrackerIssuePriorityTranslationTable($schema);
+        self::createOroTrackerIssueTypeTranslationTable($schema);
     }
 
     /**
@@ -42,7 +42,6 @@ class OroTrackerBundle implements Migration
         );
         /** End of generate table oro_tracker_type_trans **/
     }
-
 
     /**
      * Generate table oro_tracker_priority_trans

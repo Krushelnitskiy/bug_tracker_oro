@@ -1,19 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: root
- * Date: 16.03.15
- * Time: 18:24
- */
 
 namespace Oro\Bundle\TrackerBundle\Migrations\Schema;
 
 use Doctrine\DBAL\Schema\Schema;
 
-//use Oro\Bundle\ActivityBundle\Migration\Extension\ActivityExtension;
-//use Oro\Bundle\ActivityBundle\Migration\Extension\ActivityExtensionAwareInterface;
-//use Oro\Bundle\CommentBundle\Migration\Extension\CommentExtension;
-//use Oro\Bundle\CommentBundle\Migration\Extension\CommentExtensionAwareInterface;
 use Oro\Bundle\MigrationBundle\Migration\Installation;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 use Oro\Bundle\EntityExtendBundle\Migration\Extension\ExtendExtension;
@@ -22,7 +12,6 @@ use Oro\Bundle\NoteBundle\Migration\Extension\NoteExtension;
 use Oro\Bundle\NoteBundle\Migration\Extension\NoteExtensionAwareInterface;
 use Oro\Bundle\ActivityBundle\Migration\Extension\ActivityExtension;
 use Oro\Bundle\ActivityBundle\Migration\Extension\ActivityExtensionAwareInterface;
-
 use Oro\Bundle\TrackerBundle\Migrations\Schema\v1_0\OroTrackerBundle as OroTrackerBundle_1_0;
 use Oro\Bundle\TrackerBundle\Migrations\Schema\v1_1\OroTrackerBundle as OroTrackerBundle_1_1;
 
@@ -84,19 +73,12 @@ class OroTrackerBundleInstaller implements
      */
     public function up(Schema $schema, QueryBag $queries)
     {
-        $migration = new OroTrackerBundle_1_0();
-        $migration->up($schema, $queries);
-
+        OroTrackerBundle_1_0::up($schema, $queries);
         /** Add activity association */
         self::addNoteAssociations($schema, $this->noteExtension);
-
         $this->activityExtension->addActivityAssociation($schema, 'oro_email', 'oro_tracker_issue');
-
-
-        $migration11 = new OroTrackerBundle_1_1();
-        $migration11->up($schema, $queries);
+        OroTrackerBundle_1_1::up($schema, $queries);
     }
-
 
     public static function addNoteAssociations(Schema $schema, NoteExtension $noteExtension)
     {

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: root
- * Date: 24.03.15
- * Time: 12:38
- */
 
 namespace Oro\Bundle\TrackerBundle\Entity;
 

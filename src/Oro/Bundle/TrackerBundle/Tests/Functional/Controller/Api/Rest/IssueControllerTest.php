@@ -13,7 +13,6 @@ use Oro\Bundle\TrackerBundle\Entity\Priority;
  */
 class IssueControllerTest extends WebTestCase
 {
-
     protected $client;
 
     /** @var array */
@@ -46,7 +45,6 @@ class IssueControllerTest extends WebTestCase
         $this->issue['type'] = $type->getId();
         $this->issue['priority'] = $priority->getId();
     }
-
 
     /**
      * @return array
@@ -121,12 +119,7 @@ class IssueControllerTest extends WebTestCase
         $this->assertEmptyResponseStatusCodeEquals($result, 204);
 
         $this->client->request('GET', $this->getUrl('orotracker_api_get_issue', ['id' => $id]));
-
-//        $task = $this->getJsonResponseContent($this->client->getResponse(), 200);
-//        $this->assertEquals('Updated summary', $task['summary']);
-//        $this->assertEquals($updatedIssue['summary'], $task['summary']);
     }
-
 
     /**
      * @depends testCreate

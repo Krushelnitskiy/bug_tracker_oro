@@ -3,6 +3,7 @@
 namespace Oro\Bundle\TrackerBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -54,7 +55,8 @@ use Oro\Bundle\TrackerBundle\Entity\Type;
 class Issue extends ExtendIssue implements Taggable
 {
     /**
-     * @var $id integer
+     * @var integer
+     *
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -69,7 +71,8 @@ class Issue extends ExtendIssue implements Taggable
     protected $id;
 
     /**
-     * @var $summary string
+     * @var string $summary
+     *
      * @ORM\Column(type="string", nullable=false)
      * @ConfigField(
      *  defaultValues={
@@ -83,7 +86,8 @@ class Issue extends ExtendIssue implements Taggable
     protected $summary;
 
     /**
-     * @var $code string
+     * @var string $code
+     *
      * @ORM\Column(name="`code`", type="string", length=50, unique=true)
      * @ConfigField(
      *  defaultValues={
@@ -97,7 +101,8 @@ class Issue extends ExtendIssue implements Taggable
     protected $code;
 
     /**
-     * @var $id string
+     * @var string $description
+     *
      * @ORM\Column(type="string", nullable=true)
      * @ConfigField(
      *  defaultValues={
@@ -111,7 +116,7 @@ class Issue extends ExtendIssue implements Taggable
     protected $description;
 
     /**
-     * @var Organization
+     * @var Organization $organization
      *
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\Organization")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="SET NULL")
@@ -127,7 +132,8 @@ class Issue extends ExtendIssue implements Taggable
     protected $organization;
 
     /**
-     * @var $type Type
+     * @var Type $type
+     *
      * @ORM\ManyToOne(targetEntity="Type")
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      * @ConfigField(
@@ -142,7 +148,8 @@ class Issue extends ExtendIssue implements Taggable
     protected $type;
 
     /**
-     * @var $priority Priority
+     * @var Priority $priority
+     *
      * @ORM\ManyToOne(targetEntity="Priority")
      * @ORM\JoinColumn(name="priority_id", referencedColumnName="id")
      * @ConfigField(
@@ -156,9 +163,8 @@ class Issue extends ExtendIssue implements Taggable
      **/
     protected $priority;
 
-
     /**
-     * @var $resolution Resolution
+     * @var Resolution $resolution
      * @ORM\ManyToOne(targetEntity="Resolution")
      * @ORM\JoinColumn(name="resolution_id", referencedColumnName="id")
      * @ConfigField(
@@ -172,7 +178,7 @@ class Issue extends ExtendIssue implements Taggable
     protected $resolution;
 
     /**
-     * @var $assignee User
+     * @var User $assignee
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="assignee_id", referencedColumnName="id")
      * @ConfigField(
@@ -186,7 +192,7 @@ class Issue extends ExtendIssue implements Taggable
     protected $assignee;
 
     /**
-     * @var $owner User
+     * @var User $owner
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", onDelete="SET NULL")
      * @ConfigField(
@@ -200,7 +206,7 @@ class Issue extends ExtendIssue implements Taggable
     protected $owner;
 
     /**
-     * @var $collaborators ArrayCollection
+     * @var ArrayCollection $collaborators
      *
      * @ORM\ManyToMany(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinTable(
@@ -225,14 +231,15 @@ class Issue extends ExtendIssue implements Taggable
      */
     protected $collaborators;
 
-
     /**
+     * @var Issue[] $children
+     *
      * @ORM\OneToMany(targetEntity="Issue", mappedBy="parent")
      **/
     protected $children;
 
     /**
-     * @var Issue
+     * @var Issue $parent
      * @ORM\ManyToOne(targetEntity="Issue", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      **/
@@ -253,7 +260,8 @@ class Issue extends ExtendIssue implements Taggable
     protected $myRelated;
 
     /**
-     * @var \DateTime
+     * @var \DateTime $createdAt
+     *
      * @ORM\Column(name="created_at", type="datetime")
      * @ConfigField(
      *  defaultValues={
@@ -266,7 +274,8 @@ class Issue extends ExtendIssue implements Taggable
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTime $updatedAt
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      * @ConfigField(
      *  defaultValues={
@@ -278,9 +287,8 @@ class Issue extends ExtendIssue implements Taggable
      **/
     protected $updatedAt;
 
-
     /**
-     * @var WorkflowItem
+     * @var WorkflowItem $workflowItem
      *
      * @ORM\OneToOne(targetEntity="Oro\Bundle\WorkflowBundle\Entity\WorkflowItem")
      * @ORM\JoinColumn(name="workflow_item_id", referencedColumnName="id", onDelete="SET NULL")
@@ -296,7 +304,7 @@ class Issue extends ExtendIssue implements Taggable
     protected $workflowItem;
 
     /**
-     * @var WorkflowStep
+     * @var WorkflowStep $workflowStep
      *
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\WorkflowBundle\Entity\WorkflowStep")
      * @ORM\JoinColumn(name="workflow_step_id", referencedColumnName="id", onDelete="SET NULL")
@@ -313,6 +321,7 @@ class Issue extends ExtendIssue implements Taggable
 
     /**
      * @var ArrayCollection $tags
+     *
      * @ConfigField(
      *      defaultValues={
      *          "merge"={
@@ -350,6 +359,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set summary
      *
      * @param string $summary
+     *
      * @return Issue
      */
     public function setSummary($summary)
@@ -373,6 +383,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set code
      *
      * @param string $code
+     *
      * @return Issue
      */
     public function setCode($code)
@@ -396,6 +407,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set description
      *
      * @param string $description
+     *
      * @return Issue
      */
     public function setDescription($description)
@@ -419,6 +431,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set createdAt
      *
      * @param \DateTime $createdAt
+     *
      * @return Issue
      */
     public function setCreatedAt($createdAt)
@@ -442,6 +455,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set updatedAt
      *
      * @param \DateTime $updatedAt
+     *
      * @return Issue
      */
     public function setUpdatedAt($updatedAt)
@@ -464,7 +478,8 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Set type
      *
-     * @param \Oro\Bundle\TrackerBundle\Entity\Type $type
+     * @param Type $type
+     *
      * @return Issue
      */
     public function setType(Type $type = null)
@@ -477,7 +492,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get type
      *
-     * @return \Oro\Bundle\TrackerBundle\Entity\Type
+     * @return Type
      */
     public function getType()
     {
@@ -487,7 +502,8 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Set priority
      *
-     * @param \Oro\Bundle\TrackerBundle\Entity\Priority $priority
+     * @param Priority $priority
+     *
      * @return Issue
      */
     public function setPriority(Priority $priority = null)
@@ -500,7 +516,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get priority
      *
-     * @return \Oro\Bundle\TrackerBundle\Entity\Priority
+     * @return Priority
      */
     public function getPriority()
     {
@@ -510,7 +526,8 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Set resolution
      *
-     * @param \Oro\Bundle\TrackerBundle\Entity\Resolution $resolution
+     * @param Resolution $resolution
+     *
      * @return Issue
      */
     public function setResolution(Resolution $resolution = null)
@@ -523,7 +540,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get resolution
      *
-     * @return \Oro\Bundle\TrackerBundle\Entity\Resolution
+     * @return Resolution
      */
     public function getResolution()
     {
@@ -571,7 +588,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Remove collaborators
      *
-     * @param \Oro\Bundle\UserBundle\Entity\User $collaborators
+     * @param User $collaborators
      */
     public function removeCollaborator(User $collaborators)
     {
@@ -581,7 +598,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get collaborators
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getCollaborators()
     {
@@ -591,7 +608,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Add children
      *
-     * @param \Oro\Bundle\TrackerBundle\Entity\Issue $children
+     * @param Issue $children
      * @return Issue
      */
     public function addChild(Issue $children)
@@ -604,7 +621,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Remove children
      *
-     * @param \Oro\Bundle\TrackerBundle\Entity\Issue $children
+     * @param Issue $children
      */
     public function removeChild(Issue $children)
     {
@@ -614,7 +631,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get children
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getChildren()
     {
@@ -624,7 +641,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Set parent
      *
-     * @param \Oro\Bundle\TrackerBundle\Entity\Issue $parent
+     * @param Issue $parent
      * @return Issue
      */
     public function setParent(Issue $parent = null)
@@ -637,7 +654,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get parent
      *
-     * @return \Oro\Bundle\TrackerBundle\Entity\Issue
+     * @return Issue
      */
     public function getParent()
     {
@@ -647,7 +664,8 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Set workflowItem
      *
-     * @param \Oro\Bundle\WorkflowBundle\Entity\WorkflowItem $workflowItem
+     * @param WorkflowItem $workflowItem
+     *
      * @return Issue
      */
     public function setWorkflowItem(WorkflowItem $workflowItem = null)
@@ -660,7 +678,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get workflowItem
      *
-     * @return \Oro\Bundle\WorkflowBundle\Entity\WorkflowItem
+     * @return WorkflowItem
      */
     public function getWorkflowItem()
     {
@@ -670,7 +688,8 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Set workflowStep
      *
-     * @param \Oro\Bundle\WorkflowBundle\Entity\WorkflowStep $workflowStep
+     * @param WorkflowStep $workflowStep
+     *
      * @return Issue
      */
     public function setWorkflowStep(WorkflowStep $workflowStep = null)
@@ -683,21 +702,24 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get workflowStep
      *
-     * @return \Oro\Bundle\WorkflowBundle\Entity\WorkflowStep
+     * @return WorkflowStep
      */
     public function getWorkflowStep()
     {
         return $this->workflowStep;
     }
 
+    /**
+     * @return User
+     */
     public function getOwner()
     {
         return $this->owner;
     }
 
-
     /**
      * @param $user User
+     *
      * @return Issue
      */
     public function setOwner($user)
@@ -711,6 +733,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set organization
      *
      * @param Organization $organization
+     *
      * @return Issue
      */
     public function setOrganization(Organization $organization = null)
@@ -779,6 +802,7 @@ class Issue extends ExtendIssue implements Taggable
      * Add relatedWithMe
      *
      * @param Issue $issue
+     *
      * @return Issue
      */
     public function addRelatedWithMe(Issue $issue)
@@ -801,18 +825,18 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get relatedWithMe
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getRelatedWithMe()
     {
         return $this->relatedWithMe;
     }
 
-
     /**
      * Add myRelated
      *
      * @param Issue $issue
+     *
      * @return Issue
      */
     public function addMyRelated(Issue $issue)

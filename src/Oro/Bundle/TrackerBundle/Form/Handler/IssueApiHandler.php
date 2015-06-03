@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Oro\Bundle\TagBundle\Form\Handler\TagHandlerInterface;
 use Oro\Bundle\TagBundle\Entity\TagManager;
-
 use Oro\Bundle\TrackerBundle\Entity\Issue;
 
 class IssueApiHandler implements TagHandlerInterface
@@ -84,7 +83,6 @@ class IssueApiHandler implements TagHandlerInterface
             $this->tagManager->saveTagging($entity);
         }
     }
-
 
     /**
      * {@inheritdoc}

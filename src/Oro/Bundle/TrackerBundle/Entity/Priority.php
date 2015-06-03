@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: root
- * Date: 19.02.15
- * Time: 18:59
- */
 
 namespace Oro\Bundle\TrackerBundle\Entity;
 
@@ -18,13 +12,13 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 
 /**
  * Class Priority
+ *
  * @package Tracker\IssueBundle\Entity
  * @ORM\Table(name="oro_tracker_issue_priority")
  * @Gedmo\TranslationEntity(class="Oro\Bundle\TrackerBundle\Entity\PriorityTranslation")
  * @ORM\Entity
  * @Config()
  */
-
 class Priority
 {
     const PRIORITY_TRIVIAL = 'Trivial';
@@ -34,6 +28,8 @@ class Priority
     const PRIORITY_BLOCKER = 'Blocker';
 
     /**
+     * @var integer $id
+     *
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -41,7 +37,7 @@ class Priority
     protected $id;
 
     /**
-     * @var string
+     * @var string $name
      *
      * @ORM\Column(type="string", length=30, unique=true)
      * @ConfigField(
@@ -55,7 +51,7 @@ class Priority
     protected $name;
 
     /**
-     * @var string
+     * @var string $label
      *
      * @ORM\Column(name="label", type="string", unique=true)
      * @Gedmo\Translatable
@@ -63,13 +59,15 @@ class Priority
     protected $label;
 
     /**
-     * @var integer
+     * @var integer $order
      *
      * @ORM\Column(name="`order`", type="integer", nullable=false, options={"default":0})
      */
     protected $order;
 
     /**
+     * @var string $locale
+     *
      * @Gedmo\Locale
      */
     protected $locale;
@@ -88,6 +86,7 @@ class Priority
      * Set label
      *
      * @param string $label
+     *
      * @return Priority
      */
     public function setLabel($label)
@@ -109,6 +108,7 @@ class Priority
 
     /**
      * @param $order
+     *
      * @return Priority
      */
     public function setOrder($order)
@@ -128,6 +128,7 @@ class Priority
 
     /**
      * @param $name
+     *
      * @return Priority
      */
     public function setName($name)
@@ -149,6 +150,7 @@ class Priority
      * Set locale for translation
      *
      * @param string $locale
+     *
      * @return Priority
      */
     public function setLocale($locale)
