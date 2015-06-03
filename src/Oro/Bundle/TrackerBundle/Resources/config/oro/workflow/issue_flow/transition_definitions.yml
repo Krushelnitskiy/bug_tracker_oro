@@ -24,4 +24,4 @@ workflows:
                         object: $issue
                         method: setResolution
                         method_parameters:
-                            [$issue_resolution]
+                            [null]

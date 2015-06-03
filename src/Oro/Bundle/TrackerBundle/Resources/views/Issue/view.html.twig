@@ -68,6 +68,7 @@
                 {{ UI.renderHtmlProperty('oro.tracker.issue.assignee.label'|trans, entity.assignee) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.owner.label'|trans, entity.owner) }}
                 {{ UI.renderHtmlProperty('oro.tracker.issue.priority.label'|trans, entity.priority) }}
+                {{ UI.renderHtmlProperty('oro.tracker.issue.resolution.label'|trans, entity.resolution) }}
                 {% if resource_granted('oro_tag_view_tag_cloud') %}
                     {{ UI.renderHtmlProperty('oro.tag.entity_plural_label'|trans, tag.renderView(entity)) }}
                 {% endif %}

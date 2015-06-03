@@ -22,7 +22,7 @@ Oro\Bundle\TrackerBundle\Entity\Issue:
             target_fields:          [code]
 
         -
-            name:                   type
+            name: type
             relation_type: many-to-one
             relation_fields:
                 -
@@ -34,7 +34,7 @@ Oro\Bundle\TrackerBundle\Entity\Issue:
                     target_type: integer
                     target_fields: [type]
         -
-            name:                   priority
+            name: priority
             relation_type: many-to-one
             relation_fields:
                 -
@@ -58,20 +58,20 @@ Oro\Bundle\TrackerBundle\Entity\Issue:
                     target_type: integer
                     target_fields: [workflowStep]
         -
-            name:                   resolution
+            name: resolution
             relation_type: many-to-one
             relation_fields:
                 -
                     name: name
                     target_type: text
-                    target_fields: [label, all_data]
+                    target_fields: [resolution, all_data]
                 -
                     name: id
                     target_type: integer
                     target_fields: [resolution]
 
         -
-            name:                   assignee
+            name: assignee
             relation_type: many-to-one
             relation_fields:
                 -

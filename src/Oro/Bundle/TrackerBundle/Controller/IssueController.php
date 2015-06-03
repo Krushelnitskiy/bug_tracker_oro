@@ -2,6 +2,8 @@
 
 namespace Oro\Bundle\TrackerBundle\Controller;
 
+use Doctrine\ORM\EntityRepository;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -11,8 +13,6 @@ use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\TrackerBundle\Entity\Issue;
 use Oro\Bundle\TrackerBundle\Entity\Type;
-
-use Doctrine\ORM\EntityRepository;
 
 /**
  * Class DefaultController
@@ -46,6 +46,8 @@ class IssueController extends Controller
      * @Route("/view/{id}", name="orotracker_issue_view", requirements={"id"="\d+"})
      * @AclAncestor("orotracker_issue_view")
      * @Template
+     *
+     * @return array
      */
     public function viewAction(Issue $issue)
     {
@@ -69,6 +71,7 @@ class IssueController extends Controller
     /**
      * @param Issue $issue
      * @param string $formAction
+     *
      * @return array
      */
     protected function update(Issue $issue, $formAction)
@@ -110,6 +113,8 @@ class IssueController extends Controller
      * @Route("/update/{id}", name="orotracker_issue_update", requirements={"id"="\d+"})
      * @AclAncestor("orotracker_issue_edit")
      * @Template
+     *
+     * @return array
      */
     public function updateAction(Issue $task)
     {
@@ -124,6 +129,8 @@ class IssueController extends Controller
      * @Route("/{id}/sub-task/create", name="orotracker_issue_add_child")
      * @Template("OroTrackerBundle:Issue:update.html.twig")
      * @AclAncestor("orotracker_issue_edit")
+     *
+     * @return array
      */
     public function createSubTaskAction(Issue $issue)
     {
@@ -187,6 +194,8 @@ class IssueController extends Controller
      * @Route("/user/{userId}", name="orotracker_issue_user_issue", requirements={"userId"="\d+"})
      * @AclAncestor("orotracker_issue_view")
      * @Template
+     *
+     * @return array
      */
     public function userIssueAction($userId)
     {

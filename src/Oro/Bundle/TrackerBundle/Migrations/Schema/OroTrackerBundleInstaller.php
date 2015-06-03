@@ -73,11 +73,11 @@ class OroTrackerBundleInstaller implements
      */
     public function up(Schema $schema, QueryBag $queries)
     {
-        OroTrackerBundle_1_0::up($schema, $queries);
+        OroTrackerBundle_1_0::update($schema, $queries);
         /** Add activity association */
         self::addNoteAssociations($schema, $this->noteExtension);
         $this->activityExtension->addActivityAssociation($schema, 'oro_email', 'oro_tracker_issue');
-        OroTrackerBundle_1_1::up($schema, $queries);
+        OroTrackerBundle_1_1::update($schema, $queries);
     }
 
     public static function addNoteAssociations(Schema $schema, NoteExtension $noteExtension)

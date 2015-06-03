@@ -22,7 +22,7 @@ use Oro\Bundle\TrackerBundle\Entity\Type;
  * Class Issue
  * @package Oro\Bundle\TrackerBundle\Entity
  *
- * @ORM\Entity(repositoryClass="Oro\Bundle\TrackerBundle\Entity\IssueRepository")
+ * @ORM\Entity(repositoryClass="Oro\Bundle\TrackerBundle\Entity\Repository\IssueRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(
  *      name="oro_tracker_issue",

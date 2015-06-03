@@ -43,3 +43,6 @@ oro:
         type.name.label: ""
         priority.name.label: ""
         resolution.name.label: ""
+        type.entity_label: "Issue Type"
+        priority.entity_label: "Issue Priority"
+        resolution.entity_label: "Issue Resolution"

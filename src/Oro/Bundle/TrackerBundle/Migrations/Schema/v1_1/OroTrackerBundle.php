@@ -12,7 +12,12 @@ class OroTrackerBundle implements Migration
     /**
      * {@inheritdoc}
      */
-    public static function up(Schema $schema, QueryBag $queries)
+    public function up(Schema $schema, QueryBag $queries)
+    {
+        self::update($schema, $queries);
+    }
+
+    public static function update(Schema $schema, QueryBag $queries)
     {
         self::createOroTrackerIssueResolutionTranslationTable($schema);
         self::createOroTrackerIssuePriorityTranslationTable($schema);

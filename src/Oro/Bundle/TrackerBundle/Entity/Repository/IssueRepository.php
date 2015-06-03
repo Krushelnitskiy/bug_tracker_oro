@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\TrackerBundle\Entity;
+namespace Oro\Bundle\TrackerBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
