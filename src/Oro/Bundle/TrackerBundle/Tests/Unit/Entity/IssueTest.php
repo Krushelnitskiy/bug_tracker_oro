@@ -2,6 +2,8 @@
 
 namespace Oro\Bundle\TrackerBundle\Tests\Unit\Entity;
 
+use Symfony\Component\PropertyAccess\PropertyAccess;
+
 use Oro\Bundle\TrackerBundle\Entity\Issue;
 
 class IssueTest extends \PHPUnit_Framework_TestCase
@@ -83,9 +85,9 @@ class IssueTest extends \PHPUnit_Framework_TestCase
     public function testSettersAndGetters($property, $value)
     {
         $obj = new Issue();
-
-        call_user_func_array(array($obj, 'set' . ucfirst($property)), array($value));
-        $this->assertEquals($value, call_user_func_array(array($obj, 'get' . ucfirst($property)), array()));
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $accessor->setValue($obj, $property, $value);
+        $this->assertEquals($value, $accessor->getValue($obj, $property), array());
     }
 
     public function settersAndGettersDataProvider()
