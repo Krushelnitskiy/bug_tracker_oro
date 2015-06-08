@@ -64,7 +64,11 @@ Oro\Bundle\TrackerBundle\Entity\Issue:
                 -
                     name: name
                     target_type: text
-                    target_fields: [resolution, all_data]
+                    target_fields: [name, all_data]
+                -
+                    name: label
+                    target_type: text
+                    target_fields: [label, all_data]
                 -
                     name: id
                     target_type: integer
